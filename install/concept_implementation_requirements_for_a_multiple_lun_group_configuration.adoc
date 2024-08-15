@@ -1,0 +1,43 @@
+---
+permalink: install/concept_implementation_requirements_for_a_multiple_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: implementation, requirements, multiple, lun, group, configuration 
+summary: Puede mejorar el rendimiento del sistema implementando una configuración de varios grupos de LUN en su entorno de almacenamiento. Se deben realizar algunas tareas de configuración en los sistemas ONTAP y en las cabinas de almacenamiento para implementar esta configuración. 
+---
+= Requisitos de implementación de una configuración de varios grupos de LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede mejorar el rendimiento del sistema implementando una configuración de varios grupos de LUN en su entorno de almacenamiento. Se deben realizar algunas tareas de configuración en los sistemas ONTAP y en las cabinas de almacenamiento para implementar esta configuración.
+
+La configuración de varios grupos de LUN es compatible con la mayoría de las cabinas de almacenamiento. Consulte la _Matriz de interoperabilidad_ para confirmar que esta configuración es compatible con una cabina de almacenamiento específica.
+
+Debe trabajar con el administrador de la cabina de almacenamiento para configurar las siguientes opciones en _storage array_ para una configuración de varios grupos de LUN:
+
+* Utilice tantos puertos como sea posible para permitir acceso a los LUN de cabina asignados al sistema ONTAP.
+* Use grupos de hosts (o el equivalente de su proveedor) para definir qué grupos de LUN de cabina se presentan a cada puerto de iniciador FC de un sistema de ONTAP.
+
+
+Puede configurar los siguientes elementos en el sistema ONTAP para implementar una configuración de varios grupos de LUN:
+
+* Use un par de puertos iniciadores de FC para cada grupo de LUN de cabina.
++
+Cada par de puertos de iniciador de FC tiene acceso a un grupo LUN diferente de la cabina de almacenamiento a través de rutas redundantes.
+
+* Cree un agregado grande en la configuración de ONTAP y añada LUN de cabina de varios grupos RAID (grupos de paridad) al agregado.
++
+Al hacerlo, la E/S se distribuye en más discos. La combinación de repartir la actividad de I/O entre los grupos RAID y crear un gran agregado da como resultado un importante aumento del rendimiento.
+
+
+
+Debe configurar lo siguiente en _switch_ para implementar una configuración de varios grupos de LUN:
+
+* Configure la división en zonas del switch para definir qué puertos de destino deben utilizar los puertos de iniciador de FC en el sistema ONTAP para acceder a cada grupo de LUN de cabina.
+
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

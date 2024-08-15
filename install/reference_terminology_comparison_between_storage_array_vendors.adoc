@@ -1,0 +1,219 @@
+---
+permalink: install/reference_terminology_comparison_between_storage_array_vendors.html 
+sidebar: sidebar 
+keywords: terminology, comparison, between, storage, array, vendors 
+summary: De vez en cuando, diferentes proveedores de cabinas de almacenamiento utilizan diferentes términos para describir conceptos similares. A la inversa, el significado del mismo término puede diferir entre los proveedores de cabina. 
+---
+= Comparación terminológica entre proveedores de cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+De vez en cuando, diferentes proveedores de cabinas de almacenamiento utilizan diferentes términos para describir conceptos similares. A la inversa, el significado del mismo término puede diferir entre los proveedores de cabina.
+
+En la siguiente tabla se proporciona un mapeo entre algunos términos comunes del proveedor:
+
+|===
+| Periodo | Proveedor | Definición 
+
+
+ a| 
+grupo de hosts
+ a| 
+Hitachi
+ a| 
+Una entidad de configuración que permite especificar el acceso de host a los puertos de la cabina de almacenamiento. Identifica los WWN de puertos de iniciador de FC para el sistema ONTAP del que desea acceder a las LUN; el proceso difiere según el proveedor y, a veces, difiere para diferentes modelos de cabina de almacenamiento del mismo proveedor.
+
+
+
+ a| 
+HP XP
+ a| 
+
+
+
+| Grupo de almacenamiento  a| 
+EMC CX Y EMC VNX
+ a| 
+
+
+
+| definición de host  a| 
+3PAR
+ a| 
+
+
+
+| host  a| 
+3PAR, HP EVA, HP XP Y HITACHI
+ a| 
+
+
+
+ a| 
+
+
+
+| grupo de paridad  a| 
+Hitachi y HP XP
+ a| 
+La disposición de los discos en back-end que, en conjunto, forman el nivel de RAID definido.
+
+
+
+ a| 
+Grupo RAID
+ a| 
+ONTAP, EMC CX y EMC VNX
+ a| 
+
+
+
+| grupo de discos  a| 
+EVA DE HP
+ a| 
+Conjunto de discos físicos que forman pools de almacenamiento a partir de los cuales se pueden crear discos virtuales.
+
+
+
+ a| 
+Conjunto de paridad, conjunto de RAID
+ a| 
+3PAR
+ a| 
+Un grupo de _chunklets_ protegidos por paridad. (Un chunklet es un bloque de 256 MB de espacio contiguo en un disco físico.)
+
+
+
+ a| 
+ a| 
+|  
+
+
+| clúster  a| 
+ONTAP
+ a| 
+En ONTAP , agrupación de nodos que permite que varios nodos agrupen sus recursos en un servidor virtual grande y distribuyan el trabajo en el cluster.
+
+
+
+ a| 
+| Hitachi y HP XP  a| 
+Un componente de hardware de las cabinas de almacenamiento que contiene los puertos a los que se conectan los hosts.
+
+
+
+ a| 
+ a| 
+|  
+
+
+| controladora  a| 
+ONTAP
+ a| 
+El componente de un sistema de almacenamiento que ejecuta el sistema operativo ONTAP e interactúa con las cabinas de almacenamiento back-end. Los controladores también se denominan a veces cabezales o módulos de CPU.
+
+
+
+ a| 
+| HITACHI, HP EVA Y HP XP  a| 
+El hardware de la cabina de almacenamiento en la que se encuentran los puertos de destino.
+
+
+
+ a| 
+nodo
+ a| 
+3-PAR
+ a| 
+Un componente de hardware de las cabinas de almacenamiento que contiene los puertos a los que se conectan los hosts.
+
+
+
+ a| 
+Placa FEBE
+ a| 
+Symmetrix de EMC
+ a| 
+
+
+
+| Procesador de almacenamiento (SP)  a| 
+EMC CX Y EMC VNX
+ a| 
+
+
+
+ a| 
+LUN
+ a| 
+Muchas cabinas de almacenamiento
+ a| 
+Agrupación de uno o más discos o particiones de disco en un espacio de almacenamiento en disco. En la documentación de ONTAP, se conoce como _array lun_.
+
+
+
+ a| 
+LDEV
+ a| 
+Hitachi y HP XP
+ a| 
+
+
+
+| LUN  a| 
+ONTAP
+ a| 
+El sistema ONTAP puede virtualizar el almacenamiento conectado a este y suministrar el almacenamiento como LUN a aplicaciones y clientes externos (por ejemplo, mediante iSCSI y FC). Los clientes no son conscientes de dónde se almacena una LUN de interfaz de usuario.
+
+
+
+ a| 
+LUN, disco virtual
+ a| 
+EVA DE HP
+ a| 
+Un disco virtual (llamado _vdisk_ en la interfaz de usuario) es una unidad de disco simulada creada en un grupo de discos. Es posible asignar una combinación de características a un disco virtual, como un nombre, un nivel de redundancia y un tamaño. Presentar un disco virtual ofrece su almacenamiento a un host.
+
+
+
+ a| 
+LUN de cabina
+ a| 
+Documentación de ONTAP, herramientas de gestión del almacenamiento de ONTAP
+ a| 
+La documentación de ONTAP utiliza el término _lun de cabina_ para distinguir las LUN de las cabinas de almacenamiento de las LUN front-end ( LUN de ONTAP).
+
+
+
+ a| 
+VLUN
+ a| 
+3PAR
+ a| 
+(Volume-LUN) Un emparejamiento entre un volumen virtual y un número de unidad lógica (LUN). Para que un host vea un volumen virtual, el volumen debe exportarse como LUN mediante la creación de vLUN en la cabina de almacenamiento.
+
+
+
+ a| 
+ a| 
+|  
+
+
+| volumen  a| 
+ONTAP
+ a| 
+Entidad lógica que contiene los datos del usuario a los que se puede acceder a través de uno o varios de los protocolos de acceso compatibles con ONTAP, incluidos Sistema de archivos de red (NFS), Common Internet File System (CIFS), Protocolo de transferencia de hipertexto (HTTP), Fibre Channel (FC) y SCSI de Internet (iSCSI).
+
+
+
+ a| 
+volumen virtual
+ a| 
+3PAR
+ a| 
+Unidad de almacenamiento virtual creada mediante la asignación de datos de uno o varios discos lógicos.
+
+|===

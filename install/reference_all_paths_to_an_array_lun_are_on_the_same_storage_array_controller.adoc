@@ -1,0 +1,94 @@
+---
+permalink: install/reference_all_paths_to_an_array_lun_are_on_the_same_storage_array_controller.html 
+sidebar: sidebar 
+keywords: all, paths, array, lun, same, storage, array, controller, errors, message 
+summary: 'ONTAP no admite la configuración de todas las rutas en la misma controladora de la cabina de almacenamiento, ya que al hacerlo se configura una configuración con un punto de error único (SPOF). El comando storage errors show identifica cualquier LUN de cabina cuyas rutas se configuran para ir a la misma controladora de la cabina de almacenamiento.' 
+---
+= Todas las rutas a un LUN de cabina se encuentran en la misma controladora de cabina de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP no admite la configuración de todas las rutas en la misma controladora de la cabina de almacenamiento, ya que al hacerlo se configura una configuración con un punto de error único (SPOF). El `storage errors show` comando identifica cualquier LUN de cabina cuyas rutas están configuradas para ir a la misma controladora de la cabina de almacenamiento.
+
+ONTAP no le permite asignar LUN de cabina a un sistema ONTAP hasta que se solucione este error.
+
+
+
+== Los errores de almacenamiento muestran un mensaje
+
+[listing]
+----
+NAME (UID): All paths to this array LUN are connected to the same fault domain. This is a single point of failure
+----
+
+
+== Explicación
+
+Este error se produce porque las rutas a un LUN de cabina se configuran para ir a la misma controladora de la cabina de almacenamiento o FRU.
+
+[NOTE]
+====
+El uso de cuatro rutas a un LUN de matriz, un arreglo de almacenamiento con FRU con varios directores (como un USP de EMC Symmetrix o HDS) o un arreglo de almacenamiento con controladoras dobles (como EMC CX o HP EVA) son buenos métodos para lograr redundancia. Sin embargo, si configura las rutas para atravesar una controladora de cabina de almacenamiento única o FRU, estará configurando la configuración con un SPOF, incluso con dichas funciones. En una cabina de almacenamiento activo-activo, se considera que todo el FRU es un dominio de fallo. Una cabina de almacenamiento EMC Symmetrix, por ejemplo, tiene varios directores de canal en la misma placa FEBE. Una placa FEBE se considera un dominio de falla porque si todas las rutas pasan por la misma placa FEBE, se pierden todas las rutas si se debe reemplazar la placa.
+
+====
+En la siguiente ilustración, se muestra la selección de puertos de la cabina de almacenamiento correcta e incorrecta para configurar rutas redundantes a un LUN de cabina, de modo que no tenga un único dominio de fallo. La configuración de la ruta en el ejemplo de la izquierda es correcta porque las rutas que van al LUN de cabina son redundantes: Cada conexión se realiza a un puerto de una controladora diferente de la cabina de almacenamiento. En el ejemplo de la derecha, ambas rutas al LUN de cabina van a la misma controladora, que configura un SPOF.
+
+image::../media/redundant_array_port_selection.gif[Este gráfico se describe en el texto adyacente.]
+
+El `storage errors show` comando muestra el LUN de cabina que se encuentra en el mismo dominio de fallos. También puede ver este problema en `storage disk show` la salida si observa la columna TPGN (número de grupo de puertos de destino). Debe mostrarse otro TPGN para cada iniciador en un par de puertos de iniciador. Si el TPGN es el mismo para ambos iniciadores de la pareja, ambos iniciadores están en el mismo dominio de fallo.
+
+En el siguiente `storage disk show` ejemplo, se muestra TPGN 1 para LUN 30, al que se accede a través de los iniciadores 0A y 0C. Si las rutas son redundantes, cada iniciador muestra un TPGN diferente.
+
+[listing]
+----
+
+mysystem1::> storage disk show mysystem1:vgbr300s70:9.126L30
+                  Disk: HP-1.15
+        Container Type: unassigned
+            Owner/Home: -  / -
+               DR Home: -
+                 Array: HP_HSV450_1
+                Vendor: HP
+                 Model: HSV450
+         Serial Number: 600508B4000B63140000800001660000
+                   UID: 600508B4:000B6314:00008000:01660000:00000000:...
+                   BPS: 512
+         Physical Size: -
+              Position: present
+Checksum Compatibility: block
+             Aggregate: -
+                  Plex: -
+Paths:
+                     LUN Initiator Side   Target Side
+Controller Initiator ID  Switch Port      Switch Port     Acc Use  Target Port      TPGN...
+---------- --------- --- ---------------- --------------- --- ---  ---------------- -----
+mysystem1    0c      30  vgci9148s75:1-12 vgci9148s75:1-9 AO  RDY  50014380025d1509   1
+mysystem1    0a      30  vgbr300s70:12    vgbr300s70:9    AO  INU  50014380025d1508   1
+
+Errors:
+HP-1.15 (600508b4000b63140000800001660000): All paths to this array LUN are connected to the same fault domain. This is a single point of failure.
+----
+[NOTE]
+====
+El UID completo en este ejemplo es 600508B4:000B6314:00008000:01660000:00000000:00000000:00000000:00000000:00000000:00000000. En el ejemplo, se trunca debido al espacio.
+
+====
+
+
+== Solución de problemas y resolución de problemas
+
+Las rutas al LUN de cabina deben reconfigurarse para que se dirijan a controladoras de cabina de almacenamiento redundantes o FRU.
+
+. Añada un cable al puerto de destino redundante de la otra controladora.
++
+Debe mantener la redundancia al corregir este problema; para ello, añada un cable a la controladora alternativa _before_ quita un cable de la controladora con el SPOF. En este caso, se mantiene la redundancia debido a que aumenta temporalmente la cantidad de rutas a tres rutas en lugar de reducir la cantidad de rutas a una mientras se resuelve el problema.
+
+. Retire un cable del controlador configurado con el SPOF.
++
+Ahora tiene dos rutas redundantes al LUN de cabina.
+
+. Desde la línea de comandos de ONTAP, introduzca de nuevo el siguiente comando y confirme que se ha solucionado el error: `storage errors show`
+

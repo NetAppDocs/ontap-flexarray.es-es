@@ -1,0 +1,41 @@
+---
+permalink: install/task_installing_the_license_for_using_array_luns.html 
+sidebar: sidebar 
+keywords: install, license, use, array, luns 
+summary: La licencia V_StorageAttach debe instalarse en cada nodo ONTAP que desee utilizar con los LUN de cabina. No se trata de una única licencia para el clúster. Los LUN de cabina no se pueden usar en agregados hasta que se haya instalado una licencia. 
+---
+= Instalar la licencia para utilizar LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La licencia V_StorageAttach debe instalarse en cada nodo ONTAP que desee utilizar con los LUN de cabina. Es _not_ una única licencia para el clúster. Los LUN de cabina no se pueden usar en agregados hasta que se haya instalado una licencia.
+
+*Lo que necesitará*
+
+* Se debe instalar el clúster.
+* Debe tener la clave de licencia de la licencia V_StorageAttach.
++
+https://mysupport.netapp.com/site/global/dashboard["Soporte de NetApp"]
+
+
+
+No necesita realizar este procedimiento si la clave de licencia del paquete V_StorageAttach ya está instalada. Si el sistema ONTAP se pide con discos, normalmente instala el paquete de licencia de fábrica. Alternativamente, muchos clientes instalan todas las licencias necesarias al principio del proceso de instalación.
+
+.Pasos
+. Para cada nodo ONTAP del clúster para utilizarlo con LUN de cabina, introduzca el siguiente comando en el nodo: `system license add license key`
++
+[listing]
+----
+
+vgv3170f41a> license
+Serial Number: nnnnnnnn
+Owner: mysystem1a
+Package           Type    Description           Expiration
+----------------- ------- --------------------- --------------------
+V_StorageAttach   license Virtual Attached Storage
+----
+. Observe la salida para confirmar que se muestra el paquete V_StorageAttach.
+

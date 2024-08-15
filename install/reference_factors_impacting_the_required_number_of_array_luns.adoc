@@ -1,0 +1,34 @@
+---
+permalink: install/reference_factors_impacting_the_required_number_of_array_luns.html 
+sidebar: sidebar 
+keywords: factors, impact, required, number, array, luns 
+summary: Al planificar el uso de ONTAP de los LUN de cabina, se deben tener en cuenta factores como el tamaño de LUN de cabina, la sobrecarga de ONTAP y el tipo de suma de comprobación que afectan a la cantidad de LUN de cabina necesarias en el entorno de ONTAP. 
+---
+= Factores que afectan al número necesario de LUN de la cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Al planificar el uso de ONTAP de los LUN de cabina, se deben tener en cuenta factores como el tamaño de LUN de cabina, la sobrecarga de ONTAP y el tipo de suma de comprobación que afectan a la cantidad de LUN de cabina necesarias en el entorno de ONTAP.
+
+Debe tener en cuenta lo siguiente al determinar la cantidad requerida de LUN de cabina:
+
+* Cuanto más pequeños sean los LUN de cabina, más LUN se requieren para el almacenamiento.
++
+Idealmente, se recomienda crear un LUN de cabina grande a partir de un grupo RAID de cabina de almacenamiento determinado.
+
+* Los límites de dispositivos definen el número máximo de discos y LUN de cabina que se pueden asignar a un sistema ONTAP.
++
+_Hardware Universe_ contiene información acerca de los límites del dispositivo.
+
+* Cuanto más espacio utilizable haya en una LUN de cabina, menos LUN de cabina se necesitan.
++
+La cantidad de espacio utilizable en una LUN de cabina está determinada por el espacio que requiere ONTAP, el tipo de suma de comprobación y otros factores como el espacio necesario para las reservas de Snapshot opcionales.
+
+* Diferentes aplicaciones generan diferentes cargas.
++
+Al determinar la asignación de LUN de cabina a sistemas ONTAP, se debe tener en cuenta para qué se utilizará el almacenamiento y el número de solicitudes que pueden generar diferentes aplicaciones.
+
+

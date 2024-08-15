@@ -1,0 +1,47 @@
+---
+permalink: install/concept_minimum_and_maximum_array_lun_sizes_supported_by_ontap.html 
+sidebar: sidebar 
+keywords: minimum, maximum, array, lun, sizes, supported, ontap, configurations 
+summary: Los LUN de cabina presentados desde las cabinas de almacenamiento deben encontrarse entre los requisitos de tamaño mínimo y máximo para una configuración de ONTAP con LUN de cabina. ONTAP emite un mensaje de error al identificar un LUN de cabina que no cumple los requisitos de tamaño mínimo o máximo. 
+---
+= Tamaños mínimos y máximos de LUN de cabina admitidos para las configuraciones de ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los LUN de cabina presentados desde las cabinas de almacenamiento deben encontrarse entre los requisitos de tamaño mínimo y máximo para una configuración de ONTAP con LUN de cabina. ONTAP emite un mensaje de error al identificar un LUN de cabina que no cumple los requisitos de tamaño mínimo o máximo.
+
+Los tamaños mínimos y máximos de LUN de cabina se calculan de acuerdo con la manera en que ONTAP define las unidades de medida. La definición de ONTAP de GB y TB es la siguiente:
+
+[cols="2*"]
+|===
+| Uno... | Es igual a... 
+
+
+ a| 
+GB
+ a| 
+1000 x 1024 x 1024 bytes (1000 MB)
+
+
+
+ a| 
+TB
+ a| 
+1000 x 1000 x 1024 x 1024 bytes (1000 GB)
+
+|===
+Diferentes proveedores de cabinas de almacenamiento utilizan diferentes fórmulas para calcular unidades de medida. Debe usar las unidades de medida de su proveedor para calcular los tamaños de LUN de la cabina equivalentes a los tamaños mínimo y máximo admitidos con una configuración de ONTAP.
+
+El tamaño máximo de LUN que admite ONTAP difiere del de las versiones de ONTAP. Para obtener información acerca de los tamaños mínimos y máximos de LUN de cabina, consulte _Hardware Universe_.
+
+[NOTE]
+====
+El tamaño mínimo de LUN de cabina para un LUN de datos (almacenamiento) es diferente del tamaño mínimo de LUN de cabina para el volumen raíz.
+
+====
+*Información relacionada*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

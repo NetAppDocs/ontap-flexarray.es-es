@@ -1,0 +1,46 @@
+---
+permalink: install/concept_invalid_path_setup_alternate_paths_are_not_configured.html 
+sidebar: sidebar 
+keywords: invalid, path, setup, alternate, paths, configured 
+summary: 'Es importante configurar rutas alternativas a todos los LUN de cabina de ambos iniciadores FC en el sistema ONTAP para evitar un único punto de error (SPOF).' 
+---
+= Configuración de ruta no válida: No se han configurado rutas alternativas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es importante configurar rutas alternativas a todos los LUN de cabina de ambos iniciadores FC en el sistema ONTAP para evitar un único punto de error (SPOF).
+
+La siguiente configuración no es válida porque no proporciona rutas alternativas desde cada puerto de iniciador de FC en los sistemas ONTAP a cada LUN de la cabina de almacenamiento. Los dos puertos de iniciador de FC del mismo sistema ONTAP están conectados a la cabina de almacenamiento a través del mismo switch.
+
+image::../media/invalid_config_no_alternate_paths.gif[Este gráfico se describe en el texto adyacente.]
+
+Suponga que la siguiente división en zonas está en su lugar en este ejemplo no válido:
+
+* Para vs1:
++
+** 0A está zonificado para ver el puerto A del controlador 1
+** 0C se divide en zonas para ver el puerto B. del controlador 1
+
+
+* Para vs2:
++
+** 0A está zonificado para ver el puerto A del controlador 2
+** 0C se divide en zonas para ver el puerto B. del controlador 2
+
+
+
+
+En esta configuración de muestra, cada interruptor se convierte en un SPOF.
+
+Para que esta configuración sea válida, se deben realizar los siguientes cambios:
+
+* El puerto iniciador FC 0C de VS1 debe estar conectado al switch 2.
+* El puerto iniciador FC 0A de VS2 debe estar conectado al switch 1.
+* Debe configurarse la división en zonas adecuada.
++
+Si utiliza varios puertos en una cabina de almacenamiento que admite la configuración de un conjunto específico de LUN en un conjunto de puertos seleccionado, un puerto de iniciador FC determinado debe ser capaz de ver todos los LUN de cabina presentados en la estructura.
+
+

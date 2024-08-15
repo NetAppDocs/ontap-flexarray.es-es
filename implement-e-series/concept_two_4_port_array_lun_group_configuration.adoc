@@ -1,0 +1,24 @@
+---
+permalink: implement-e-series/concept_two_4_port_array_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: two, 4-port, array, lun, group, configuration 
+summary: En esta configuración, cada par de puertos de iniciador FC de ONTAP accede a un grupo de LUN de cabina independiente. La división en zonas es un solo iniciador FC de ONTAP a un único puerto de destino de cabina. 
+---
+= Configuración de dos grupos de LUN para cabinas de 4 puertos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta configuración, cada par de puertos de iniciador FC de ONTAP accede a un grupo de LUN de cabina independiente. La división en zonas es un solo iniciador FC de ONTAP a un único puerto de destino de cabina.
+
+Esta configuración se admite para su uso con todas las cabinas de almacenamiento enumeradas en la matriz de interoperabilidad compatibles con la versión de ONTAP que se ejecuta en el sistema.
+
+En la siguiente ilustración se muestra un diagrama de bloques de esta configuración:
+
+image::../media/two_4_port_array_lun_groups.gif[dos grupos de lun de cabinas de 4 puertos]
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

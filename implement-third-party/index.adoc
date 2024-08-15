@@ -1,0 +1,12 @@
+---
+permalink: implement-third-party/index.html 
+sidebar: sidebar 
+keywords: flexarray, virtualization, implementation, third-Party, storage 
+summary: Bienvenido a la Biblioteca de información de ONTAP FlexArray. Aquí encontrará información sobre cómo usar una cabina de almacenamiento de terceros como almacenamiento back-end de los clústeres. 
+---
+= Implementación de virtualización de FlexArray® para almacenamiento de terceros
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+

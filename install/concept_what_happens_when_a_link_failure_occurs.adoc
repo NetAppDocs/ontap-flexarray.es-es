@@ -1,0 +1,34 @@
+---
+permalink: install/concept_what_happens_when_a_link_failure_occurs.html 
+sidebar: sidebar 
+keywords: happens, link, failure, occurs 
+summary: ONTAP supervisa el uso de un enlace periódicamente. La respuesta de ONTAP a un fallo de enlace es diferente en función de dónde se produzca el fallo. 
+---
+= Qué ocurre cuando se produce un fallo de enlace
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP supervisa el uso de un enlace periódicamente. La respuesta de ONTAP a un fallo de enlace es diferente en función de dónde se produzca el fallo.
+
+En la siguiente tabla se muestra qué ocurre si se produce un fallo en la configuración conectada a la estructura:
+
+|===
+| Si se produce un fallo en el enlace entre... | Realice lo siguiente... 
+
+
+ a| 
+Sistema ONTAP y el switch
+ a| 
+ONTAP recibe una notificación inmediatamente y envía tráfico a la otra ruta inmediatamente.
+
+
+
+ a| 
+Switch y la cabina de almacenamiento
+ a| 
+ONTAP no es consciente inmediatamente de que hay un fallo de enlace porque el enlace aún se establece entre el sistema ONTAP y el switch. La ONTAP nota que hay un fallo cuando se agota el tiempo de espera de I/O. ONTAP reintenta tres veces enviar el tráfico en la ruta original y luego conmuta el tráfico a la otra ruta.
+
+|===

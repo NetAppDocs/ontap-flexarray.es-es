@@ -1,0 +1,33 @@
+---
+permalink: install/concept_support_for_metrocluster_configurations_that_can_use_array_luns.html 
+sidebar: sidebar 
+keywords: requirements, metrocluster, configurations, array, luns 
+summary: Antes de configurar una configuración de MetroCluster con LUN de cabina, debe asegurarse de que los sistemas ONTAP y el almacenamiento utilizados en la configuración sigan los requisitos básicos de compatibilidad. 
+---
+= Requisitos para las configuraciones de MetroCluster con LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de configurar una configuración de MetroCluster con LUN de cabina, debe asegurarse de que los sistemas ONTAP y el almacenamiento utilizados en la configuración sigan los requisitos básicos de compatibilidad.
+
+Los requisitos básicos para admitir configuraciones de MetroCluster con LUN de cabina son los siguientes:
+
+* Puede usar tanto sistemas V-Series como sistemas FAS compatibles con LUN de cabinas en configuraciones de MetroCluster.
++
+Sin embargo, debe asegurarse de que todos los sistemas de ONTAP que se usan en una configuración de MetroCluster sean del mismo modelo.
+
+* Los sistemas ONTAP solo pueden utilizar discos nativos, LUN solamente en cabinas de almacenamiento o ambos.
+* Si está configurando una configuración MetroCluster tanto con discos y LUN de cabina nativos, debe usar puentes FC a SAS y discos nativos compatibles con dichos puentes.
+* Los sistemas ONTAP y las cabinas de almacenamiento deben identificarse en _Interoperability Matrix_ como compatibles con las configuraciones de MetroCluster.
+
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Instalación y configuración de MetroCluster estructural"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-stretch/index.html["Instalación y configuración de MetroCluster con ampliación"]

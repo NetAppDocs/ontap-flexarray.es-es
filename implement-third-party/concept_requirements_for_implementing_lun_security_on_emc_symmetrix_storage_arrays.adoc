@@ -1,0 +1,32 @@
+---
+permalink: implement-third-party/concept_requirements_for_implementing_lun_security_on_emc_symmetrix_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, implementing, lun, security, emc, symmetrix, storage, arrays 
+summary: Utiliza la seguridad de LUN para eliminar la posibilidad de que un host escriba datos en una LUN que no es propiedad de ese host. 
+---
+= Requisitos para implementar la seguridad de LUN en matrices de almacenamiento EMC Symmetrix
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Utiliza la seguridad de LUN para eliminar la posibilidad de que un host escriba datos en una LUN que no es propiedad de ese host.
+
+Para eliminar la posibilidad de que un host distinto de ONTAP sobrescriba LUN de cabina EMC Symmetrix propiedad de un sistema ONTAP o viceversa, debe presentar los dispositivos lógicos Symmetrix a través de los puertos del director del host (canal) de una de las siguientes formas:
+
+* Presente solo los dispositivos lógicos Symmetrix para ONTAP en puertos de director de host (canal) Symmetrix específicos dedicados al uso de ONTAP.
++
+Si los puertos no pueden estar dedicados a ONTAP, debe confirmar que todos los demás hosts que utilizan esos puertos son compatibles con los requisitos de ONTAP. Esto se debe a que cada host conectado a la matriz Symmetrix tiene requisitos para diferentes configuraciones de atributos de puerto. El uso compartido de puertos entre varios hosts conectados a la cabina de almacenamiento de Symmetrix puede dar como resultado una configuración imposible de implementar.
+
+* Para las cabinas de almacenamiento VMAX, cree vistas de enmascaramiento para la asignación y el enmascaramiento necesarios mediante la creación de grupos de puertos, grupos de almacenamiento e iGroups.
++
+Para conseguirlo, primero debe habilitar el atributo de puerto ACLX en los puertos de la cabina de almacenamiento VMAX.
+
+
+
+[NOTE]
+====
+De forma predeterminada, no presente el LUN de VCMDB a todos los hosts. Configure la configuración global para restringir la visibilidad de la VCMDB a menos que se haya hecho visible específicamente para un host en particular.
+
+====

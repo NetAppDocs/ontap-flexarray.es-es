@@ -1,0 +1,97 @@
+---
+permalink: install/reference_commands_for_checking_back_end_configuration.html 
+sidebar: sidebar 
+keywords: commands, check, back-end, configuration 
+summary: Varios comandos de ONTAP proporcionan información sobre la configuración de la cabina de almacenamiento, incluidos los errores de configuración back-end. Estos comandos son particularmente útiles durante la verificación de la instalación y la solución de problemas. 
+---
+= Comandos para comprobar la configuración back-end
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Varios comandos de ONTAP proporcionan información sobre la configuración de la cabina de almacenamiento, incluidos los errores de configuración back-end. Estos comandos son particularmente útiles durante la verificación de la instalación y la solución de problemas.
+
+ `storage array config show`El comando es el primer comando que se utiliza durante la verificación de la instalación. También es el primer comando que debe utilizar si observa que el sistema no funciona como se espera o si recibe un mensaje de error.
+
+En la siguiente tabla se muestran los comandos que son particularmente útiles para la verificación de la instalación y la solución de problemas:
+
+|===
+| Comando | Descripción 
+
+
+ a| 
+`storage array config show`
+ a| 
+Proporciona información, en el nivel de la cabina de almacenamiento, acerca de la configuración de los dispositivos back-end en una implementación con sistemas ONTAP mediante LUN de cabinas. Este comando muestra la forma en que las cabinas de almacenamiento se conectan al clúster. Si ONTAP detecta un problema que impide que los sistemas ONTAP que utilizan LUN de cabina y cabinas de almacenamiento funcionen correctamente juntos, `storage array config show` indica que se debe ejecutar `storage errors show` para obtener detalles sobre el error.
+
+Este comando también es útil para verificar que la configuración está configurada como se desea. Por ejemplo, puede mirar el resultado para confirmar que el número de grupos LUN de cabina que pretendió se crearon.
+
+
+
+ a| 
+`storage array show -name array_name`
+ a| 
+Muestra información sobre todas las cabinas de almacenamiento visibles para el clúster o acerca de la cabina de almacenamiento que se especifique. Si el número de LUN de cabina presentados supera la capacidad del sistema, el campo de texto Error muestra el número de LUN que ONTAP no pudo detectar. Debe estar atento a este problema en los sistemas con poca memoria en particular.
+
+
+
+ a| 
+`storage path quiesce`
+ a| 
+Suspende temporalmente la I/O en un LUN de cabina específico en una ruta específica. La ruta se vuelve a activar al reiniciar o al ejecutar `storage path resume`. Algunas cabinas de almacenamiento requieren la interrupción de I/O durante un periodo para quitar o mover un LUN de cabina.
+
+[NOTE]
+====
+ `storage path quiesce`El comando no se puede utilizar con matrices de almacenamiento IBM DS.
+
+====
+
+
+ a| 
+`storage path resume`
+ a| 
+Permite que las I/O comiencen a fluir de nuevo; esta es la inversa de la pausa.  `storage path resume`El comando se utiliza principalmente para mantenimiento de hardware (por ejemplo, extracción de cable o GBIC) o después de que se produzca un modo inactivo accidental de una ruta a un LUN de cabina. No siempre es necesario ejecutar este comando después de desactivar una ruta en modo inactivo. Por ejemplo, ONTAP puede detectar un LUN de cabina recién asignado.
+
+
+
+ a| 
+`storage array show`
+ a| 
+Muestra información sobre las cabinas de almacenamiento visibles para el clúster, por ejemplo, nombre, proveedor, modelo, y tipo de conmutación al nodo de respaldo.
+
+
+
+ a| 
+`storage disk show`
+ a| 
+Introducir `storage disk show` sin parámetros muestra lo siguiente para todos los discos y LUN de cabina: El nombre, el tamaño utilizable, el tipo de contenedor, posición, agregado, y propietario. Al introducir `storage disk show` con un nombre de disco o un nombre de LUN de cabina como parámetro, se muestran detalles sobre un disco o LUN de cabina individual, por ejemplo, el estado (asignado o sin asignar), el propietario y las rutas para el LUN de cabina. El resultado se divide en tres secciones: Información acerca del LUN de la cabina, información acerca de las rutas al LUN de la cabina y cualquier error asociado con el LUN de la cabina.
+
+
+
+ a| 
+`storage disk show -errors _**_`
+ a| 
+Al introducir `storage disk show` con el ``-errors` parámetro, se proporcionan detalles de errores de configuración en los niveles de LUN de disco y cabina. Aunque el resultado del comando es similar al `storage disk error show` del comando, `storage disk show -errors` proporciona opciones adicionales para filtrar el resultado por parámetros como la posición de nodo, clúster y bahía.
+
+
+
+ a| 
+`storage disk error show`
+ a| 
+Proporciona detalles sobre los errores de configuración back-end en los niveles de LUN de disco y cabina. Al `storage disk error` introducir show con el nombre de LUN de cabina como parámetro, se muestran detalles acerca de los errores de configuración relacionados con el LUN de cabina especificado. Debe corregir estos errores antes de configurar ONTAP para que funcione con cabinas de almacenamiento.
+
+
+
+ a| 
+`storage errors show`
+ a| 
+Proporciona detalles, en el nivel del LUN de la cabina, sobre los errores de configuración back-end que impiden que el sistema ONTAP y la cabina de almacenamiento funcionen juntos. Es necesario corregir errores identificados `storage errors show` antes de configurar ONTAP para que funcione con cabinas de almacenamiento.
+
+[NOTE]
+====
+ `storage errors show`El comando no proporciona información sobre errores de configuración del disco. Para ver información sobre los errores de configuración de LUN de cabina y discos, puede utilizar `storage disk show -errors` el comando o `storage disk error show` el comando.
+
+====
+|===

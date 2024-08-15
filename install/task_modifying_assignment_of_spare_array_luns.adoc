@@ -1,0 +1,36 @@
+---
+permalink: install/task_modifying_assignment_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: modify, assignment, spare, array, luns 
+summary: Es posible cambiar la propiedad de un LUN de cabina de repuesto a otro nodo. Se recomienda hacerlo para el equilibrio de carga en los nodos. 
+---
+= Modificación de la asignación de LUN de cabina de repuesto
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede cambiar la propiedad de una LUN de cabina _spare_ a otro nodo. Se recomienda hacerlo para el equilibrio de carga en los nodos.
+
+.Pasos
+. En la consola del nodo al que pertenece el LUN de cabina que desea reasignar, introduzca el siguiente comando para ver una lista de LUN de cabina de repuesto en el nodo: `storage disk show -owner local`
++
+Se enumeran los LUN de cabina que pertenecen al nodo, tanto los repuestos como los LUN de agregados.
+
+. Confirme que la LUN que desea reasignar a otro nodo es una LUN de repuesto.
+. Introduzca el siguiente comando para asignar la propiedad del LUN de cabina a otro nodo: `storage disk assign arrayLUNname -owner new_owner_name -force`
++
+[NOTE]
+====
+La propiedad del LUN de cabina no se modifica si no se utiliza la opción -force o si el LUN de cabina ya se añadió a un agregado.
+
+====
+. Introduzca el siguiente comando para comprobar que la propiedad del LUN de cabina de repuesto se cambió a otro nodo: `storage disk show -owner local`
++
+El LUN de cabina de repuesto que se modificó al nuevo propietario ya no debe aparecer en la lista de repuestos. Si todavía aparece el LUN de cabina, repita el comando para cambiar la propiedad.
+
+. En el nodo de destino, introduzca el siguiente comando para verificar que el LUN de cabina de repuesto cuya propiedad modificada se muestra como una pieza de repuesto propiedad del nodo de destino: `storage disk show -owner local`
+
+
+Es necesario añadir el LUN de cabina a un agregado para poder utilizar el almacenamiento.

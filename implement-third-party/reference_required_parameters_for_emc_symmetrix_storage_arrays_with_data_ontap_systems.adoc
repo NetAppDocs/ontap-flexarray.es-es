@@ -1,0 +1,71 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_emc_symmetrix_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameter, settings, storage, array, ontap, systems, host, channel, director, configuration, port 
+summary: La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP. 
+---
+= Configuración de parámetros obligatoria en la cabina de almacenamiento para sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP.
+
+
+
+== Parámetros de configuración del puerto de director de canal de host requeridos
+
+En la siguiente tabla, se muestran los parámetros de configuración del puerto del director del canal de host que deben establecerse en la cabina de almacenamiento:
+
+|===
+| Parámetro (los nombres pueden diferir entre la GUI y la CLI) | Ajuste 
+
+
+ a| 
+`Common SN` (Número de serie común o parámetro de bits C)
+ a| 
+Habilite
+
+
+
+ a| 
+`PP` (Parámetro punto a punto)
+ a| 
+Habilite
+
+
+
+ a| 
+`SC3` (SCSI-3)
+ a| 
+Habilite
+
+
+
+ a| 
+`SPC-2` (SCS2_PROTOCOLO_VERSION, parámetro SCSI Primary Command 2, o. `Allow inquiry data to be compiled to the standard)`
+ a| 
+Habilite
+
+
+
+ a| 
+`UWN` (Nombre mundial único)
+ a| 
+Habilite
+
+
+
+ a| 
+`Volume Set Addressing`
+ a| 
+Desactivar
+
+|===
+ `Volume Set Addressing`El parámetro debe establecerse de la misma manera en todos los puertos de director de canal a los que se asigna la LUN. Si la configuración es diferente, ONTAP informa de esto como una discrepancia de ID de LUN en `storage errors show` la salida y en un mensaje de EMS.
+
+*Información relacionada*
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Referencias y requisitos de instalación de la virtualización FlexArray"]

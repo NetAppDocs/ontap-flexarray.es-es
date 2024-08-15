@@ -1,0 +1,20 @@
+---
+permalink: install/task_setting_the_target_queue_depth_clustered_data_ontap_prior_to_8_2.html 
+sidebar: sidebar 
+keywords: set, target, queue, depth, ontap, 8.2 
+summary: La profundidad de cola de destino predeterminada es aceptable para la mayoría de las implementaciones, pero puede cambiar el valor predeterminado si es necesario. 
+---
+= Configuración de la profundidad de cola de destino (ONTAP anterior a 8,2)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La profundidad de cola de destino predeterminada es aceptable para la mayoría de las implementaciones, pero puede cambiar el valor predeterminado si es necesario.
+
+Esta configuración es según el sistema ONTAP, y se aplica a todos los puertos objetivo de todas las cabinas de almacenamiento. Para sistemas ONTAP que ejecutan una versión anterior a la 8,2, se puede usar esta opción.
+
+.Paso
+. Utilice la siguiente opción para definir la profundidad de cola de destino: `options disk.target_port.cmd_queue_depth value`
+

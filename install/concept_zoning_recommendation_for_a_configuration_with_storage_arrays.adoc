@@ -1,0 +1,20 @@
+---
+permalink: install/concept_zoning_recommendation_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: zone, recommendation, configuration, storage, arrays 
+summary: 'El tipo recomendado de división en zonas para una configuración con cabinas de almacenamiento es la división en zonas de 1:1. Con la división en zonas de 1:1, cada zona contiene un solo puerto iniciador FC y un solo puerto de destino de cabina de almacenamiento.' 
+---
+= Recomendación de división en zonas para una configuración con cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El tipo recomendado de división en zonas para una configuración con cabinas de almacenamiento es la división en zonas de 1:1. Con la división en zonas de 1:1, cada zona contiene un solo puerto iniciador FC y un solo puerto de destino de cabina de almacenamiento.
+
+Los beneficios de crear la división en zonas 1:1 son los siguientes:
+
+* Es necesario limitar el número de puertos a través de los cuales se puede acceder a un LUN de cabina específico.
+* Existen mejoras en la detección y el tiempo de arranque porque los sistemas ONTAP de los iniciadores FC no intentan detectarse entre sí.
+

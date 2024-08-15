@@ -1,0 +1,69 @@
+---
+permalink: install/reference_array_lun_is_either_smaller_or_larger_than_the_supported_values.html 
+sidebar: sidebar 
+keywords: array, lun, size, smaller, larger, supported, values, show, message, storage, errors 
+summary: Para planificar los tamaños de LUN de cabina, debe cumplir los límites mínimos y máximos de tamaño de LUN de cabina de ONTAP. Estos límites varían en función del lanzamiento de ONTAP. El resultado de los errores de almacenamiento muestra identifica los LUN de cabina que no cumplen con los requisitos de tamaño. 
+---
+= El tamaño del LUN de cabina es menor o mayor que los valores admitidos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para planificar los tamaños de LUN de cabina, debe cumplir los límites mínimos y máximos de tamaño de LUN de cabina de ONTAP. Estos límites varían en función del lanzamiento de ONTAP. El `storage errors show` resultado identifica los LUN de cabina que no cumplen con los requisitos de tamaño.
+
+No se pueden asignar LUN de cabina con problemas de tamaño a un sistema ONTAP.
+
+
+
+== Los errores de almacenamiento muestran un mensaje
+
+[listing]
+----
+NAME (Serial #): This array LUN is too large and is not usable. The maximum array LUN size supported is xTB
+----
+O.
+
+[listing]
+----
+NAME (Serial #): This array LUN is too small and is not usable. The minimum array LUN size supported is xGB.
+----
+
+
+== Explicación
+
+Este mensaje se genera cuando el LUN de cabina es menor que el tamaño mínimo de LUN de cabina admitido por ONTAP o supera el tamaño máximo admitido. Los motivos principales por los que los tamaños de LUN de cabina son mayores o menores que los valores admitidos pueden ser los siguientes:
+
+* El administrador de la cabina de almacenamiento no convirtió los límites de tamaño de los LUN de la cabina de ONTAP en límites equivalentes de acuerdo con la definición de unidades de medida del proveedor.
++
+Algunos proveedores calculan los límites de tamaño de LUN de cabina de una forma distinta a la de ONTAP para determinar los límites de tamaño mínimo y máximo de LUN de cabina.
+
++
+_Hardware Universe_ enumera los valores de los límites de tamaño máximo y mínimo de LUN de cabina admitidos.
+
+* Los LUN de cabina están para otro host cuyos límites de tamaño son diferentes de los límites de ONTAP.
++
+En una SAN abierta, ONTAP se expone a los LUN de cabina destinados a otros hosts si esos LUN de cabina no se han enmascarado.
+
++
+ONTAP genera un mensaje de error sobre los problemas de tamaño de cualquier LUN de cabina expuesto a ella.
+
+
+
+
+
+== Solución de problemas y resolución de problemas
+
+. Revise `storage errors show` el resultado para averiguar qué LUN de cabina tiene un problema de tamaño.
++
+** Si el LUN de cabina con el problema de tamaño es para ONTAP, el administrador de la cabina de almacenamiento debe cambiar el tamaño del LUN de cabina para cumplir con los requisitos de ONTAP y presentarlo de nuevo a ONTAP.
+** Si el LUN de cabina con el problema de tamaño es para otro host, el administrador de la cabina de almacenamiento debe enmascarar el LUN de cabina para que no quede expuesto a ONTAP.
+
+
+. Después de solucionar el problema, ejecute `storage array config show` de nuevo para confirmar que el error no persiste.
+
+
+*Información relacionada*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

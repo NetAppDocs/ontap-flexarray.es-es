@@ -1,0 +1,20 @@
+---
+permalink: install/concept_minimum_array_lun_size_for_the_root_volume.html 
+sidebar: sidebar 
+keywords: array, lun, size, required, root, volume 
+summary: Es necesario configurar el tamaño del volumen raíz para que sea mayor que el tamaño mínimo de LUN de cabina admitido a fin de garantizar que exista espacio suficiente en el volumen raíz para los archivos del sistema, los archivos de registro y los archivos de núcleo. Debe proporcionar estos archivos al soporte técnico si se produce un problema del sistema. 
+---
+= El tamaño de LUN de cabina necesario para el volumen raíz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es necesario configurar el tamaño del volumen raíz para que sea mayor que el tamaño mínimo de LUN de cabina admitido a fin de garantizar que exista espacio suficiente en el volumen raíz para los archivos del sistema, los archivos de registro y los archivos de núcleo. Debe proporcionar estos archivos al soporte técnico si se produce un problema del sistema.
+
+_Hardware Universe_ enumera el tamaño mínimo de LUN de cabina para un volumen raíz.
+
+*Información relacionada*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

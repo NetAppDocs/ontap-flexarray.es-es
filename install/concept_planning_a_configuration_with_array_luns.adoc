@@ -1,0 +1,20 @@
+---
+permalink: install/concept_planning_a_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: plan, configuration, array, luns 
+summary: Para planificar una configuración de ONTAP con LUN de cabina, debe verificar si la cabina de almacenamiento es compatible con una versión de ONTAP en particular. Además, debe comprobar la información de interoperabilidad y soporte para garantizar que todos los sistemas cumplan los requisitos de una configuración con LUN de cabina. 
+---
+= Planificar una configuración con LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para planificar una configuración de ONTAP con LUN de cabina, debe verificar si la cabina de almacenamiento es compatible con una versión de ONTAP en particular. Además, debe comprobar la información de interoperabilidad y soporte para garantizar que todos los sistemas cumplan los requisitos de una configuración con LUN de cabina.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/site/global/dashboard["Soporte de NetApp"]
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

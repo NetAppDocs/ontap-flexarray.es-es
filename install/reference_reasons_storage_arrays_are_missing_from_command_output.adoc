@@ -1,0 +1,28 @@
+---
+permalink: install/reference_reasons_storage_arrays_are_missing_from_command_output.html 
+sidebar: sidebar 
+keywords: reasons, storage, arrays, miss, command, output 
+summary: Una cabina de almacenamiento que no está conectada al sistema ONTAP no aparece en el resultado de la configuración de la cabina de almacenamiento show. Los problemas con el cableado, la división en zonas y la configuración de grupos de hosts pueden impedir una conexión entre los dos dispositivos. 
+---
+= Razones por las que las cabinas de almacenamiento no están en la salida del comando
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En la salida, no se muestra una cabina de almacenamiento conectada al sistema ONTAP `storage array config show` . Los problemas con el cableado, la división en zonas y la configuración de grupos de hosts pueden impedir una conexión entre los dos dispositivos.
+
+
+
+== Resolver el problema
+
+. Compruebe el cableado, la configuración del grupo de hosts y la división en zonas de la siguiente manera:
++
+** Compruebe que los cables están conectados.
+** Compruebe que los WWPN de los iniciadores de FC en los sistemas ONTAP estén en el grupo de hosts.
+** Compruebe que tanto la cabina de almacenamiento como el iniciador de FC estén en la misma zona.
+
+
+. Una vez solucionado el problema, ejecute `storage array config show` en ONTAP para confirmar que se solucionó el problema.
+

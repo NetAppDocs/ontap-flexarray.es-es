@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/concept_configuring_fill_word_settings_for_8_gb_brocade_switch_ports_concept.html 
+sidebar: sidebar 
+keywords: required fill word, settings, 8 gb, brocade, switch, ports 
+summary: Si utiliza switches Brocade de 8 GB que ejecutan la versión de firmware de FOS 6.3.1 o posterior en el entorno de almacenamiento, debe verificar que estén configurados los ajustes de palabra de relleno adecuados en los puertos del switch conectados a los sistemas ONTAP y que los puertos del switch estén conectados a las cabinas de almacenamiento. Si se proporcionan palabras de relleno incorrectas, se pueden producir fallos de inicialización de enlace en los puertos del switch. 
+---
+= Configuración de canal de llenado requerida para puertos de switch Brocade de 8 Gb
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si utiliza switches Brocade de 8 GB que ejecutan la versión de firmware de FOS 6.3.1 o posterior en el entorno de almacenamiento, debe verificar que estén configurados los ajustes de palabra de relleno adecuados en los puertos del switch conectados a los sistemas ONTAP y que los puertos del switch estén conectados a las cabinas de almacenamiento. Si se proporcionan palabras de relleno incorrectas, se pueden producir fallos de inicialización de enlace en los puertos del switch.
+
+Para los sistemas ONTAP, debe establecer el canal de relleno en los puertos del switch correspondientes en 3.
+
+Para las cabinas de almacenamiento, debe configurar la palabra de relleno de acuerdo con los siguientes valores recomendados, mediante la documentación del switch de Brocade para recibir instrucciones:
+
+[cols="2*"]
+|===
+| Cabina de almacenamiento | Rellene el valor de canal en los puertos del switch Brocade 
+
+
+ a| 
+Hitachi
+| 2 
+
+
+ a| 
+HP XP
+|  
+
+
+ a| 
+Todas las demás cabinas de almacenamiento compatibles con los sistemas Data ONTAP
+| 3 
+|===
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

@@ -1,0 +1,86 @@
+---
+permalink: implement-third-party/reference_workaround_when_luns_are_not_visible_with_hitachi_storage_arrays.html 
+sidebar: sidebar 
+keywords: workaround, luns, not, visible, hitachi, storage, arrays, aggregates, created, ontap, system, 
+summary: Deben definirse los parámetros de la cabina de almacenamiento especificados en la sección Parámetros requeridos para las cabinas de almacenamiento Hitachi con sistemas que ejecutan ONTAP y se deben asignar LUN a los grupos de hosts antes de que se pase la zona del switch para conectar el sistema ONTAP que utiliza LUN de cabina a una cabina de almacenamiento Hitachi. 
+---
+= Solución alternativa cuando los LUN no están visibles con las cabinas de almacenamiento Hitachi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Deben definirse los parámetros de la cabina de almacenamiento especificados en la sección Parámetros requeridos para las cabinas de almacenamiento Hitachi con sistemas que ejecutan ONTAP y se deben asignar LUN a los grupos de hosts antes de que se pase la zona del switch para conectar el sistema ONTAP que utiliza LUN de cabina a una cabina de almacenamiento Hitachi.
+
+xref:reference_required_parameters_for_hitachi_storage_arrays_with_ontap_systems.adoc[Parámetros requeridos para las cabinas de almacenamiento Hitachi con sistemas que ejecutan ONTAP]
+
+Si se configuró la división en zonas antes de configurar los parámetros y asignar las LUN a los grupos de hosts, puede resolver el problema que no estén visibles si realiza una reinicialización de ruta. La reinicialización de ruta fuerza una nueva detección de los LUN de cabina asignados desde una cabina de almacenamiento de Hitachi.
+
+El procedimiento que utilice depende de si los agregados con LUN de cabina Hitachi ya se han configurado en el sistema ONTAP. (En los siguientes procedimientos, supongamos que Node-1 y Node-2 son los nombres de los nodos ONTAP).
+
+
+
+== Si ya se crean agregados con LUN de cabina Hitachi en un sistema ONTAP que utiliza LUN de cabina
+
+. Ejecute el siguiente comando para garantizar que la configuración de alta disponibilidad está activada en sus sistemas ONTAP *`cluster ha show`: *
++
+Se muestra la siguiente salida:
+
++
+[listing]
+----
+
+High Availability Configured: true
+----
+. Ejecute el siguiente comando para garantizar que el sistema de recuperación tras fallos de almacenamiento está configurado en el sistema ONTAP: *`storage failover show`*
++
+Se muestra la siguiente salida:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-1    Node-2    true     Connected to Node-2
+Node-2    Node-1    true     Connected to Node-1
+2 entries were displayed.
+----
+. Ejecute el siguiente comando para realizar una operación de toma de control en el nodo 1: *`storage failover takeover -ofnode Node-1`*
+. Ejecute de nuevo el siguiente comando para comprobar que Node-2 está listo para una operación de devolución *`storage failover show`: *
++
+Se muestra la siguiente salida:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-2    Node-1    false    In takeover, Auto giveback will be
+                                      initiated in 348 seconds
+Node-1    Node-2    -        Waiting for giveback (HA mailboxes)
+2 entries were displayed.
+----
+. Ejecute el siguiente comando para realizar una operación de devolución en el nodo 1: *`storage failover giveback -ofnode Node-1 -require-partner-waiting true`*
+. Desde otros nodos del cluster, repita del Paso 3 al Paso 5.
+
+
+
+
+== Si no se han creado agregados con LUN de cabina Hitachi en un sistema ONTAP que utiliza LUN de cabina
+
+. Ejecute el siguiente comando para enumerar todos los puertos de iniciador ONTAP FC conectados a la cabina de almacenamiento Hitachi: *`system node run -node <node name> -command "sysconfig -v"`*
++
+Por ejemplo *`system node run -node Node-1 -command "sysconfig -v"`: *
+
+. Ejecute el siguiente comando para desconectar todos los puertos enumerados *`system node run -node <node name> -command "priv set advanced;fcadmin offline <adapter>"`: *
++
+Por ejemplo *`system node run -node Node-1 -command "priv set advanced;fcadmin offline 0a"`: *
+
+. Ejecute el siguiente comando para conectar todos los puertos enumerados *`system node run -node <node name> -command "priv set advanced;fcadmin online <adapter>"`: *
++
+Por ejemplo *`system node run -node Node-1 -command "priv set advanced;fcadmin online 0a"`: *
+
+

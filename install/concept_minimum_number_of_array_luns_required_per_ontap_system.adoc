@@ -1,0 +1,18 @@
+---
+permalink: install/concept_minimum_number_of_array_luns_required_per_ontap_system.html 
+sidebar: sidebar 
+keywords: minimum, number, array, luns, required, ontap, system 
+summary: El número de LUN de cabina que necesita por sistema ONTAP depende de la ubicación del volumen raíz. 
+---
+= Número mínimo de LUN de cabina requeridos por sistema ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El número de LUN de cabina que necesita por sistema ONTAP depende de la ubicación del volumen raíz.
+
+El volumen raíz puede estar en un disco o en LUN de cabina. Luego, la ubicación del volumen raíz determina la cantidad mínima de LUN de cabina que necesita. Si el volumen raíz se encuentra en una cabina de almacenamiento, cada sistema ONTAP independiente y cada nodo de un par de alta disponibilidad deben poseer al menos un LUN de cabina. Si el volumen raíz se encuentra en un disco nativo, los únicos LUN de cabina necesarios son los para el almacenamiento de datos.
+
+Para una configuración de MetroCluster que utiliza LUN de cabina, se requieren dos LUN de cabina (un LUN de cada sitio) si el volumen raíz está en una cabina de almacenamiento. Los dos LUN son necesarios para poder reflejar el volumen raíz.

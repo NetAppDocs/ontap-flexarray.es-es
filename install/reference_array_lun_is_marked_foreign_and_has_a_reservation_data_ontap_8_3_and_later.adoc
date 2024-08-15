@@ -1,0 +1,60 @@
+---
+permalink: install/reference_array_lun_is_marked_foreign_and_has_a_reservation_data_ontap_8_3_and_later.html 
+sidebar: sidebar 
+keywords: array, lun, marked, foreign, reservation, show, message, troubleshoot, resolution, problem 
+summary: Puede importar datos alojados en los LUN de cabina en su formato nativo en ONTAP. El proceso de importación de contenido de dicho LUN de cabina que se marca como externo puede verse afectado si el LUN de cabina tiene reservas de host externo durante la importación. 
+---
+= El LUN de la cabina se marca como externo y tiene una reserva
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede importar datos alojados en los LUN de cabina en su formato nativo en ONTAP. El proceso de importación del contenido de dicho LUN de cabina marcado como *ajeno* puede verse afectado si el LUN de cabina tiene reservas de host externo durante la importación.
+
+
+
+== Los errores de almacenamiento muestran un mensaje
+
+[listing]
+----
+
+EMC-1.3 (600000e00d1000000010000e00030000): This array LUN is marked foreign and has a reservation.
+----
+
+
+== Explicación
+
+Esta condición de error se produce cuando las reservas creadas por aplicaciones de host externas en el LUN no se borran hasta que el administrador de ONTAP inicie el proceso de importación. La operación de importación falla y el mensaje se muestra como el resultado `storage errors show` del comando.
+
+Deben borrarse las reservas para que la operación de importación se complete correctamente.
+
+
+
+== Solución de problemas y resolución de problemas
+
+Para resolver el problema, el administrador de la cabina de almacenamiento debe eliminar la reserva persistente del LUN de cabina.
+
+Es posible quitar la reserva persistente desde el host externo que accede a los datos de LUN de la cabina en su formato nativo o mediante comandos de ONTAP. Puede usar los siguientes comandos de la ONTAP para eliminar la reserva:
+
+. Revise el `storage errors show` resultado para identificar el LUN de cabina con reservas, como se muestra en el ejemplo siguiente:
++
+[listing]
+----
+
+system1a::> storage errors show
+EMC_SYMMETRIX_1
+--------------------------------------
+EMC-1.3 (600000e00d1000000010000e00030000): This array LUN is marked foreign and has a reservation.
+----
+. Ejecute `set -privilege advanced` el comando para cambiar al modo _ADVANCED_, dado que no puede importar el contenido de la LUN de la cabina en el modo _admin_.
+. Utilice el `storage disk -remove-reservation` comando para eliminar la reserva persistente del LUN de cabina identificado.
++
+[listing]
+----
+
+system1a::>* storage disk remove-reservation -disk EMC-1.3
+----
+. Utilice el `lun import start` comando para iniciar el proceso de importación del contenido de la LUN de la cabina en ONTAP.
+

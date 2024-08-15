@@ -1,0 +1,130 @@
+---
+permalink: install/reference_array_luns_are_configured_with_conflicting_failover_modes_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: array, luns, configured, conflict, failover, modes 
+summary: ONTAP requiere que los LUN de cabina visibles para un determinado sistema ONTAP se configuren con el mismo modo de conmutación por error. En algunas cabinas de almacenamiento, es posible configurar modos de conmutación al nodo de respaldo incoherentes en diferentes rutas a un LUN de cabina. 
+---
+= Los LUN de cabina se configuran con modos de conmutación por error contradictorios
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP requiere que los LUN de cabina visibles para un determinado sistema ONTAP se configuren con el mismo modo de conmutación por error. En algunas cabinas de almacenamiento, es posible configurar modos de conmutación al nodo de respaldo incoherentes en diferentes rutas a un LUN de cabina.
+
+
+
+== Los errores de almacenamiento muestran un mensaje
+
+[listing]
+----
+NAME(UID): This array LUN is configured with conflicting failover modes. Each path to this LUN must use the same mode.
+----
+
+
+== Explicación
+
+En algunas cabinas de almacenamiento, por ejemplo, las cabinas de almacenamiento EMC CLARiiON, el modo de conmutación por error puede establecerse con el puerto iniciador FC. En dichas cabinas de almacenamiento, es posible establecer modos de conmutación por error incoherentes para los LUN de cabina visibles para los iniciadores de FC en el mismo sistema de ONTAP. ONTAP no admite modos de conmutación al respaldo incoherentes para las rutas a un LUN de cabina desde un sistema ONTAP en particular.
+
+Si la cabina de almacenamiento permite configurar el modo de conmutación por error para un LUN de cabina mediante iniciador FC, parte del proceso de validación de instalación debe incluir la comprobación para garantizar que no haya problemas en la configuración del modo de conmutación por error de los LUN de cabina visibles en el sistema ONTAP. El `storage errors show` comando envía alertas sobre configuraciones de modo de conmutación por error inconsistentes para los LUN de cabina y genera un mensaje de EMS.
+
+Aunque su sistema puede funcionar con una configuración de modo de conmutación por error del LUN de cabina incoherente, es necesario solucionar este problema lo antes posible. De lo contrario, si se produce un error de ruta, es posible que el sistema ONTAP no funcione correctamente, es posible que no se produzca una conmutación al nodo de respaldo o que el sistema produzca una alarma.
+
+[NOTE]
+====
+ONTAP admite diferentes configuraciones de modo de conmutación al nodo de respaldo entre los nodos que ejecutan ONTAP. Por ejemplo, el nodo A puede utilizar el modo activo-pasivo para las rutas a un LUN de cabina y el nodo B puede utilizar ALUA para las rutas al mismo LUN de cabina.
+
+====
+
+
+== Solución de problemas y resolución de problemas
+
+El modo de conmutación por error de la primera ruta que ONTAP detecta durante la inicialización de la LUN es el modo de conmutación por error que ONTAP espera para todas las rutas a la LUN desde un sistema ONTAP en particular. Si el modo de conmutación por error de rutas posteriores detectadas no coincide con el modo de conmutación por error de la primera ruta, ONTAP emitirá un mensaje de error.
+
+En el siguiente `storage errors show` ejemplo, ONTAP le dice que el modo de recuperación tras fallos para el LUN EMC-1,128, que es visible en mysystem1 iniciador de FC 0A, es _PROPIETARIO_, y que el modo de recuperación tras fallos es diferente del modo de conmutación por error que ONTAP detectó en la primera ruta para ese LUN de cabina.
+
+[listing]
+----
+
+mysystem1::> storage errors show
+EMC-1.128 (60060160e1b0220008071baf6046e211): hba 0a port 500601603ce014de mode Proprietary: This array LUN is configured with conflicting failover modes. Each path to this LUN must use the same mode.
+
+Disk: EMC-1.128
+UID: 60060160:E1B02200:1C65EB20:BFF7E111:00000000:00000000:00000000:...
+----
+Debe corregir el problema de discrepancia de conmutación al nodo de respaldo en la cabina de almacenamiento. Sin embargo, el procedimiento completo para solucionar la discrepancia depende de si el modo de conmutación al nodo de respaldo que ONTAP detectó en la primera ruta es el modo de conmutación al nodo de respaldo que se desea utilizar para todas las rutas del sistema ONTAP hacia el LUN de cabina.
+
+. Introduzca `storage errors show` si aún no lo ha hecho como parte del proceso de verificación de la instalación.
++
+[NOTE]
+====
+El `storage array config` comando le indica que ejecute `storage error show` si hay algún problema que necesite corregir.
+
+====
+. Revise `storage errors show` el resultado para determinar el ajuste de modo de conmutación por error del LUN de cabina que no sea coherente con el modo de conmutación por error esperado por ONTAP.
++
+|===
+| Si el modo de recuperación tras fallos detectado por el sistema en la primera ruta es... | Ejemplo | Necesita... 
+
+
+ a| 
+Lo que quieres
+ a| 
+Si desea un modo de conmutación al nodo de respaldo de ALUA, ALUA es el modo de conmutación al nodo de respaldo que ONTAP detectó para la primera ruta.
+ a| 
+Cambie, en la cabina de almacenamiento, el modo de conmutación por error del iniciador que ONTAP identificó en el mensaje de error. Vaya al paso 3.
+
+
+
+ a| 
+No es lo que quieres
+ a| 
+Desea un modo de conmutación al nodo de respaldo activo-pasivo, pero ALUA es el modo de conmutación al nodo de respaldo que ONTAP detectó para la primera ruta.
+ a| 
+Quite el LUN de cabina de la vista del sistema ONTAP. Vaya al paso 4.
+
+|===
+. Si necesita cambiar el modo de conmutación al nodo de respaldo del iniciador, proceda del siguiente modo para solucionar la discrepancia.
++
+Utilice este paso si el modo de conmutación por error detectado por el sistema en la primera ruta _es_ lo que desea.
+
++
+.. En ONTAP, desconecte la segunda ruta.
+.. En la cabina de almacenamiento, cambie el modo de conmutación por error del iniciador que ONTAP identificó en el mensaje de error.
+.. En ONTAP, vuelva a conectar la segunda ruta.
+
+
+. Si necesita quitar el LUN de cabina de la vista del sistema ONTAP para solucionar la discrepancia, seleccione uno de los siguientes métodos, según si los LUN de cabina son repuestos o en un agregado.
++
+Usaría uno de estos métodos si el modo de failover que el sistema detectó en la primera ruta _no es_ lo que desea.
+
++
+|===
+| Método 1: Los LUN de cabina afectada son repuestos (no forman parte de un agregado) | Método 2: Las LUN afectadas están en un agregado 
+
+
+ a| 
+Con este método, no es necesario reiniciar el sistema ONTAP.
+
+.. En ONTAP, ejecute el siguiente comando para cada LUN de repuesto afectada: `disk remove_ownership LUNfullname`
+.. En la cabina de almacenamiento, enmascarar cada LUN de cabina afectado en todas las rutas al sistema ONTAP.
+.. Espere aproximadamente un minuto y confirme que el sistema ONTAP ya no puede ver los LUN de cabina.
+.. Configure el mismo modo de conmutación por error para cada uno de los iniciadores de FC en el sistema ONTAP.
+.. Vuelva a presentar todos los LUN de cabina afectados al sistema ONTAP.
++
+ONTAP debe detectar las LUN cuando se ejecuta la próxima vez que se ejecuta la detección de LUN
+
+.. Ejecute `storage errors show` para confirmar que ya no se ha producido un error en el modo de conmutación por error.
+
+ a| 
+Con este método, se debe reiniciar el sistema ONTAP.
+
+.. Reinicie el sistema ONTAP y manténgalo pulsado en el símbolo del sistema de Loader.
+.. En la cabina de almacenamiento, revise la configuración del modo de conmutación por error en los iniciadores de FC para este sistema y actualícelos según sea necesario al modo de conmutación por error que desee.
+.. Reinicie el sistema ONTAP.
+.. Ejecute `storage errors show` para confirmar que ya no se ha producido un error en el modo de conmutación por error.
+
+
+|===
+

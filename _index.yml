@@ -1,0 +1,28 @@
+---
+indexpage:
+  title: Documentación de ONTAP FlexArray
+  summary: Documentación de ONTAP FlexArray
+  keywords: flexarray, ontap, array
+  lead: Documentación de ONTAP FlexArray
+  tiles:
+  - title: Implementación de soluciones de almacenamiento de E-Series
+    links:
+    - title: Requisitos para configurar cabinas de almacenamiento E-Series
+      url: "/implement-e-series/reference_requirements_for_configuring_e_series_storage_arrays.html"
+    - title: Configuraciones FAS para cabinas de almacenamiento E-Series
+      url: "/implement-e-series/reference_supported_fabric_attached_configurations_for_storage_arrays.html"
+    - title: Configuraciones de conexión directa compatibles con cabinas de almacenamiento
+        E-Series
+      url: "/implement-e-series/reference_supported_direct_attached_configurations_for_e_series_storage_arrays.html"
+  - title: Implementación de almacenamiento de terceros
+    links:
+    - title: Directrices de configuración para todas las cabinas de almacenamiento
+      url: "/implement-third-party/concept_general_configuration_guidelines_for_all_storage_arrays.html"
+    - title: Configuraciones FAS admitidas
+      url: "/implement-third-party/reference_supported_fabric_attached_configurations_for_storage_arrays.html"
+  - title: Instalando FlexArray
+    links:
+    - title: Planificar una configuración con LUN de cabina
+      url: "/install/concept_planning_a_configuration_with_array_luns.html"
+    - title: Preparar una cabina de almacenamiento para usar con sistemas ONTAP
+      url: "/install/task_preparing_a_storage_array_for_use_with_ontap_systems.html"

@@ -1,0 +1,80 @@
+---
+permalink: install/task_displaying_target_port_queue_depth_statistics_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: display, target, queue, depth, statistics 
+summary: Si sospecha que una configuración de profundidad de la cola de destino está provocando problemas de rendimiento en la cabina de almacenamiento, debe comprobar el valor que se estableció para la profundidad de la cola y comprobar el estado de las solicitudes en los puertos del iniciador FC. 
+---
+= Visualización de estadísticas de profundidad de cola de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si sospecha que una configuración de profundidad de la cola de destino está provocando problemas de rendimiento en la cabina de almacenamiento, debe comprobar el valor que se estableció para la profundidad de la cola y comprobar el estado de las solicitudes en los puertos del iniciador FC.
+
+Existen diferentes niveles de detalle a los que puede acceder para determinar si hay problemas al procesar solicitudes en los puertos de destino. En los siguientes pasos se describe cómo determinar la configuración actual para la profundidad de la cola de puerto de destino, determinar si hay solicitudes en espera en los puertos y mostrar estadísticas detalladas de puertos para ayudarle a comprender la carga de trabajo en el puerto.
+
+.Pasos
+. Utilice `storage array show` el comando con `-instance` el parámetro para mostrar el valor actual de la profundidad de la cola del puerto de destino.
++
+[listing]
+----
+> set advanced
+> storage array show -instance
+
+Name: HP2
+                 Prefix: HP-2
+                 Vendor: HP
+                  Model: HSV300
+                options:
+          Serial Number: 50014380025d1500
+Target Port Queue Depth: 512
+        LUN Queue Depth: 32
+        Upgrade Pending: false
+    Optimization Policy: eALUA
+               Affinity: aaa
+             Error Text: -
+----
+. Use el `storage array port show -fields max-queue-depth` comando para mostrar la configuración de profundidad de cola de cada puerto de la cabina de almacenamiento.
++
+[listing]
+----
+> set advanced
+> storage array port show -fields max-queue-depth
+
+name            wwnn             wwpn             max-queue-depth
+--------------- ---------------- ---------------- ---------------
+EMC_SYMMETRIX_1 50060480000001a0 50060480000001a0 -
+EMC_SYMMETRIX_1 50060480000001a1 50060480000001a1 -
+EMC_SYMMETRIX_1 50060480000001b0 50060480000001b0 -
+EMC_SYMMETRIX_1 50060480000001b1 50060480000001b1 256
+----
++
+El valor «`-` `Max Queue Depth` para indica que el puerto no tiene una configuración de profundidad de cola máxima específica y se usa el valor establecido en el nivel de la cabina de almacenamiento.
+
+. Use el `storage array port show` comando para mostrar información de rendimiento de los puertos de destino de la cabina de almacenamiento.
++
+Los resultados de este comando le ayudan a determinar si hay problemas de rendimiento relacionados con los puertos. Los `%busy` valores y `%waiting` proporcionan una vista de alto nivel del rendimiento en un puerto. Si estos valores muestran un alto porcentaje de solicitudes que esperan ser procesadas o muestran que el puerto está ocupado durante un gran porcentaje de tiempo, es posible que desee investigar más a fondo el estado del puerto.
+
++
+[listing]
+----
+
+vgv3070f51::*> storage array port show
+
+Array Name: HP2
+WWNN: 50014380025d1500
+WWPN: 50014380025d1508
+Connection Type: fabric
+Switch Port: vgbr300s70:9
+Link Speed: 4   GB/s
+Max Queue Depth: -
+                              LUN                                 Link
+Node       Initiator  Count   IOPS    KB/s    %busy    %waiting   Errs
+---------  ---------  -----  ------  ------  -------  ----------  ----
+vgv51-02       0a     21       2      53        0           0     0
+vgv51-01       0a     21       2      48        1           0     0
+----
+. Puede obtener información más detallada sobre los puertos mediante el `storage array port show -fields` comando con `average-latency-per-iop`los campos , , `average-pending`, , `average-waiting` `max-pending`o. `max-waiting`
+

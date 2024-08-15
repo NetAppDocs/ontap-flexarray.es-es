@@ -1,0 +1,25 @@
+---
+permalink: install/task_removing_one_array_lun_from_use_by_data_ontap.html 
+sidebar: sidebar 
+keywords: remove, one, array, lun, use, ontap 
+summary: 'Si el administrador de la cabina de almacenamiento ya no desea utilizar un LUN de cabina determinado para ONTAP, es necesario quitar la información que ONTAP escribió en la LUN (por ejemplo, tamaño y propiedad) para que el administrador pueda volver a configurar el LUN para que lo utilice otro host.' 
+---
+= Eliminación de un LUN de cabina para que lo utilice ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si el administrador de la cabina de almacenamiento ya no desea utilizar un LUN de cabina determinado para ONTAP, es necesario quitar la información que ONTAP escribió en la LUN (por ejemplo, tamaño y propiedad) para que el administrador pueda volver a configurar el LUN para que lo utilice otro host.
+
+*Lo que necesitará*
+
+Si el LUN que el administrador de la cabina de almacenamiento ya no desea que ONTAP utilice está en un agregado, debe desconectar el agregado y destruir el agregado antes de iniciar este procedimiento. Desconectar un agregado y destruirlo cambia la LUN de datos a una LUN de reserva.
+
+.Paso
+. Introduzca el siguiente comando: `storage disk removeowner -disk LUN_name`
++
+_LUN_name_ es el nombre del LUN de cabina.
+
+

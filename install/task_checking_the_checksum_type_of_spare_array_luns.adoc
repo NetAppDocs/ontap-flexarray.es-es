@@ -1,0 +1,33 @@
+---
+permalink: install/task_checking_the_checksum_type_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: check, checksum, type, spare, array, luns 
+summary: Si piensa añadir un LUN de cabina de repuesto a un agregado especificando su nombre, debe asegurarse de que el tipo de suma de comprobación del LUN de cabina que desea añadir sea el mismo que el tipo de suma de comprobación del agregado. 
+---
+= Se comprueba el tipo de suma de comprobación de los LUN de cabina de repuesto
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si piensa añadir un LUN de cabina de repuesto a un agregado especificando su nombre, debe asegurarse de que el tipo de suma de comprobación del LUN de cabina que desea añadir sea el mismo que el tipo de suma de comprobación del agregado.
+
+No se pueden mezclar LUN de cabina de diferentes tipos de suma de comprobación en un agregado de LUN de cabina. El tipo de suma de comprobación del agregado y el tipo de suma de comprobación de los LUN de cabina que se han añadido deben ser iguales.
+
+Si especifica el número de LUN de cabina de repuesto que se añadirán a un agregado, ONTAP selecciona los LUN de cabina del mismo tipo de suma de comprobación que el agregado de forma predeterminada.
+
+[NOTE]
+====
+El tipo de suma de comprobación de todos los agregados recién creados que utilizan LOS LUN de matriz de suma de comprobación zonas es _advanced zoned checksum_ (AZCS). El tipo de suma de comprobación de zonas sigue siendo compatible con los agregados de zonas existentes. Los LUN de cabina de repuesto de suma de comprobación de zonas añadidos a un agregado de suma de comprobación de zonas existente siguen dividiendo los LUN de cabina de suma de comprobación de zonas. Los LUN de matriz de repuesto de suma de comprobación zoned agregados a un agregado de tipo de suma de comprobación AZCS utilizan el esquema de suma de comprobación AZCS para gestionar sumas de comprobación.
+
+====
+.Paso
+. Compruebe el tipo de suma de comprobación de los LUN de cabina de repuesto introduciendo el siguiente comando:
++
+`storage disk show -fields checksum-compatibility -container-type spare`
+
++
+Puede agregar un LUN de matriz de suma de comprobación de bloques a un agregado de suma de comprobación de bloques y un LUN de cabina zoned a un agregado _advanced zoned checksum_ (AZCS).
+
+

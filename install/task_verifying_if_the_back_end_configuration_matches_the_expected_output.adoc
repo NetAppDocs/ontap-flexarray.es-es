@@ -1,0 +1,93 @@
+---
+permalink: install/task_verifying_if_the_back_end_configuration_matches_the_expected_output.html 
+sidebar: sidebar 
+keywords: verify, back-end, configuration, matches, intended, configuration 
+summary: Después de resolver los errores de configuración de back-end detectados por errores de almacenamiento, debe comprobar si la configuración de back-end existente coincide con la configuración deseada y corregir problemas que surgen de cualquier discrepancia. 
+---
+= Verificar que la configuración del back-end coincide con la configuración deseada
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Después de resolver los errores de configuración de back-end detectados por `storage errors show`, debe comprobar si la configuración de back-end existente coincide con la configuración deseada y corregir los problemas que surjan de cualquier discrepancia.
+
+.Pasos
+. Introduzca el siguiente comando: `storage array config show`
++
+La `storage array config show` información de los grupos de salida sobre los grupos de LUN, el número de LUN y las rutas por cabina de almacenamiento, como el siguiente ejemplo de una pareja de alta disponibilidad muestra:
+
++
+[listing]
+----
+
+mysystem1::> storage array config show
+             LUN   LUN
+Node         Group Count  Array Name      Array Target Port   Initiator
+------------ ----- ----- ---------------  ------------------  ---------
+mysystem1a    0    10     DGC_RAID5_1      5005076303030124       1a
+                                           5005076303088124       1b
+                                           5005076303130124       1c
+                                           5005076303188124       1d
+mysystem1b    0    10     DGC_RAID5_1      5005076303030124       1a
+                                           5005076303088124       1b
+                                           5005076303130124       1c
+                                           5005076303188124       1d
+8 entries were displayed.
+----
+. Compruebe `storage array config show` el resultado de cada sentencia de problema en la siguiente tabla y consulte la información adecuada para la solución.
++
+|===
+| Si encuentra este problema... | Vea esta información... 
+
+
+ a| 
+Grupos de LUN vacíos
+ a| 
+xref:reference_reasons_for_no_luns_in_the_array_lun_group.adoc[Motivos para no utilizar ninguna LUN en el grupo de LUN de cabina]
+
+
+
+ a| 
+Faltan cabinas de almacenamiento esperadas
+ a| 
+xref:reference_reasons_storage_arrays_are_missing_from_command_output.adoc[Motivos por los que es posible que no vea todas las cabinas de almacenamiento esperadas]
+
+
+
+ a| 
+Más grupos de LUN de cabina de los esperados
+ a| 
+xref:reference_reasons_for_more_array_lun_groups_than_expected.adoc[Motivos de más grupos de LUN de cabina de lo esperado]
+
+
+
+ a| 
+Menos grupos de LUN de cabina de los esperados
+ a| 
+xref:reference_reasons_for_fewer_array_lun_groups_than_expected.adoc[Motivos de menos grupos de LUN de cabina de lo esperado]
+
+
+
+ a| 
+Los grupos de LUN de cabina no muestran el número de LUN esperadas
+ a| 
+xref:reference_reasons_for_the_incorrect_number_of_luns_in_array_lun_groups.adoc[Motivos del número de LUN en los grupos de LUN de cabina incorrecto]
+
+
+
+ a| 
+Menos rutas de las esperadas
+ a| 
+xref:reference_fewer_than_two_paths_to_an_array_lun.adoc[Menos de dos rutas a un LUN de cabina]
+
+
+
+ a| 
+Más rutas de lo esperado
+ a| 
+xref:reference_reasons_for_more_paths_to_an_array_lun_than_expected.adoc[Razones de más rutas a un LUN de cabina de lo esperado]
+
+|===
+

@@ -1,0 +1,20 @@
+---
+permalink: install/concept_systems_that_can_use_array_luns_on_storage_arrays.html 
+sidebar: sidebar 
+keywords: ontap, systems, use, array, luns, storage 
+summary: Puede usar sistemas FAS y V-Series compatibles con LUN de cabina. 
+---
+= Sistemas ONTAP que pueden utilizar LUN de cabina en cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede usar sistemas FAS y V-Series compatibles con LUN de cabina.
+
+La herramienta de matriz de interoperabilidad de NetApp incluye las combinaciones admitidas de hardware y software.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

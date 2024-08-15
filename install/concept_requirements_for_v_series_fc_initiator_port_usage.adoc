@@ -1,0 +1,62 @@
+---
+permalink: install/concept_requirements_for_v_series_fc_initiator_port_usage.html 
+sidebar: sidebar 
+keywords: requirements, use, fc initiator, ports 
+summary: Si desea utilizar puertos de iniciador FC en una configuración de ONTAP con LUN de cabina, debe seguir requisitos específicos de redundancia de pares de puertos, configuración de puertos para HBA, conexión a puertos de destino, límites de LUN de cabina y conexión a diferentes sistemas de almacenamiento y dispositivos. 
+---
+= Requisitos para usar puertos iniciadores FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si desea utilizar puertos de iniciador FC en una configuración de ONTAP con LUN de cabina, debe seguir requisitos específicos de redundancia de pares de puertos, configuración de puertos para HBA, conexión a puertos de destino, límites de LUN de cabina y conexión a diferentes sistemas de almacenamiento y dispositivos.
+
+|===
+| Para esta función... | Los requisitos son... 
+
+
+ a| 
+Redundancia de la pareja de puertos
+ a| 
+Debe utilizar pares de puertos de iniciador FC redundantes al conectar un sistema ONTAP a los LUN de la cabina.
+
+
+
+ a| 
+Configuración del puerto para los HBA
+ a| 
+Debe establecer todos los HBA que se utilizan para acceder a los discos o LUN de cabina como puertos _initiator_.
+
+
+
+ a| 
+Conectando a los puertos de destino de la cabina de almacenamiento
+ a| 
+Es posible conectar el mismo puerto de iniciador de FC a varios puertos de destino en la cabina de almacenamiento.
+
+Puede conectar un máximo de dos puertos de iniciador FC a un único puerto de destino.
+
+
+
+ a| 
+Límites de LUN de cabina
+ a| 
+Hay límites sobre cuántos LUN de cabina pueden ser visibles a través de un puerto iniciador FC. Estos límites varían en los lanzamientos de ONTAP.
+
+
+
+ a| 
+Conexión a diferentes dispositivos y almacenamiento
+ a| 
+Debe utilizar un puerto de iniciador de FC independiente para conectar el sistema ONTAP a cada uno de los siguientes:
+
+* Bandejas de discos
+* LUN de cabina
+* Dispositivos de cinta
+
+
+Si el sistema ONTAP no tiene suficientes puertos internos para sus requisitos, debe solicitar un HBA adicional.
+
+|===

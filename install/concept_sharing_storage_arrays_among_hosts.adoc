@@ -1,0 +1,20 @@
+---
+permalink: install/concept_sharing_storage_arrays_among_hosts.html 
+sidebar: sidebar 
+keywords: share, storage, arrays, hosts 
+summary: Una cabina de almacenamiento típica proporciona almacenamiento a hosts de distintos proveedores. Sin embargo, ONTAP requiere que algunas cabinas de almacenamiento estén dedicadas a los sistemas ONTAP. 
+---
+= Compartir cabinas de almacenamiento entre hosts
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una cabina de almacenamiento típica proporciona almacenamiento a hosts de distintos proveedores. Sin embargo, ONTAP requiere que algunas cabinas de almacenamiento estén dedicadas a los sistemas ONTAP.
+
+Para determinar si la cabina de almacenamiento de su proveedor debe estar dedicada a los sistemas ONTAP, consulte _Matriz de interoperabilidad_.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

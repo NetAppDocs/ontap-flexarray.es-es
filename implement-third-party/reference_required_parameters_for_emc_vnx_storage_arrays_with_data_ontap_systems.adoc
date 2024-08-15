@@ -1,0 +1,62 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_emc_vnx_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, emc, vnx, storage, arrays, ontap, systems 
+summary: La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP. 
+---
+= Parámetros necesarios para las cabinas de almacenamiento EMC VNX con sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP.
+
+En la siguiente tabla, se enumeran los parámetros de configuración de host que deben establecerse en la cabina de almacenamiento.
+
+|===
+| Parámetro | Ajuste 
+
+
+ a| 
+`Initiator type`
+ a| 
+CLARiiON/VNX
+
+
+
+ a| 
+`Array Com Path`
+ a| 
+Activado
+
+
+
+ a| 
+`Failover mode`
+ a| 
+4
+
+
+
+ a| 
+`Unit serial number`
+ a| 
+LUN
+
+
+
+ a| 
+`Host name`
+ a| 
+Nombre de host y número de puerto proporcionados por el usuario
+
+
+
+ a| 
+`IP address`
+ a| 
+Dirección IP falsa exclusiva Debe asegurarse de no introducir esta dirección IP en ningún otro lugar de la configuración de la cabina de almacenamiento y que no es una dirección IP presente en la red.
+
+|===

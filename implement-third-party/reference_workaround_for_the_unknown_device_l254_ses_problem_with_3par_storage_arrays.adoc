@@ -1,0 +1,86 @@
+---
+permalink: implement-third-party/reference_workaround_for_the_unknown_device_l254_ses_problem_with_3par_storage_arrays.html 
+sidebar: sidebar 
+keywords: 'Workaround, unknown device (l254/ses), problem, 3PAR, storage, arrays, aggregates, luns, created, ontap system, not' 
+summary: La definición de host, con la persona de host especificada en la sección Parámetros requeridos para cabinas 3PAR con sistemas ONTAP, debe crearse en una cabina de almacenamiento 3PAR antes de que se pase a la zona del switch para conectar el sistema ONTAP a una cabina de almacenamiento 3PAR. Si la división en zonas se configura antes de la definición del host, ONTAP detecta un LUN de cabina 3PAR como LUN 254 y un tipo de producto SES, que ONTAP no puede utilizar. 
+---
+= Solución alternativa para el problema de dispositivo desconocido (L254/SES) con cabinas de almacenamiento 3PAR
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La definición de host, con la persona de host especificada en la sección Parámetros requeridos para cabinas 3PAR con sistemas ONTAP, debe crearse en una cabina de almacenamiento 3PAR antes de que se pase a la zona del switch para conectar el sistema ONTAP a una cabina de almacenamiento 3PAR. Si la división en zonas se configura antes de la definición del host, ONTAP detecta un LUN de cabina 3PAR como LUN 254 y un tipo de producto SES, que ONTAP no puede utilizar.
+
+xref:reference_required_parameters_for_3par_arrays_with_data_ontap_systems.adoc[Parámetros requeridos para cabinas 3PAR con sistemas ONTAP]
+
+Cuando ONTAP detecta LUN de cabina 3PAR como LUN 254 y SES de tipo de producto, no se pueden asignar LUN 3PAR recién asignados a sistemas ONTAP y no se pueden usar algunos LUN de 3PAR que pueden ya haberse añadido a un agregado porque ONTAP observa un LUN 254. ONTAP genera mensajes de EMS para el LUN detectado como LUN 254 y como tipo de producto SES, informando algunas LUN como dispositivos desconocidos.
+
+Si se configuró la división en zonas antes de la definición del host, puede resolver el problema de dispositivo desconocido LUN 254/SES al forzar una nueva detección de los LUN de cabina asignados desde la cabina de almacenamiento 3PAR. El procedimiento utilizado depende de si los agregados con 3PAR LUN de cabina ya se configuraron en el sistema ONTAP. (En los siguientes procedimientos, supongamos que Node-1 y Node-2 son los nombres de los nodos ONTAP).
+
+
+
+== Si ya se crearon agregados con LUN de cabina 3PAR en un sistema ONTAP
+
+. Ejecute el siguiente comando para garantizar que hay una configuración de alta disponibilidad habilitada en sus sistemas ONTAP: *`cluster ha show`*
++
+Se muestra la siguiente salida:
+
++
+[listing]
+----
+
+High Availability Configured: true
+----
+. Ejecute el siguiente comando para garantizar que la recuperación tras fallos de almacenamiento está configurada en sus sistemas ONTAP: *`storage failover show`*
++
+Se muestra la siguiente salida:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-1    Node-2    true     Connected to Node-2
+Node-2    Node-1    true     Connected to Node-1
+2 entries were displayed.
+----
+. Realice una operación de toma de control en el nodo 1 ejecutando el siguiente comando *`storage failover takeover -ofnode Node-1`: *
+. Ejecute de nuevo el siguiente comando para comprobar que Node-2 está listo para una operación de devolución *`storage failover show`: *
++
+Se muestra la siguiente salida:
+
++
+[listing]
+----
+          Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- -------------------------------------
+Node-2    Node-1    false    In takeover, Auto giveback will be
+                                      initiated in 348 seconds
+Node-1    Node-2    -        Waiting for giveback (HA mailboxes)
+2 entries were displayed.
+----
+. Realice una operación de devolución en el nodo 1 ejecutando el siguiente comando *`storage failover giveback -ofnode Node-1 -require-partner-waiting true`: *
+. Desde otros nodos del cluster, repita del Paso 3 al Paso 5.
+
+
+
+
+== Si no se han creado agregados con LUN de cabina 3PAR en un sistema ONTAP
+
+. Ejecute el siguiente comando para enumerar todos los puertos de iniciador FC de ONTAP conectados a la cabina de almacenamiento 3PAR: *`system node run -node <node name> -command "sysconfig -v"`*
++
+En el siguiente ejemplo se muestra el comando con un nombre de nodo específico incluido *`system node run -node Node-1 -command "sysconfig -v"`: *
+
+. Ejecute el siguiente comando para desconectar todos los puertos enumerados *`system node run -node <node name> -command "priv set advanced;fcadmin offline <adapter>"`: *
++
+En el siguiente ejemplo se muestra el comando con un nombre de nodo y un adaptador específicos incluidos *`system node run -node Node-1 -command "priv set advanced;fcadmin offline 0a"`: *
+
+. Ejecute el siguiente comando para conectar todos los puertos enumerados *`system node run -node <node name> -command "priv set advanced;fcadmin online <adapter>"`: *
++
+En el siguiente ejemplo se muestra el comando con un nombre de nodo y un adaptador específicos incluidos *`system node run -node Node-1 -command "priv set advanced;fcadmin online 0a"`: *
+
+

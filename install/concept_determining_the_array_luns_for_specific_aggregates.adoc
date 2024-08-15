@@ -1,0 +1,14 @@
+---
+permalink: install/concept_determining_the_array_luns_for_specific_aggregates.html 
+sidebar: sidebar 
+keywords: determine, array, luns, specific, aggregates 
+summary: Hay una serie de reglas acerca de combinar diferentes tipos de almacenamiento en agregados únicos para los sistemas ONTAP que usan LUN de cabina. Debe comprender estas reglas al planificar qué LUN y discos de cabina añadir a qué agregados. 
+---
+= Determinar los LUN de cabina para agregados específicos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Hay una serie de reglas acerca de combinar diferentes tipos de almacenamiento en agregados únicos para los sistemas ONTAP que usan LUN de cabina. Debe comprender estas reglas al planificar qué LUN y discos de cabina añadir a qué agregados.

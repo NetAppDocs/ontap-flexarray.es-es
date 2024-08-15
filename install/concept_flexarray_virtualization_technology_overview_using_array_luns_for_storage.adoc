@@ -1,0 +1,20 @@
+---
+permalink: install/concept_flexarray_virtualization_technology_overview_using_array_luns_for_storage.html 
+sidebar: sidebar 
+keywords: flexarray, virtualization, technology, overview, use, array, luns, storage 
+summary: El software ONTAP ofrece una plataforma de software de almacenamiento unificado que simplifica la gestión tanto de bandejas de discos nativas como de LUN en cabinas de almacenamiento. La capacidad de almacenamiento se puede añadir donde y cuando lo necesite, sin interrupciones. Esta funcionalidad se proporciona mediante el software de virtualización FlexArray, anteriormente conocido como V-Series. 
+---
+= Información general de la tecnología de virtualización de FlexArray: ​using LUN de cabina para almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El software ONTAP ofrece una plataforma de software de almacenamiento unificado que simplifica la gestión tanto de bandejas de discos nativas como de LUN en cabinas de almacenamiento. La capacidad de almacenamiento se puede añadir donde y cuando lo necesite, sin interrupciones. Esta funcionalidad la proporciona _Software de virtualización FlexArray_, anteriormente conocido como V-Series.
+
+La siguiente ilustración muestra una configuración en la que los sistemas ONTAP con licencia para conectarse a las cabinas de almacenamiento están agrupando LUN de las cabinas de almacenamiento y presentando dicho almacenamiento a los clientes.
+
+image::../media/how_v_series_uses_storage.gif[Este gráfico se describe con el texto circundante.]
+
+Un sistema ONTAP presenta almacenamiento a los clientes como volúmenes de sistemas de archivos ONTAP, que gestiona en el sistema con las funciones de administración de ONTAP o como un destino SCSI que crea LUN para que los utilicen los clientes. En ambos casos (clientes de sistema de archivos y clientes LUN), en los sistemas que pueden utilizar LUN de cabina se combinan los LUN de cabina en uno o varios agregados LUN de cabina. En un entorno de ONTAP, puede asociar estos agregados de LUN de cabina a máquinas virtuales de almacenamiento (SVM) y crear volúmenes de ONTAP para presentarlos a los clientes como archivos o como LUN a los que sirve ONTAP.

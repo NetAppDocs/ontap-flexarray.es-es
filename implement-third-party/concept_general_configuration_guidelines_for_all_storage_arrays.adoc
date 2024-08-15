@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/concept_general_configuration_guidelines_for_all_storage_arrays.html 
+sidebar: sidebar 
+keywords: configuration, guidelines, storage, arrays 
+summary: Existen ciertas directrices de configuración que se deben seguir en cualquiera de las cabinas de almacenamiento que admita ONTAP. 
+---
+= Directrices generales de configuración para todas las cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Existen ciertas directrices de configuración que se deben seguir en cualquiera de las cabinas de almacenamiento que admita ONTAP.

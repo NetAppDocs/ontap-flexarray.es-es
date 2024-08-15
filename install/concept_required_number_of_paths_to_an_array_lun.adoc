@@ -1,0 +1,18 @@
+---
+permalink: install/concept_required_number_of_paths_to_an_array_lun.html 
+sidebar: sidebar 
+keywords: required, number, paths, array, lun 
+summary: ONTAP admite cuatro o dos rutas a los LUN de cabina. 
+---
+= Cantidad requerida de rutas a un LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP admite cuatro o dos rutas a los LUN de cabina.
+
+ONTAP espera y requiere que una cabina de almacenamiento proporcione acceso a un LUN de cabina específico en, al menos, dos puertos de cabina de almacenamiento redundantes, es decir, a través de un mínimo de dos rutas redundantes.
+
+Asegúrese de que los puertos de la cabina de almacenamiento que selecciona para acceder a un LUN determinado pertenecen a diferentes componentes, a fin de evitar un solo punto de error, por ejemplo, desde controladoras, clústeres o compartimentos alternativos. El motivo es que no desea que se pierdan todos los accesos a un LUN de cabina si falla un componente.

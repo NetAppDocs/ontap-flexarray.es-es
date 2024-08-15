@@ -1,0 +1,222 @@
+---
+permalink: install/concept_valid_pathing_eight_port_array_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: valid, path, eight-port, array, lun, group, configuration, variation, back-end, connections, crossed, fc initiator, maximum 
+summary: Puede utilizar una configuración de grupo LUN de ocho puertos para conectar cabinas de almacenamiento con sistemas ONTAP en implementaciones en clústeres grandes que requieren mayor redundancia de rutas y balanceo de carga que el posible con menos puertos por grupo LUN. 
+---
+= Rutas válidas: Configuración de grupo LUN de cabina de ocho puertos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede utilizar una configuración de grupo LUN de ocho puertos para conectar cabinas de almacenamiento con sistemas ONTAP en implementaciones en clústeres grandes que requieren mayor redundancia de rutas y balanceo de carga que el posible con menos puertos por grupo LUN.
+
+Puede configurar esta configuración con las conexiones de back-end cruzadas o no cruzadas.
+
+
+
+== Variación en qué conexiones de back-end se cruzan
+
+En una configuración con las conexiones de entorno de administración cruzadas, las conexiones FC de la misma controladora de la cabina de almacenamiento se dirigen a ambos switches estructurales (redundantes).
+
+Este esquema de conexión aprovecha mejor los puertos de switch y los puertos de la cabina de almacenamiento que si no se cruzan las conexiones back-end, lo que reduce el impacto de un switch o un fallo de una controladora de la cabina de almacenamiento.
+
+En el caso de las cabinas de almacenamiento con solo dos controladores, se prefiere una configuración de grupo LUN de ocho puertos cruzados sobre una configuración de grupo LUN de cabina de ocho puertos que no se haya cruzado.
+
+Solo puede cruzar el grupo de LUN de cabina de ocho puertos cuando hay rutas dedicadas desde cada nodo (una división en zonas de iniciador de FC a un destino por ruta).
+
+image::../media/eight_port_array_lun_group_configuration_crossed.gif[se ha cruzado la configuración de un grupo lun de cabina de ocho puertos]
+
+En esta ilustración de conexiones de back-end cruzadas, debe tenerse en cuenta cómo están conectados los sistemas ONTAP a los switches y a la cabina de almacenamiento. VS1 utiliza el switch 1 cuando se conecta a la cabina de almacenamiento El puerto 1A de Controller 1 y el puerto 2C de Controller 2, y utiliza el switch 2 cuando se conecta a la cabina de almacenamiento Los puertos 2A de Controller 2 y el puerto 1C de Controller 1.
+
+La siguiente tabla resume la división en zonas de un grupo de LUN de cabina de ocho puertos con conexiones back-end cruzadas. La estrategia de división en zonas recomendada es la división en zonas de iniciador único.
+
+|===
+| Zona | Puerto iniciador FC en el sistema ONTAP | Cabina de almacenamiento 
+
+
+ a| 
+Interruptor 1
+
+
+
+ a| 
+z1
+ a| 
+VS1, puerto 0A
+ a| 
+Controlador 1, Puerto 1A
+
+
+
+ a| 
+z2
+ a| 
+VS2, puerto 0A
+ a| 
+Controlador 1, Puerto 1B
+
+
+
+ a| 
+z3
+ a| 
+VS1, puerto 0b
+ a| 
+Controlador 2, Puerto 2C
+
+
+
+ a| 
+z4
+ a| 
+VS2, puerto 0b
+ a| 
+Controlador 2, Puerto 2D
+
+
+
+ a| 
+Interruptor 2
+
+
+
+ a| 
+z5
+ a| 
+VS1, puerto 0C
+ a| 
+Controlador 2, Puerto 2A
+
+
+
+ a| 
+z6
+ a| 
+VS2, puerto 0C
+ a| 
+Controlador 2, Puerto 2B
+
+
+
+ a| 
+z7
+ a| 
+VS1, puerto 0d
+ a| 
+Controlador 1, Puerto 1C
+
+
+
+ a| 
+z8
+ a| 
+VS2, puerto 0d
+ a| 
+Controlador 1, Puerto 1D
+
+|===
+
+
+== Variación en la que las conexiones de back-end se cruzan _NOT_
+
+En una configuración en la que no se cruzan las conexiones de back-end, las conexiones FC de la misma controladora de la cabina de almacenamiento van a solo un switch estructural.
+
+En la siguiente ilustración, se muestran las rutas en una configuración con un grupo de LUN de cabinas de ocho puertos en el que no se cruzan las conexiones back-end:
+
+image::../media/eight_port_array_lun_group_configuration.gif[configuración de ocho grupos lun de cabina de ocho puertos]
+
+La siguiente tabla resume la división en zonas de un grupo de LUN de cabina de ocho puertos cuando no se cruzan las conexiones back-end. La estrategia de división en zonas recomendada es la división en zonas de iniciador único.
+
+|===
+| Zona | Puerto iniciador FC en el sistema ONTAP | Cabina de almacenamiento 
+
+
+ a| 
+Interruptor 1
+
+
+
+ a| 
+z1
+ a| 
+VS1, puerto 0A
+ a| 
+Controlador 1, Puerto 1A
+
+
+
+ a| 
+z2
+ a| 
+VS2, puerto 0A
+ a| 
+Controlador 1, Puerto 1B
+
+
+
+ a| 
+z3
+ a| 
+VS1, puerto 0b
+ a| 
+Controlador 1, Puerto 1C
+
+
+
+ a| 
+z4
+ a| 
+VS2, puerto 0b
+ a| 
+Controlador 1, Puerto 1D
+
+
+
+ a| 
+Interruptor 2
+
+
+
+ a| 
+z5
+ a| 
+VS1, puerto 0C
+ a| 
+Controlador 2, Puerto 2A
+
+
+
+ a| 
+z6
+ a| 
+VS2, puerto 0C
+ a| 
+Controlador 2, Puerto 2B
+
+
+
+ a| 
+z7
+ a| 
+VS1, puerto 0d
+ a| 
+Controlador 2, Puerto 2C
+
+
+
+ a| 
+z8
+ a| 
+VS2, puerto 0d
+ a| 
+Controlador 2, Puerto 2D
+
+|===
+
+
+== Consideraciones que se deben tener en cuenta al número máximo de LUN de cabina por iniciador FC
+
+Al configurar una configuración con un grupo de LUN de cabina de ocho puertos, no puede superar el número de LUN de cabina que admite ONTAP por puerto de iniciador FC.

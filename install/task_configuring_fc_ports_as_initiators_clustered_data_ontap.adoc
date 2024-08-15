@@ -1,0 +1,57 @@
+---
+permalink: install/task_configuring_fc_ports_as_initiators_clustered_data_ontap.html 
+sidebar: sidebar 
+keywords: configure, fc ports, initiators 
+summary: Los puertos FC individuales se pueden configurar como iniciadores en los sistemas ONTAP. El modo iniciador permite que los puertos se conecten a cabinas de almacenamiento. 
+---
+= Configurar puertos FC como iniciadores
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los puertos FC individuales se pueden configurar como iniciadores en los sistemas ONTAP. El modo iniciador permite que los puertos se conecten a cabinas de almacenamiento.
+
+.Pasos
+. *Opcional:* Si el puerto adaptador ya tiene LIF configuradas, elimine todas las LIF mediante el `network interface delete` comando.
++
+Si la LIF está en un conjunto de puertos, debe eliminar la LIF de conjunto de puertos para poder eliminar la LIF.
+
++
+El ejemplo siguiente muestra cómo puede eliminar las LIF en una SVM VS3: `network interface delete -vserver vs3 -lif lif2,lif0`
+
+. Desconecte el puerto con `network fcp adapter modify` el comando.
++
+En el ejemplo siguiente se muestra cómo puede desconectar el puerto 0C para el nodo sysnode: `network fcp adapter modify -node sysnode1 -adapter 0c -state down`
+
+. Utilice `system hardware unified-connect modify` el comando para cambiar el puerto sin conexión del destino al iniciador.
++
+En el ejemplo siguiente se muestra cómo puede cambiar el tipo de puerto para 0C de destino a iniciador: `system node hardware unified-connect modify -node sysnode1 -adapter 0c -type initiator`
+
+. Reinicie el nodo que aloja el adaptador que cambió.
+. Use el `system hardware unified-connect show` comando para comprobar que los puertos FC están configurados correctamente para la configuración.
++
+En el ejemplo siguiente se muestra el cambio en el tipo de puerto para 0C:
+
++
+`system node hardware unified-connect show -node sysnode1`
+
++
+[listing]
+----
+
+
+                       Current  Current    Pending  Pending
+Node          Adapter  Mode     Type       Mode     Type       Status
+------------  -------  -------  ---------  -------  ---------  -----------
+sysnode1      0a       fc       target     -        -          online
+sysnode1      0b       fc       target     -        -          online
+sysnode1      0c       fc       initiator  -        -          offline
+sysnode1      0d       fc       target     -        -          online
+----
+. Use el `storage enable adapter` comando para conectar de nuevo el puerto desconectado.
++
+En el siguiente ejemplo se muestra cómo hacer que el puerto 0C esté en línea: `node run -node sysnode1 -command storage enable adapter -e 0c`
+
+

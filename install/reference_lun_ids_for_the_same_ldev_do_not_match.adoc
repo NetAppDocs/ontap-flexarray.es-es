@@ -1,0 +1,169 @@
+---
+permalink: install/reference_lun_ids_for_the_same_ldev_do_not_match.html 
+sidebar: sidebar 
+keywords: lun, ids, same, ldev, not, match 
+summary: 'Debe asignarse un dispositivo lógico (LDEV) al mismo ID de LUN en todos los puertos de cabina de almacenamiento a través de los cuales debe ser visible para los sistemas ONTAP. El resultado muestra errores de almacenamiento identifica los LDEV con ID de LUN que no coinciden.' 
+---
+= Los ID de LUN para el mismo LDEV no coinciden
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe asignarse un dispositivo lógico (LDEV) al mismo ID de LUN en todos los puertos de cabina de almacenamiento a través de los cuales debe ser visible para los sistemas ONTAP.  `storage errors show`El resultado identifica los LDEV cuyos ID de LUN no coinciden.
+
+ONTAP no le permite asignar LUN de cabina a un sistema ONTAP si los ID de LUN no coinciden.
+
+
+
+== Los errores de almacenamiento muestran un mensaje
+
+[listing]
+----
+
+HIT-1.4 (4849544143484920443630303035323430303132): This Array LUN is using multiple LUN IDs.  Only one LUN ID per serial number is supported.
+----
+
+
+== Explicación
+
+Se realizó uno de los siguientes errores durante la configuración de la cabina de almacenamiento:
+
+* El LDEV se presenta en el mismo puerto iniciador de FC del sistema ONTAP desde varios puertos de destino y los ID de LUN no son coherentes.
+* Los ID de LUN de dos LDEVs se intercambian.
++
+En este caso, se informa de un error para cada LUN de cabina.
+
+* Al asignar el LDEV a los puertos de la cabina de almacenamiento que presentan el LDEV al sistema ONTAP, se utilizan diferentes ID de LUN para el mismo LDEV.
+
+
+[NOTE]
+====
+Es más probable que este error se produzca en las cabinas de almacenamiento en las que cada puerto está configurado por separado, por ejemplo, en las cabinas de almacenamiento Hitachi. En algunas cabinas de almacenamiento, por ejemplo, las cabinas de almacenamiento IBM, los puertos no se configuran por separado.
+
+====
+* La configuración de direccionamiento del conjunto de volúmenes es inconsistente en los puertos a los que se asigna la LUN.
++
+En una cabina de almacenamiento EMC Symmetrix, el problema sería que la configuración de direccionamiento del conjunto de volúmenes varía en los puertos del director de canal.
+
+
+
+
+
+== Situación de problema
+
+En esta situación, se analiza el caso de los ID de LUN incoherentes según se aplica a la mayoría de las cabinas de almacenamiento. Consulte la sección Direccionamiento del conjunto de volúmenes es inconsistente para obtener información sobre este mismo mensaje de error en el contexto de direccionamiento de conjunto de volúmenes mal configurado.
+
+xref:reference_volume_set_addressing_is_inconsistent.adoc[El direccionamiento del conjunto de volúmenes es inconsistente]
+
+Suponga que el administrador de la cabina de almacenamiento crea un nuevo LDEV Z. Se supone que el ID de LUN para LDEV Z es LUN 3. Sin embargo, el administrador presenta LDEV Z como LUN 3 en el puerto de la controladora de la cabina de almacenamiento 1A y como LUN 4 en el puerto 2A de la controladora de la cabina de almacenamiento, como muestra la siguiente ilustración:
+
+image::../media/inconsistent_lun_ids_for_an_ldev.gif[Este gráfico se describe en el texto adyacente.]
+
+Para solucionar este problema, se debe asignar el mismo ID de LUN a un LDEV en todos los puertos a los que se asigna LDEV. En este ejemplo, el LDEV debe presentarse como LUN ID 3 en ambos puertos.
+
+
+
+== Solución de problemas y resolución de problemas
+
+Para solucionar el problema, el administrador de la cabina de almacenamiento debe volver a asignar la LUN con el ID de LUN correcto. Puede usar comandos de ONTAP para obtener los detalles necesarios para proporcionar información sobre el problema al administrador de almacenamiento.
+
+. Revise el `storage errors show` resultado para identificar el LUN de cabina con los ID de LUN que no coinciden.
++
+Cuando los ID de LUN para el mismo LDEV no coinciden, el resultado identifica el número de serie del LDEV con el problema. Por ejemplo:
+
++
+[listing]
+----
+
+mysystem1a::> storage errors show
+Disk: HIT-1.4
+UID: 48495441:43484920:44363030:30353234:30303132:00000000:...
+----------
+
+HITACHI_DF600F_1
+----------
+HIT-1.4 (4849544143484920443630303035323430303132): This Array LUN is using multiple LUN IDs.  Only one LUN ID per serial number is supported.
+----
++
+[NOTE]
+====
+El UID en este ejemplo es 48495441:43484920:44363030:30353234:30303132:00000000:00000000:00000000:00000000:00000000. En el ejemplo, se trunca debido al espacio.
+
+====
+. Para obtener detalles sobre los ID de LUN que se están utilizando para el mismo LDEV, introduzca el siguiente comando: `storage disk show arrayLUNname`
++
+ `storage disk show`El resultado de este ejemplo muestra lo siguiente:
+
++
+[listing]
+----
+
+mysystem1a::> storage disk show -disk HIT-1.4
+                  Disk: HIT-1.4
+        Container Type: unassigned
+            Owner/Home: -  / -
+               DR Home: -
+                 Array: HITACHI_DF600F_1
+                Vendor: HITACHI
+                 Model: DF600F
+         Serial Number: D600020C000C
+                   UID: 48495441:43484920:44363030:30353234:30303132:00000000:...
+                   BPS: 512
+         Physical Size: -
+              Position: present
+Checksum Compatibility: block
+             Aggregate: -
+                  Plex: -
+Paths:
+                     LUN  Initiator Side  Target Side
+Controller Initiator ID   Switch Port     Switch Port      Acc Use  Target Port     TPGN...
+---------- --------- -------------------- ----------------- --- ---  --------------- ----
+mysystem1a   0c       4  vgci9148s76:1-2  vgci9148s76:1-9  AO  INU  50060e80004291c1  1
+mysystem1a   0a       3  vgbr300s89:1     vgbr300s89:9     S   RDY  50060e80004291c0  2
+mysystem1b   0c       4  vgci9148s76:1-4  vgci9148s76:1-9  AO  INU  50060e80004291c1  1
+mysystem1b   0a       3  vgbr300s89:3     vgbr300s89:10    S   RDY  50060e80004291c2  2
+
+Errors:
+HIT-1.4 (4849544143484920443630303035323430303132): This Array LUN is using multiple LUN IDs.  Only one LUN ID per serial number is supported.
+----
+
+
+[NOTE]
+====
+El UID en este ejemplo es 48495441:43484920:44363030:30353234:30303132:00000000:00000000:00000000:00000000:00000000. En el ejemplo, se trunca debido al espacio.
+
+====
+Al observar los ID de LUN de la sección Rutas del resultado del show de disco de almacenamiento, puede ver que los ID de LUN 3 y 4 se están usando para este LDEV.
+
+. Determine el ID de LUN correcto para LDEV.
++
+El ID de LUN 4 es el ID de LUN incorrecto en este ejemplo.
+
+. En ONTAP, utilice `storage path quiesce` el comando para poner en modo inactivo la ruta incorrecta para el LUN de la cabina.
++
+El siguiente ejemplo muestra las opciones para agregar al `storage path quiesce` comando para la ruta que se está desactivando--ID de LUN 4 en el iniciador 0C.
+
++
+[listing]
+----
+
+storage path quiesce -node mysystem1a -initiator 0c -target-wwpn 50060e80004291c1 -lun-number 4
+----
++
+El `storage path quiesce` comando suspende temporalmente las operaciones de I/O en un LUN de cabina específico de una ruta específica. Algunas cabinas de almacenamiento requieren la interrupción de las operaciones de I/O durante un periodo cuando se debe quitar o mover un LUN de cabina.
+
++
+Tras poner la ruta en modo inactivo, ONTAP ya no puede ver esa LUN.
+
+. Espere un minuto hasta que caduque el temporizador de actividad de la cabina de almacenamiento.
++
+Aunque no todas las cabinas de almacenamiento requieren interrumpir las operaciones de I/O durante un periodo, es buena práctica hacerlo.
+
+. En la cabina de almacenamiento, vuelva a asignar el LUN al puerto de destino mediante el ID de LUN correcto, ID de LUN 3 en esta situación.
++
+La próxima vez que se ejecute el proceso de detección de ONTAP, se detectará el nuevo LUN de cabina. La detección se ejecuta cada minuto.
+
+. Una vez finalizada la detección de ONTAP, ejecute `storage array config show` de nuevo en ONTAP para confirmar que ya no existe un error.
+

@@ -1,0 +1,106 @@
+---
+permalink: install/concept_guidelines_for_connecting_a_v_series_system_to_native_disk_shelves.html 
+sidebar: sidebar 
+keywords: guidelines, connect, v-series, system, native, disk, shelves, fc initiator, ports 
+summary: Al planificar cómo conectar el sistema V-Series a bandejas de discos nativas, el plan de conectividad de puerto a puerto debe abordar la redundancia y otras directrices. 
+---
+= Directrices para conectar un sistema V-Series a bandejas de discos nativas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Al planificar cómo conectar el sistema V-Series a bandejas de discos nativas, el plan de conectividad de puerto a puerto debe abordar la redundancia y otras directrices.
+
+
+
+== Número de puertos de iniciador de FC necesarios para los discos
+
+El número de puertos de iniciador de FC necesarios para conectar un sistema V-Series a una bandeja de discos depende de si su sistema V-Series es un sistema independiente o un par de alta disponibilidad
+
+[cols="2*"]
+|===
+| Configuración | Número de puertos iniciadores FC 
+
+
+ a| 
+Sistema independiente
+ a| 
+* Si utiliza un bucle: Un puerto iniciador FC.
+* Si va a conectar dos bucles: Dos puertos de iniciador FC, uno para cada bucle.
+
+
+
+
+ a| 
+En una pareja de alta disponibilidad
+ a| 
+* Si utiliza el almacenamiento multivía, dos puertos de iniciador de FC para cada bucle.
+* Si no utiliza el almacenamiento multivía, un puerto iniciador FC para cada controladora para cada bucle de la configuración.
+
+
+|===
+
+
+== Conexiones entre un sistema V-Series y discos
+
+Sigue los mismos procesos para conectar los cables de un sistema V-Series a una bandeja de discos nativa como lo haría para conectar un sistema FAS a una bandeja de discos nativa. Al crear el esquema de conectividad puerto a puerto, esta guía y las guías ONTAP y hardware de la siguiente tabla proporcionan información sobre la configuración y la gestión de discos y bandejas de discos.
+
+[cols="2*"]
+|===
+| Para obtener información acerca de... | Consulte... 
+
+
+ a| 
+Compatibilidad con discos, incluidas las velocidades de disco compatibles y la capacidad de disco
+ a| 
+https://mysupport.netapp.com/site/global/dashboard["Soporte de NetApp"]
+
+
+
+ a| 
+Instalar un sistema V-Series en un rack o armario del sistema
+ a| 
+En los sistemas nuevos, esta tarea suele ser realizada por la fábrica. Si necesita instrucciones, consulte la guía de su armario.
+
+
+
+ a| 
+Conectar una bandeja de discos a un sistema V-Series independiente
+ a| 
+Las instrucciones de instalación y configuración de la plataforma.
+
+* https://library.netapp.com/ecm/ecm_download_file/ECMP1213632["Instrucciones de instalación y configuración 32xx Sistemas"]
+* https://library.netapp.com/ecm/ecm_download_file/ECMP1147995["Instrucciones de instalación y configuración 62xx Sistemas"]
+
+
+
+
+ a| 
+Conectar un par de alta disponibilidad a una bandeja de discos
+ a| 
+https://docs.netapp.com/us-en/ontap/high-availability/index.html["Configuración de alta disponibilidad"]
+
+
+
+ a| 
+Agregando una bandeja de discos
+ a| 
+La guía adecuada para el tipo de bandeja de discos.
+
+
+
+ a| 
+Movimiento de una bandeja de discos
+ a| 
+La guía adecuada para el tipo de bandeja de discos.
+
+
+
+ a| 
+Gestión de discos
+ a| 
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestión de discos y agregados"]
+
+|===

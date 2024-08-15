@@ -1,0 +1,67 @@
+---
+permalink: install/task_getting_started_with_troubleshooting.html 
+sidebar: sidebar 
+keywords: get, started, troubleshoot, ontap, configuration, array, luns 
+summary: Al solucionar problemas en una configuración de ONTAP con LUN de cabina, debe seguir un método sistemático para determinar la causa del problema. 
+---
+= Primeros pasos para solucionar los problemas de una configuración de ONTAP con LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Al solucionar problemas en una configuración de ONTAP con LUN de cabina, debe seguir un método sistemático para determinar la causa del problema.
+
+Este procedimiento sugiere una orden para abordar la solución de problemas.
+
+[NOTE]
+====
+Mientras continúe con los pasos de solución de problemas, debe guardar la información recopilada sobre el problema para poder proporcionar esta información al soporte técnico en caso de una escalada.
+
+====
+.Pasos
+. Determine si el problema se relaciona con _front end_ (un problema de ONTAP que afecta a todas las plataformas correspondientes) o con el _back end_ (un problema con el switch o la configuración de la cabina de almacenamiento).
++
+Por ejemplo, si intenta utilizar una función ONTAP y no funciona según lo esperado, es probable que el problema esté en el front-end
+
+. Tomar las medidas adecuadas para abordar el problema, dependiendo de su naturaleza:
++
+|===
+| Si la configuración de ONTAP tiene un... | Realice lo siguiente... 
+
+
+ a| 
+Problema de front-end
+ a| 
+Continúe para solucionar problemas de la función ONTAP siguiendo las instrucciones en las guías de ONTAP.
+
+https://docs.netapp.com/us-en/ontap/index.html["Documentación de ONTAP 9"^]
+
+
+
+ a| 
+Problema de back-end
+ a| 
+.. Revise la matriz de interoperabilidad para asegurarse de que los siguientes sean compatibles: Configuración, cabina de almacenamiento, firmware de la cabina de almacenamiento, switch y firmware del switch.
++
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"^]
+
+.. Utilice el `storage array config show` comando para comprobar si hay errores comunes de configuración de back-end que el sistema pueda detectar.
++
+Si ONTAP detecta un error de configuración de back-end, debe ejecutar `storage errors show` el comando para obtener detalles sobre el error.
+
+
+
+|===
+. Si la causa del problema sigue sin quedar clara, revise las siguientes fuentes para garantizar que el sistema cumpla con los requisitos para trabajar con las cabinas de almacenamiento:
++
+** xref:concept_verifying_an_installation_with_storage_arrays.adoc[Verificación de una instalación con cabinas de almacenamiento]
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"]
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implementación de virtualización FlexArray para almacenamiento E-Series de NetApp"]
+** https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"^]
+** https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+
+. Si sigue necesitando ayuda para resolver el problema, póngase en contacto con el soporte técnico.
+

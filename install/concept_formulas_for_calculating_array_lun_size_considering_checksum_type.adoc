@@ -1,0 +1,192 @@
+---
+permalink: install/concept_formulas_for_calculating_array_lun_size_considering_checksum_type.html 
+sidebar: sidebar 
+keywords: formulas, calculate, array, lun, size, checksum, type, usable, capacity, snapshot, reserve, maximum 
+summary: Una serie de elementos, incluido el tipo de suma de comprobación, afectan a la capacidad utilizable de un LUN de cabina. Puede utilizar una fórmula para calcular cuánta capacidad utilizable habría en un LUN de cabina de un tamaño determinado o para calcular el tamaño que tiene que tener un LUN de cabina para proporcionar la cantidad de almacenamiento que desea. 
+---
+= Fórmulas para calcular el tamaño de LUN de cabina en función del tipo de suma de comprobación
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una serie de elementos, incluido el tipo de suma de comprobación, afectan a la capacidad utilizable de un LUN de cabina. Puede utilizar una fórmula para calcular cuánta capacidad utilizable habría en un LUN de cabina de un tamaño determinado o para calcular el tamaño que tiene que tener un LUN de cabina para proporcionar la cantidad de almacenamiento que desea.
+
+Una serie de elementos, incluido el tipo de suma de comprobación, afectan el tamaño del LUN de cabina que necesita para la cantidad de _capacidad utilizable_. La capacidad utilizable es la cantidad de espacio disponible para almacenamiento.
+
+La siguiente tabla muestra las formas de calcular el tamaño de LUN de cabina que se requieren:
+
+[cols="2*"]
+|===
+| Si usted sabe... | Quieres averiguar... 
+
+
+ a| 
+¿Qué tamaño tienen los LUN de cabina
+ a| 
+Cuánta capacidad está disponible para el almacenamiento (capacidad utilizable). Debe considerar la cantidad de espacio necesaria para todos los elementos.
+
+
+
+ a| 
+Cuánto almacenamiento se desea en el LUN de cabina
+ a| 
+¿Qué tamaño necesita un LUN de cabina? Debe tener en cuenta la cantidad necesaria de almacenamiento y el espacio necesario para otros elementos.
+
+|===
+[NOTE]
+====
+2 TB en estas fórmulas representa 2 TiB, o 2199023255552 bytes, que es 2097,152 GnaB o 2,097 TnaB según la forma en que ONTAP calcula las mediciones.
+
+====
+
+
+== Fórmula para calcular la capacidad utilizable
+
+Cuando conozca el tamaño de los LUN de cabina, puede utilizar la siguiente fórmula para determinar la capacidad utilizable para el almacenamiento en un LUN de cabina. Esta fórmula tiene en cuenta la reserva Snapshot.
+
+* Y es la capacidad utilizable para el almacenamiento.
+* N es la capacidad total del LUN de la cabina.
+
+
+[cols="2*"]
+|===
+| Tipo de suma de comprobación | Fórmula 
+
+
+ a| 
+LUN de cabina BCS inferiores a 2 TB
+ a| 
+N x {0,875 x 0,9 x 0,99 x (1 - Reserva de instantáneas)} = Y
+
+
+
+ a| 
+LUN de matriz BCS superior a 2 TB
+ a| 
+N x {0,875 x 0,9 x 0,998 x (1 - Reserva de instantáneas)} = Y
+
+
+
+ a| 
+AZCS: LUN de cabina inferiores a 2 TB
+ a| 
+N x {0,984 x 0,9 x 0,99 x (1 - Reserva de instantáneas)} = Y
+
+
+
+ a| 
+AZCS: LUN de cabina superior a 2 TB
+ a| 
+N x {0,984 x 0,9 x 0,998 x (1 - Reserva de instantáneas)} = Y
+
+|===
+
+
+== Ejemplo 1: Cálculos _con_ una reserva de instantáneas
+
+En el siguiente ejemplo, la capacidad total del LUN de cabina es de 4 GB, con una reserva Snapshot de volumen establecida en el valor predeterminado para Data ONTAP 8.1.1 (5 %).
+
+Los siguientes ejemplos son para un LUN de cabina menor de 2 TB:
+
+[cols="2*"]
+|===
+| Tipo de suma de comprobación | Fórmula 
+
+
+ a| 
+BCS (LUN de cabina inferior a 2 TB)
+ a| 
+4 x {0,875 x 0,9 x 0,99 x 0,95}= 2,96 GB de espacio utilizable para almacenamiento
+
+
+
+ a| 
+AZCS (LUN de cabina inferior a 2 TB)
+ a| 
+4 x {0,984 x 0,9 x 0,99 x 0,95}=3,33 GB de espacio utilizable para almacenamiento
+
+|===
+
+
+== Fórmula para calcular el tamaño máximo de LUN de cabina necesario
+
+Cuando conoce la capacidad de LUN de cabina necesaria para obtener la capacidad de almacenamiento que desea, puede utilizar la siguiente fórmula para determinar el tamaño total de LUN de cabina que necesita, teniendo en cuenta los elementos que requieren espacio en la LUN.
+
+* Y es la cantidad exacta de espacio en el LUN de cabina que se desea.
+* Si utiliza copias Snapshot, se tiene en cuenta la reserva Snapshot.
+
+
+Los siguientes ejemplos son para un LUN de cabina menor de 2 TB:
+
+[cols="2*"]
+|===
+| Tipo de suma de comprobación | Fórmula 
+
+
+ a| 
+BCS (LUN de cabina inferior a 2 TB)
+ a| 
+Y ÷ {0,875 x 0,9 x 0,99 x (1 - Snapshot reserve)} = capacidad real necesaria
+
+
+
+ a| 
+AZCS (LUN de cabina inferior a 2 TB)
+ a| 
+Y ÷ {0,984 x 0,9 x 0,99 x (1 - Snapshot reserve)} = capacidad real necesaria
+
+|===
+
+
+== Ejemplo 2: Cálculos _con_ reservas de instantáneas
+
+En este ejemplo, la reserva de Snapshot del volumen es la configuración predeterminada para Data ONTAP 8.1.1 (5 %).
+
+Los siguientes ejemplos son para un LUN de cabina menor de 2 TB:
+
+[cols="2*"]
+|===
+| Tipo de suma de comprobación | Fórmula 
+
+
+ a| 
+BCS (LUN de cabina inferior a 2 TB)
+ a| 
+10 GB ÷ {0,875 x 0,9 x 0,99 x 0,95}=13,5 GB de capacidad real requerida
+
+
+
+ a| 
+AZCS (LUN de cabina inferior a 2 TB)
+ a| 
+10 GB ÷ {0,984 x 0,9 x 0,99 x 0,95} = 12,05 GB de capacidad real requerida
+
+|===
+
+
+== Ejemplo 3: Cálculos _sin_ reservas de instantáneas
+
+Desea 10 GB de capacidad utilizable para almacenamiento. En el siguiente ejemplo, se muestra calcular el tamaño real de LUN de cabina cuando no utiliza copias Snapshot.
+
+Los siguientes ejemplos son para un LUN de cabina menor de 2 TB:
+
+[cols="2*"]
+|===
+| Tipo de suma de comprobación | Fórmula 
+
+
+ a| 
+BCS (LUN de cabina inferior a 2 TB)
+ a| 
+10 GB ÷ {0,875 x 0,9 x 0,99}=12,8 GB de capacidad real requerida
+
+
+
+ a| 
+AZCS (LUN de cabina inferior a 2 TB)
+ a| 
+10 GB ÷ {0,984 x 0,9 x 0,99}=11,41 GB de capacidad real requerida
+
+|===

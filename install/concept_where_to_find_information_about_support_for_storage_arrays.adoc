@@ -1,0 +1,77 @@
+---
+permalink: install/concept_where_to_find_information_about_support_for_storage_arrays.html 
+sidebar: sidebar 
+keywords: non-ontap, storage, third-party, storage, e-series 
+summary: No todas las versiones de ONTAP admiten las mismas funciones, configuraciones, modelos de sistema y modelos de cabinas de almacenamiento. Durante la planificación de la implementación, debe comprobar la información de soporte de ONTAP para verificar que la implementación cumpla con los requisitos de hardware y software de ONTAP para todos los sistemas de la implementación. 
+---
+= Dónde se encuentra información sobre el soporte de ONTAP para las cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+No todas las versiones de ONTAP admiten las mismas funciones, configuraciones, modelos de sistema y modelos de cabinas de almacenamiento. Durante la planificación de la implementación, debe comprobar la información de soporte de ONTAP para verificar que la implementación cumpla con los requisitos de hardware y software de ONTAP para todos los sistemas de la implementación.
+
+En la siguiente tabla se enumeran las fuentes de información que contienen los detalles de los requisitos de hardware y software asociados con los sistemas ONTAP:
+
+|===
+| Para obtener información acerca de... | Deberías mirar aquí... 
+
+
+ a| 
+ONTAP trabaja con dispositivos, incluidos los siguientes:
+
+* Cabinas de almacenamiento y firmware de cabina de almacenamiento compatibles
+* Switches y firmware de switch admitidos
+* Si la cabina de almacenamiento es compatible con una actualización no disruptiva (activa) del firmware de la cabina de almacenamiento
+* Si se admite una configuración MetroCluster con la cabina de almacenamiento
+
+ a| 
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]
+
+
+
+ a| 
+Límites de ONTAP para versiones y plataformas, como los siguientes:
+
+* Tamaños mínimos y máximos de LUN de cabina, incluido el tamaño mínimo de LUN de cabina para el volumen raíz y los LUN de cabina principal de reserva
+* Tamaño mínimo de agregado para agregados con LUN de cabina
+* Tamaño de bloque admitido
+* Capacidad mínima y máxima
+* Límites de vecindad
+
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Configuración de las cabinas de almacenamiento E-Series, incluidas las siguientes opciones:
+
+* Requisitos de preparación del sitio
+* Instrucciones para el cableado
+* Instrucciones de instalación y configuración del software SANtricity
+
+ a| 
+La siguiente documentación de E-Series:
+
+* _Guía de preparación del sitio de sistemas de almacenamiento de E-Series_
+* _Guía de cableado de hardware de los sistemas de almacenamiento de E-Series_
+* _Documentación de SANtricity ES Storage Manager_
+
+
+Puede acceder a estos documentos desde el sitio de soporte de NetApp.
+
+https://mysupport.netapp.com/site/global/dashboard["Soporte de NetApp"]
+
+
+
+ a| 
+¿Qué se admite para cabinas de almacenamiento específicas, incluidas las configuraciones compatibles
+ a| 
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"]
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implementación de virtualización FlexArray para almacenamiento E-Series de NetApp"]
+
+
+|===

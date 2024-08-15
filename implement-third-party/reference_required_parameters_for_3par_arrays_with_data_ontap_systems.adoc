@@ -1,0 +1,71 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_3par_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, 3par, arrays, ontap, systems, host, persona, settings, port, 
+summary: La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP. 
+---
+= Parámetros requeridos para cabinas 3PAR con sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP.
+
+
+
+== Configuración de persona de host
+
+Para las cabinas 3PAR con firmware 2.3.1 y posteriores, deben establecerse los valores de persona de host necesarios, como se muestra en la siguiente tabla:
+
+|===
+| Tipo de conexión | Persona de interés 
+
+
+ a| 
+Conexión directa
+ a| 
+10
+
+
+
+ a| 
+Tejido conectado
+ a| 
+10
+
+|===
+La definición de host, con la persona de host requerida, debe crearse en una cabina de almacenamiento 3PAR antes de que se pase la zona del switch para conectar el sistema ONTAP a una cabina de almacenamiento 3PAR. Si la división en zonas está configurada antes de la definición del host, ONTAP detecta una LUN de 3PAR como LUN 254 y un tipo de producto SES, que ONTAP no puede utilizar. El resultado es que no se pueden asignar 3PAR LUN recién asignadas al sistema ONTAP y no se pueden usar algunos 3PAR LUN que quizás ya se hayan agregado a un agregado porque ONTAP ve una LUN 254 en lugar de una LUN de 3PAR. Si este problema se produce, ONTAP genera el siguiente mensaje de EMS:
+
+[listing]
+----
+mlm.array.unknown:warning - Array LUN XXXXXXXX.126L254 [S/N 'XXXXXXX' vendor '3PARdata' product 'SES'] is unknown and is not supported in this version of Data ONTAP.
+----
+Si se configuró la división en zonas antes de la definición del host, puede resolver el problema mediante la reinicialización de la ruta para forzar una nueva detección de los LUN de cabina que se asignan desde la cabina de almacenamiento 3PAR. Consulte la solución alternativa para el problema del dispositivo desconocido (L254/SES) con la sección de cabinas de almacenamiento 3PAR para conocer la solución alternativa a este problema.
+
+xref:reference_workaround_for_the_unknown_device_l254_ses_problem_with_3par_storage_arrays.adoc[Solución alternativa para el problema de dispositivo desconocido (L254/SES) con cabinas de almacenamiento 3PAR]
+
+
+
+== Configuración de persona de puerto
+
+Para las cabinas 3PAR con firmware 2,2.x, los valores de persona de puerto necesarios deben establecerse como se muestra en la siguiente tabla:
+
+|===
+| Tipo de conexión | Persona de puerto 
+
+
+ a| 
+Conexión directa
+ a| 
+18
+
+
+
+ a| 
+Tejido conectado
+ a| 
+19
+
+|===

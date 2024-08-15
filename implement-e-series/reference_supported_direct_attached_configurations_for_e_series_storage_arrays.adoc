@@ -1,0 +1,54 @@
+---
+permalink: implement-e-series/reference_supported_direct_attached_configurations_for_e_series_storage_arrays.html 
+sidebar: sidebar 
+keywords: supported, direct-attached, configurations, e-series, storage, arrays, stand-alone, four-port, lun, group, eight-port 
+summary: Los sistemas ONTAP se pueden conectar con configuraciones de conexión directa con cabinas de almacenamiento de E-Series. Debe verificar la redundancia en las conexiones entre los sistemas ONTAP y las cabinas de almacenamiento para evitar la posibilidad de un único punto de error. Stretch MetroCluster de FlexArray admite configuraciones de conexión directa con cabinas de almacenamiento E-Series. 
+---
+= Configuraciones de conexión directa compatibles con cabinas de almacenamiento E-Series
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los sistemas ONTAP se pueden conectar con configuraciones de conexión directa con cabinas de almacenamiento de E-Series. Debe verificar la redundancia en las conexiones entre los sistemas ONTAP y las cabinas de almacenamiento para evitar la posibilidad de un único punto de error. Stretch MetroCluster de FlexArray admite configuraciones de conexión directa con cabinas de almacenamiento E-Series. Para obtener más información, consulte la https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"] y https://docs.netapp.com/us-en/ontap-metrocluster/install-stretch/index.html["Instalación y configuración de MetroCluster con ampliación"]la .
+
+La matriz de interoperabilidad contiene información sobre los modelos de cabina específicos de E-Series que se admiten en configuraciones de conexión directa con el sistema ONTAP.
+
+ONTAP admite las siguientes configuraciones de conexión directa con las cabinas de almacenamiento E-Series:
+
+
+
+== Configuración básica autónoma
+
+En una configuración básica independiente, dos puertos iniciadores FC desde el sistema ONTAP acceden a los puertos de un grupo de LUN de cabina de dos puertos.
+
+En la siguiente ilustración, se muestra una configuración de conexión directa donde los puertos de iniciadores FC de ONTAP 0A y 0h acceden a los puertos de destino de un grupo de LUN de cabina de dos puertos:
+
+image::../media/da_2port_standalone.gif[da 2port independiente]
+
+
+
+== Grupo LUN de cabinas de cuatro puertos
+
+Dos puertos de iniciador FC de cada sistema ONTAP en un par de alta disponibilidad acceden a diferentes puertos de cabina de almacenamiento en un grupo LUN de cabina de cuatro puertos para ofrecer redundancia en conexiones.
+
+En la siguiente ilustración, se muestra una configuración de conexión directa donde los puertos de iniciador de ONTAP FC acceden a los puertos de destino de un grupo de LUN de cabinas de cuatro puertos.
+
+image::../media/da_4port_hapair.gif[da 4port hapair]
+
+También puede conectar cuatro puertos de iniciador FC de cada sistema ONTAP en el par de alta disponibilidad a dos grupos de LUN de cabina de cuatro puertos diferentes de modo que cada puerto de iniciador de FC en un par de puertos tenga acceso al grupo de LUN alternativo.
+
+En la siguiente ilustración, se muestra una configuración de conexión directa donde los puertos de iniciador de ONTAP FC acceden a los puertos de destino de dos grupos de LUN de cabinas de cuatro puertos:
+
+image::../media/direct_attached_configuration_with_two_four_port_array_lun_groups.gif[configuración de conexión directa con dos grupos de lun de cabinas de cuatro puertos]
+
+
+
+== Grupo LUN de cabina de ocho puertos
+
+Cuatro puertos de iniciador FC de cada sistema ONTAP en un par de alta disponibilidad acceden a diferentes puertos de cabina de almacenamiento en un grupo de LUN de cabina de ocho puertos para lograr redundancia en conexiones.
+
+En la siguiente ilustración, se muestra una configuración conectada directamente donde los puertos de iniciador de ONTAP FC acceden a los puertos de destino de un grupo de LUN de cabina de ocho puertos:
+
+image::../media/eight_port_direct_attached_ha_pair_configuration.gif[configuración de par de alta disponibilidad de conexión directa de ocho puertos]

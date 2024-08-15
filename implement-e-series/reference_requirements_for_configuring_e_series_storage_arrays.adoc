@@ -1,0 +1,14 @@
+---
+permalink: implement-e-series/reference_requirements_for_configuring_e_series_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, configure, e-series, storage, arrays 
+summary: Hay parámetros del sistema que debe configurar y consideraciones que se deben tener en cuenta al configurar una cabina de almacenamiento para que funcione con un sistema ONTAP. 
+---
+= Requisitos para configurar cabinas de almacenamiento E-Series
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Hay parámetros del sistema que debe configurar y consideraciones que se deben tener en cuenta al configurar una cabina de almacenamiento para que funcione con un sistema ONTAP.

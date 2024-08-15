@@ -1,0 +1,57 @@
+---
+permalink: install/reference_reasons_for_the_incorrect_number_of_luns_in_array_lun_groups.html 
+sidebar: sidebar 
+keywords: reasons, incorrect, number, luns, array, groups, issue, resolve 
+summary: Al validar la configuración, debe comprobar la salida show de configuración de la cabina de almacenamiento para garantizar que el número de LUN de cada grupo LUN sea lo que pretendió. La causa más probable que el número de LUN en un grupo de LUN sea incorrecto es que el LUN de cabina no esté asignado a un sistema ONTAP. 
+---
+= Motivos del número de LUN en los grupos de LUN de cabina incorrecto
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Al validar la configuración, debe comprobar el `storage array config show` resultado para asegurarse de que el número de LUN de cada grupo de LUN sea lo que pretende. La causa más probable que el número de LUN en un grupo de LUN sea incorrecto es que el LUN de cabina no esté asignado a un sistema ONTAP.
+
+
+
+== Ejemplo de resultado de show de configuración de la cabina de almacenamiento
+
+El número de LUN de cabina de cada grupo LUN aparece en `storage array config show` la salida, como muestra el ejemplo siguiente:
+
+[listing]
+----
+mysystem1::> storage array config show
+
+               LUN     LUN
+Node           Group   Count Array Name     Array Target Port  Initiator
+------         ------ ----- -------------- -------------------- ----------
+mysystem1        0      50   DGC_RAID5_1     201A00a0b80fee04     0a
+                                             202A00a0b80fee04     0c
+----
+
+
+== Explicación
+
+Las razones más probables por las que faltara un LUN de cabina que esperaba estar en un grupo LUN son las siguientes:
+
+* El LUN de cabina no está asignado al sistema ONTAP.
+* Se produce un error de asignación que provoca que el LUN de cabina esté en el grupo de LUN incorrecto.
++
+Por ejemplo, es posible que la configuración del grupo de hosts sea incorrecta.
+
+* La cabina de almacenamiento todavía está en proceso de inicialización y que los LUN de cabina estén disponibles (estado de transición).
+* El escáner de LUN de ONTAP aún no ha detectado las LUN (estado de transición).
+
+
+
+
+== Resolver el problema
+
+. Si el LUN de cabina no se asignó al sistema ONTAP, el administrador de la cabina de almacenamiento debe asignarlo.
++
+El proceso para la asignación de LUN de cabina a hosts varía entre las cabinas de almacenamiento.
+
+. Si el LUN de cabina se ha asignado al sistema ONTAP, compruebe la división en zonas y la configuración del grupo de hosts.
+. Una vez solucionado el problema, ejecute `storage array config show` de nuevo para confirmar que el problema está solucionado.
+

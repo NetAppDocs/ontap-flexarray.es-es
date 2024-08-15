@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_hp_eva_storage_arrays.html 
+sidebar: sidebar 
+keywords: hp, eva, storage, arrays 
+summary: Debe cumplir ciertos requisitos al configurar las cabinas de almacenamiento para que funcionen con sistemas ONTAP. Estos requisitos incluyen establecer parámetros de configuración en cabinas de almacenamiento y poner en marcha solo configuraciones compatibles. 
+---
+= Matrices de almacenamiento HP EVA
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe cumplir ciertos requisitos al configurar las cabinas de almacenamiento para que funcionen con sistemas ONTAP. Estos requisitos incluyen establecer parámetros de configuración en cabinas de almacenamiento y poner en marcha solo configuraciones compatibles.

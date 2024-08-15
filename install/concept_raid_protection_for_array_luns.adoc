@@ -1,0 +1,29 @@
+---
+permalink: install/concept_raid_protection_for_array_luns.html 
+sidebar: sidebar 
+keywords: raid, protection, array, luns 
+summary: Las cabinas de almacenamiento proporcionan protección RAID para los LUN de cabina que ponen a disposición del ONTAP. ONTAP no ofrece protección RAID. 
+---
+= Protección RAID para LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Las cabinas de almacenamiento proporcionan protección RAID para los LUN de cabina que ponen a disposición del ONTAP. ONTAP no ofrece protección RAID.
+
+ONTAP utiliza RAID0 (segmentación) para los LUN de cabina. ONTAP admite varios tipos de RAID en las cabinas de almacenamiento, excepto RAID0, ya que RAID0 no ofrece protección del almacenamiento.
+
+Al crear _RAID groups_ en las cabinas de almacenamiento, debe seguir las prácticas recomendadas del proveedor de la cabina de almacenamiento a fin de garantizar que haya un nivel adecuado de protección en la cabina de almacenamiento de modo que el fallo de un disco no provoque la pérdida de datos o la pérdida de acceso a los datos.
+
+[NOTE]
+====
+* Un _RAID group_ en una cabina de almacenamiento es la disposición de los discos que, juntos, forman el nivel de RAID definido.
++
+Cada grupo RAID solo admite un tipo de RAID. La cantidad de discos que se selecciona para un grupo RAID determina el tipo de RAID que admite un grupo de RAID en particular. Los diferentes proveedores de cabinas de almacenamiento utilizan diferentes términos para describir esta entidad: Grupos RAID, grupos de paridad, grupos de discos, grupos de RAID de paridad y otros términos.
+
+* ONTAP admite RAID4 y RAID-DP en bandejas de discos nativas, pero solo admite RAID0 en LUN de cabina.
+
+
+====

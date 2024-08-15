@@ -1,0 +1,67 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_hp_xp_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, hp, xp, storage, arrays, ontap, workaround 
+summary: Para que esta cabina de almacenamiento funcione correctamente con los sistemas ONTAP, se requiere cierta configuración de parámetros en la cabina de almacenamiento. 
+---
+= Parámetros necesarios para matrices de almacenamiento HP XP con ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para que esta cabina de almacenamiento funcione correctamente con los sistemas ONTAP, se requiere cierta configuración de parámetros en la cabina de almacenamiento.
+
+
+
+== Parámetros del sistema necesarios para las matrices de almacenamiento HP XP
+
+Los ajustes de parámetros necesarios se muestran en la siguiente tabla:
+
+|===
+| Parámetro | Ajuste 
+
+
+ a| 
+`Host mode`
+ a| 
+Estándar o 00
+
+
+
+ a| 
+`Port security`
+ a| 
+Activado
+
+
+
+ a| 
+[NOTE]
+====
+Se debe crear un grupo de hosts separado de los grupos de hosts predeterminados para cada par de puertos de iniciador-destino.
+
+====
+|===
+Se deben definir los parámetros de la cabina de almacenamiento y asignar los LUN a los grupos de hosts antes de dividir el switch para conectar el sistema ONTAP a una cabina de almacenamiento HP XP.
+
+Si los puertos de iniciador de ONTAP FC se dividen con puertos de destino de cabina HP XP antes de que se establezcan los parámetros de la cabina de almacenamiento y se asignen los grupos de hosts, es posible que no pueda ver ninguna LUN presentada en la interfaz de ONTAP.
+
+En esta situación, ONTAP genera uno de los siguientes mensajes de EMS:
+
+[listing]
+----
+[fci.device.login.reject:info] The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x9 'Invalid R_CTL Field', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+[listing]
+----
+[fci.device.login.reject:info]: The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x3 'Nx_Port Not Available, Temporary', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+
+
+== Solución alternativa
+
+Si se configuró la división en zonas antes de configurar los parámetros y asignar los LUN a los grupos de hosts, puede resolver el problema que no estén visibles ejecutando una reinicialización de ruta para forzar una nueva detección de los LUN de cabina asignados desde la cabina de almacenamiento de HP XP.
+
+xref:reference_workaround_when_luns_are_not_visible_with_hp_xp_storage_arrays.adoc[Solución alternativa cuando las LUN no están visibles con las matrices de almacenamiento HP XP]

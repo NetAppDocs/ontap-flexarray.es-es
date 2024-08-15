@@ -1,0 +1,16 @@
+---
+permalink: implement-third-party/concept_alua_support_for_hp_eva_storage_arrays.html 
+sidebar: sidebar 
+keywords: alua, support, hp eva, storage, arrays 
+summary: 'Se ha añadido soporte para el acceso asimétrico de unidades lógicas (ALUA) con matrices HP EVA.' 
+---
+= Compatibilidad con ALUA para las cabinas de almacenamiento HP EVA
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se ha añadido soporte para el acceso asimétrico de unidades lógicas (ALUA) con matrices HP EVA.
+
+De manera predeterminada, la compatibilidad con ALUA está habilitada en ONTAP y en todas las cabinas de almacenamiento HP EVA.

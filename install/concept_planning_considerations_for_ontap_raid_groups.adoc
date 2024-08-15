@@ -1,0 +1,32 @@
+---
+permalink: install/concept_planning_considerations_for_ontap_raid_groups.html 
+sidebar: sidebar 
+keywords: plan, considerations, ontap, raid, groups 
+summary: Antes de configurar grupos RAID de ONTAP para LUN de cabinas, debe planificar el tamaño de los agregados, la cantidad y el tamaño de los grupos RAID, y el tamaño de los LUN de cabinas. Los grupos RAID que mejor cumplen con sus requisitos de datos garantizan una protección adecuada en la cabina para los datos y su disponibilidad. 
+---
+= Consideraciones de planificación para grupos RAID de ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de configurar grupos RAID de ONTAP para LUN de cabinas, debe planificar el tamaño de los agregados, la cantidad y el tamaño de los grupos RAID, y el tamaño de los LUN de cabinas. Los grupos RAID que mejor cumplen con sus requisitos de datos garantizan una protección adecuada en la cabina para los datos y su disponibilidad.
+
+La planificación de grupos RAID de ONTAP implica las siguientes tareas:
+
+. Planifique el tamaño del agregado que mejor cumpla sus requisitos de datos.
+. Planificar la cantidad y el tamaño de los grupos RAID necesarios para el tamaño del agregado.
+. Planifique el tamaño de los LUN de cabina necesario en los grupos RAID de ONTAP:
++
+** Para evitar que se perjudique el rendimiento, todas las LUN de cabina de un grupo RAID de ONTAP determinado deben tener el mismo tamaño.
+** Los LUN de cabina deben tener el mismo tamaño en todos los grupos RAID del mismo agregado.
+
+
+. Se comunica con el administrador de la cabina de almacenamiento para crear la cantidad de LUN de cabina del tamaño que necesita para el agregado.
++
+Se deben optimizar los LUN de cabina para el rendimiento según las instrucciones que se indican en la documentación del proveedor de la cabina de almacenamiento.
+
+
+
+Para obtener más recomendaciones sobre la configuración de grupos RAID de ONTAP para su uso con cabinas de almacenamiento, consulte https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["_Gestión de discos y agregados_"].

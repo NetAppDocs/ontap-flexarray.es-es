@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_3par_storage_arrays.html 
+sidebar: sidebar 
+keywords: 3par, storage, arrays 
+summary: Debe cumplir ciertos requisitos al configurar cabinas de almacenamiento para que funcionen con sistemas ONTAP que utilizan LUN de cabina. Estos requisitos incluyen establecer parámetros de configuración en cabinas de almacenamiento y poner en marcha solo configuraciones compatibles. 
+---
+= Cabinas de almacenamiento 3PAR
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe cumplir ciertos requisitos al configurar cabinas de almacenamiento para que funcionen con sistemas ONTAP que utilizan LUN de cabina. Estos requisitos incluyen establecer parámetros de configuración en cabinas de almacenamiento y poner en marcha solo configuraciones compatibles.

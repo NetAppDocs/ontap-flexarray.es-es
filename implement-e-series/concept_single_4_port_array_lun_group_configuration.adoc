@@ -1,0 +1,24 @@
+---
+permalink: implement-e-series/concept_single_4_port_array_lun_group_configuration.html 
+sidebar: sidebar 
+keywords: single, 4-port, array, lun, group, configuration 
+summary: Esta configuración contiene un solo grupo de LUN de 4 puertos con cada puerto de destino al que se accede por un solo puerto de iniciador FC ONTAP del par de alta disponibilidad. Debido a la división en zonas, solo se permiten dos rutas a un LUN específico de cabina desde cada sistema ONTAP. 
+---
+= Configuración de grupo de LUN de cabina con 4 puertos únicos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta configuración contiene un solo grupo de LUN de 4 puertos con cada puerto de destino al que se accede por un solo puerto de iniciador FC ONTAP del par de alta disponibilidad. Debido a la división en zonas, solo se permiten dos rutas a un LUN específico de cabina desde cada sistema ONTAP.
+
+Esta configuración se admite para su uso con todas las cabinas de almacenamiento enumeradas en la matriz de interoperabilidad compatibles con la versión de ONTAP que se ejecuta en el sistema.
+
+En la siguiente ilustración, se muestra esta configuración:
+
+image::../media/one_4_port_array_lun_gp.gif[Este gráfico se describe con el texto circundante.]
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

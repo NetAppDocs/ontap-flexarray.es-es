@@ -1,0 +1,91 @@
+---
+permalink: install/concept_example_of_cascading_zoning_and_host_group_configuration_errors.html 
+sidebar: sidebar 
+keywords: example, cascade, zone, host, group, configuration, errors, troubleshoot 
+summary: Los errores realizados en las definiciones de zona pueden afectar a las definiciones de grupos de hosts y viceversa. Cuando las LUN no son visibles en una ruta, es necesario comprobar si existen errores de configuración de la división en zonas y del grupo de hosts. 
+---
+= Ejemplo de errores de configuración de la división en cascada y del grupo de hosts
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los errores realizados en las definiciones de zona pueden afectar a las definiciones de grupos de hosts y viceversa. Cuando las LUN no son visibles en una ruta, es necesario comprobar si existen errores de configuración de la división en zonas y del grupo de hosts.
+
+Supongamos que la secuencia de configuración es la siguiente:
+
+. La definición de zona se ha creado en el conmutador.
++
+El WWPN para el puerto iniciador de FC 0A del sistema ONTAP se colocó en la definición de zona. Sin embargo, la intención era poner el WWPN para el puerto iniciador FC 0C en la definición de zona.
+
+. Se creó el grupo de hosts en la cabina de almacenamiento.
++
+Se ha seleccionado el WWPN para el puerto iniciador de FC 0A (porque era el único WWPN disponible y no era obvio que era el WWPN de 0A y no 0C).
+
+. En ONTAP, miró las LUN de cabina a través de los puertos de iniciador FC, esperando ver las LUN de cabina a través de 0C.
++
+Sin embargo, no hubo LUN de cabina a través de 0C porque la definición de zona y la definición del grupo de hosts incluyen incorrectamente el WWPN para el puerto de iniciador FC 0A.
+
++
+[NOTE]
+====
+Utilizó el `storage array config show` comando para ver la información del LUN de la cabina.
+
+====
+. Inicie la solución de problemas porque no puede ver las LUN a través del iniciador sobre el que esperaba verlas.
+
+
+Debe comprobar la configuración de la división en zonas y del grupo de hosts, pero no importa cuál de los siguientes procedimientos comience por primero. Puede ver diferentes mensajes, según si comienza a corregir cosas desde el grupo de hosts primero o la división en zonas primero.
+
+
+
+== Solución de problemas comprobando primero la división en zonas
+
+. Compruebe las definiciones de zona para el sistema ONTAP.
++
+Verá que dispone de dos zonas con el WWPN para el puerto iniciador de FC 0A en él y no hay zonas con el WWPN para 0C en él.
+
+. Corrija las definiciones de zona incorrectas y actívalas.
++
+[NOTE]
+====
+No podrá ver los LUN de cabina a través de los puertos de iniciador cuando esté en ejecución `storage array config show`.
+
+====
+. Vaya a la cabina y vuelva a configurar el grupo de hosts para incluir el nombre de puerto WWPN para el puerto iniciador de FC 0C.
++
+Ahora que el WWPN de 0C está en una definición de zona activada, el WWPN de 0C aparece en la lista de opciones de la configuración del grupo de hosts de la cabina de almacenamiento.
+
+. En el sistema ONTAP, ejecute `storage array config show` para comprobar los LUN de cabina a través de los puertos de iniciador FC para confirmar que los LUN de la cabina se muestran a través de 0C.
+
+
+
+
+== Solución de problemas comprobando primero el grupo de hosts
+
+. Desde la consola del sistema ONTAP, ejecute `storage show adapteradapter#``, y luego escriba el WWPN del adaptador que falta--0C en este ejemplo.
+. Vaya a la cabina de almacenamiento y compare el WWPN que escribió con los WWPN que se muestran en la lista de opciones del grupo de hosts para ver si aparece en la lista de opciones el WWPN del puerto iniciador de FC que esperaba.
++
+Si el WWPN que esperaba no aparece, el iniciador deseado no está en la definición de zona.
+
+. Si la cabina de almacenamiento permite modificar WWPN en el grupo de hosts, puede modificar el WWPN que se muestra para que sea el WWPN que escribió.
++
+[NOTE]
+====
+Si la cabina de almacenamiento no permite modificar los WWPN en el grupo de hosts, se debe modificar la definición del grupo de hosts después de modificar la definición de la zona.
+
+====
++
+Todavía no puede ver las LUN a través del iniciador que estaba intentando porque la división en zonas aún no se ha solucionado.
+
+. Vaya al switch y sustituya el puerto WWPN incorrecto por el iniciador de puerto FC correcto y, a continuación, active la definición de zona.
+. Si no puede corregir el WWPN en la definición del grupo de hosts anteriormente en el proceso, vaya a la cabina de almacenamiento y vuelva a configurar el grupo de hosts para incluir el WWPN para el puerto iniciador de FC 0C.
++
+Ahora que el WWPN de 0C está en una definición de zona activada, el WWPN de 0C aparece en la lista de opciones de la configuración del grupo de hosts de la cabina de almacenamiento.
+
+. En el sistema ONTAP, ejecute `storage array config show` para comprobar los LUN de cabina a través de los puertos de iniciador FC para confirmar que los LUN de la cabina se muestran a través de 0C.
++
+Ahora debe ver acceso a las LUN a través del puerto iniciador de FC.
+
+

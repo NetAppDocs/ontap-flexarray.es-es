@@ -1,0 +1,22 @@
+---
+permalink: implement-third-party/concept_requirements_for_volume_groups_on_ds8xxx_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, volume, groups, ds8xxx, storage, arrays 
+summary: Al configurar las cabinas DS8xxx, es necesario conocer las limitaciones en la cantidad de grupos de volúmenes que se pueden usar con un grupo LUN. 
+---
+= Requisitos para grupos de volúmenes en cabinas de almacenamiento DS8xxx
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Al configurar las cabinas DS8xxx, es necesario conocer las limitaciones en la cantidad de grupos de volúmenes que se pueden usar con un grupo LUN.
+
+Debe usar un único grupo de volúmenes para cada grupo de LUN en una cabina de almacenamiento DS8xxx para garantizar que los LUN de la cabina DS8xxx se presenten de manera consistente a todos los iniciadores de FC (que están en el sistema ONTAP) que accedan a ellos.
+
+[NOTE]
+====
+Si las LUN de cabina no se presentan de manera coherente, existe la posibilidad de que los datos se dañen.
+
+====

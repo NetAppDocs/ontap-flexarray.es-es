@@ -1,0 +1,39 @@
+---
+permalink: implement-e-series/concept_sharing_a_target_port_with_two_fc_initiator_ports.html 
+sidebar: sidebar 
+keywords: share, target, port, two, fc initiator, ports 
+summary: Se puede conectar un máximo de dos puertos de iniciador FC de ONTAP en los nodos a un único puerto de destino de la cabina de almacenamiento. Esta configuración es compatible con las configuraciones de MetroCluster en ONTAP. 
+---
+= Compartir un puerto de destino con dos puertos de iniciador FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se puede conectar un máximo de dos puertos de iniciador FC de ONTAP en los nodos a un único puerto de destino de la cabina de almacenamiento. Esta configuración es compatible con las configuraciones de MetroCluster en ONTAP.
+
+Esta configuración se admite para su uso con todas las cabinas de almacenamiento enumeradas en la matriz de interoperabilidad compatibles con la versión de ONTAP que se ejecuta en el sistema.
+
+En la siguiente ilustración, se muestra una configuración de puerto de destino compartida con un par de alta disponibilidad. El uso compartido de un puerto de destino con dos puertos de iniciador FC admite sistemas independientes y pares de alta disponibilidad.
+
+[NOTE]
+====
+Para obtener detalles sobre cómo compartir un puerto iniciador de FC con varios puertos de destino y la división en zonas, consulte _Referencia y requisitos de instalación de virtualización de FlexArray_
+
+====
+
+
+== Puerto de destino compartido conectado a los puertos de iniciador FC
+
+El siguiente ejemplo muestra un par de alta disponibilidad en el que un único puerto de destino se conecta a dos puertos de iniciador de FC:
+
+image::../media/shared_target_ports.gif[Este gráfico se describe en el texto adyacente]
+
+Los puertos de iniciador 0A de las controladoras VS1 y VS2 están conectados al puerto 1A de la cabina de almacenamiento y los puertos 0C de las controladoras están conectados al puerto 2A de la cabina de almacenamiento.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Referencias y requisitos de instalación de la virtualización FlexArray"]

@@ -1,0 +1,39 @@
+---
+permalink: install/concept_valid_pathing_standalone_system_with_a_single_2_port_array_lun_group.html 
+sidebar: sidebar 
+keywords: valid, path, stand-alone, system, single, 2-port, array, lun, group 
+summary: Para todas las versiones de ONTAP, se admite un sistema independiente FAS con un único grupo de LUN de cabina de 2 puertos con la mayoría de cabinas de almacenamiento. 
+---
+= Rutas válidas: Sistema independiente con un único grupo de LUN de cabina de 2 puertos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para todas las versiones de ONTAP, se admite un sistema independiente FAS con un único grupo de LUN de cabina de 2 puertos con la mayoría de cabinas de almacenamiento.
+
+[NOTE]
+====
+Las diferentes cabinas de almacenamiento, incluso las del mismo proveedor, pueden etiquetar los puertos de una forma diferente a los que se muestran en el ejemplo. En la cabina de almacenamiento, debe asegurarse de que los puertos que selecciona se encuentren en controladoras alternativas.
+
+====
+En la siguiente ilustración, se muestra un único grupo de LUN de cabina de 2 puertos con un sistema ONTAP independiente:
+
+image::../media/one_standalone_2_port_array_lun_group_array_port_labels.gif[En una configuración de grupo de LUN de cabina de 2 puertos con un sistema independiente]
+
+Al validar la instalación, puede comprobar el resultado del comando con respecto al ejemplo siguiente para verificar que el número de grupos LUN es el previsto y que hay rutas redundantes.
+
+.Ejemplo
+El siguiente ejemplo muestra el resultado esperado `storage array config show` para la configuración ilustrada: Un único grupo de LUN (grupo de LUN 0) con dos rutas redundantes a cada LUN de cabina. (Las rutas redundantes en la salida que coinciden con la ilustración se muestran en los nombres de puerto de destino de la matriz 20**1A**00a0b80fee04 y 20**2A**00a0b80fee0420).
+
+[listing]
+----
+
+vs1::> storage array config show
+             LUN   LUN
+Node         Group Count     Array Name    Array Target Port   Initiator
+------------ ----- ----- ----------------- ------------------- ----------
+vs1           0    50        DGC_RAID5_1	 201A00a0b80fee04     0a
+                                             202A00a0b80fee04     0h
+----

@@ -1,0 +1,36 @@
+---
+permalink: implement-third-party/reference_required_settings_for_ibm_ds_storage_arrays_with_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, settings, ibm ds, storage, arrays, ontap, systems. host type, ds8xxx, configuring, ds8300 9a2 lpar models 
+summary: La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP. 
+---
+= Configuración requerida para las cabinas de almacenamiento IBM DS con sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP.
+
+
+
+== Tipo de host requerido para las cabinas de almacenamiento DS8xxx
+
+En la siguiente tabla, se muestra la configuración del tipo de host requerida:
+
+|===
+| Parámetro | Ajuste 
+
+
+ a| 
+`Host type`
+ a| 
+Puerta de enlace serie N.
+
+|===
+
+
+== Requisitos para configurar los modelos DS8300 9A2 LPAR
+
+Cuando se configura el modelo DS8300 9A2 LPAR (partición lógica del sistema) para interactuar con los sistemas de ONTAP, se debe configurar el acceso a cada LUN de cabina para que ambas rutas redundantes accedan al mismo LPAR.

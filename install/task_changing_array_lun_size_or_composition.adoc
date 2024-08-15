@@ -1,0 +1,36 @@
+---
+permalink: install/task_changing_array_lun_size_or_composition.html 
+sidebar: sidebar 
+keywords: change, array, lun, size, composition 
+summary: En la cabina de almacenamiento se debe volver a configurar el tamaño o la composición de un LUN de cabina. Si ya se asignó un LUN de cabina a un sistema ONTAP, debe usar ONTAP para cambiar el estado del LUN de cabina a Sin uso para que el administrador de la cabina de almacenamiento pueda volver a configurarlo. 
+---
+= Cambio de tamaño o composición del LUN de la cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En la cabina de almacenamiento se debe volver a configurar el tamaño o la composición de un LUN de cabina. Si ya se asignó un LUN de cabina a un sistema ONTAP, debe usar ONTAP para cambiar el estado del LUN de cabina a Sin uso para que el administrador de la cabina de almacenamiento pueda volver a configurarlo.
+
+*Lo que necesitará*
+
+El LUN de cabina debe ser un LUN de cabina de repuesto para poder cambiar su estado a sin usar.
+
+.Pasos
+. En el sistema ONTAP, introduzca el siguiente comando para eliminar la información de propiedad: `storage disk removeowner  -disk arrayLUNname`
+. En la cabina de almacenamiento, complete los siguientes pasos:
++
+.. Anule la asignación (anular la presentación) del LUN de cabina de los sistemas ONTAP para que ya no puedan ver el LUN de cabina.
+.. Cambie el tamaño o la composición del LUN de cabina.
+.. Si desea que ONTAP vuelva a usar el LUN de cabina, vuelva a presentar el LUN de cabina a los sistemas ONTAP.
++
+En este punto, el LUN de cabina es visible para los puertos de iniciador FC para los que se presentó el LUN de cabina, pero ningún sistema ONTAP aún no puede utilizarlo.
+
+
+
+. Introduzca el siguiente comando en el sistema ONTAP que desee ser propietario del LUN de cabina: `storage disk assign -disk arrayLUNname -owner nodename`
++
+Una vez eliminada la información de propiedad, ningún sistema ONTAP no puede utilizar el LUN de cabina hasta que se vuelva a asignar el LUN de cabina a un sistema. Puede dejar el LUN de cabina como reserva o añadirlo a un agregado. Es necesario añadir el LUN de cabina a un agregado para poder utilizar el LUN de cabina con fines de almacenamiento.
+
+

@@ -1,0 +1,24 @@
+---
+permalink: implement-third-party/concept_how_emc_vnx_storage_arrays_control_access_to_data.html 
+sidebar: sidebar 
+keywords: emc, vnx, storage, array, control, access, data 
+summary: La cabina VNX de EMC utiliza grupos de almacenamiento para controlar el acceso a los datos. Un grupo de almacenamiento es uno o varios LUN dentro de la cabina de almacenamiento a los que solo el host o los hosts asociados con los LUN de cabina pueden acceder. Un host no puede acceder a ni modificar datos de ningún LUN de cabina que no forme parte de su grupo de almacenamiento. 
+---
+= Cómo controla EMC VNX el acceso a los datos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La cabina VNX de EMC utiliza grupos de almacenamiento para controlar el acceso a los datos. Un grupo de almacenamiento es uno o varios LUN dentro de la cabina de almacenamiento a los que solo el host o los hosts asociados con los LUN de cabina pueden acceder. Un host no puede acceder a ni modificar datos de ningún LUN de cabina que no forme parte de su grupo de almacenamiento.
+
+ONTAP es compatible con varios grupos de almacenamiento si se siguen estas reglas:
+
+* La división en zonas de switch debe definir qué puertos de destino utilizan los puertos de iniciador de FC del sistema ONTAP para acceder a cada grupo de LUN de cabina.
+* El enmascaramiento de LUN se debe utilizar para restringir el acceso del host a los LUN de cabina.
+* Los grupos de almacenamiento deben definir qué grupos de LUN de cabina se presentan a cada puerto de iniciador FC.
+* Se requiere un par de puertos de iniciador FC en cada sistema ONTAP para cada grupo de LUN de cabina.
+
+
+Si se utilizan vecindarios del LUN de cabina, los sistemas V-Series en el mismo entorno deben estar en el mismo grupo de almacenamiento.

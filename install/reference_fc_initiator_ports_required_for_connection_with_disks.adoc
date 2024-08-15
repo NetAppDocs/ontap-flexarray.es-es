@@ -1,0 +1,38 @@
+---
+permalink: install/reference_fc_initiator_ports_required_for_connection_with_disks.html 
+sidebar: sidebar 
+keywords: fc initiator, ports, required, connection, native, disks 
+summary: Debe conectar un sistema V-Series a bandejas de discos nativas a través de los puertos de iniciador FC. El número de puertos de iniciador necesarios para la conexión depende de si el sistema V-Series es un sistema independiente o un par de alta disponibilidad. 
+---
+= Puertos de iniciador FC necesarios para la conexión con discos nativos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe conectar un sistema V-Series a bandejas de discos nativas a través de los puertos de iniciador FC. El número de puertos de iniciador necesarios para la conexión depende de si el sistema V-Series es un sistema independiente o un par de alta disponibilidad.
+
+En la siguiente tabla se enumera el número de puertos de iniciador de FC necesarios para conectar un sistema V-Series a las bandejas de discos nativas, en función de la configuración del sistema:
+
+|===
+| Configuración | Número de puertos iniciadores FC 
+
+
+ a| 
+Sistema independiente
+ a| 
+* Si utiliza un bucle, un puerto iniciador FC
+* Si va a conectar dos bucles, dos puertos de iniciador FC: Uno para cada bucle
+
+
+
+
+ a| 
+Pareja de HA
+ a| 
+* Si utiliza almacenamiento multivía, dos puertos de iniciador FC para cada bucle
+* Si no se utiliza almacenamiento multivía, un puerto de iniciador FC por controladora para cada bucle de la configuración
+
+
+|===

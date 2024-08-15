@@ -1,0 +1,30 @@
+---
+permalink: implement-third-party/concept_requirements_for_using_disks_external_to_the_storage_array.html 
+sidebar: sidebar 
+keywords: requirements, using, disks, external, storage, array 
+summary: 'ONTAP admite el uso de los mismos discos detrás de las cabinas de almacenamiento que admite el proveedor (es decir, discos externos a la cabina de almacenamiento). Cuando se implementan cabinas de almacenamiento que usan discos externos, ONTAP acepta la configuración entre la cabina de almacenamiento y los discos externos.' 
+---
+= Requisitos para usar discos externos a la cabina de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP admite el uso de los mismos discos detrás de las cabinas de almacenamiento que admite el proveedor (es decir, discos externos a la cabina de almacenamiento). Cuando se implementan cabinas de almacenamiento que usan discos externos, ONTAP acepta la configuración entre la cabina de almacenamiento y los discos externos.
+
+A continuación, se incluyen restricciones y recomendaciones de prácticas recomendadas para la implementación de cabinas de almacenamiento que utilizan discos externos:
+
+* Los volúmenes raíz y los LUN de núcleo de reserva se admiten en los discos externos.
+* Las LUN de cabina de discos externos e internos no deben estar en el mismo agregado de ONTAP.
+* Los LUN de cabina de unidades SATA y LUN de cabina de unidades FC no deben estar en el mismo agregado.
+* Las reglas del número de rutas a los LUN de cabina en discos externos son las mismas que para los LUN de cabina en discos en la cabina de almacenamiento.
++
+En el caso de los discos externos, las rutas van desde el sistema ONTAP a través de la cabina de almacenamiento hasta los discos externos.
+
+* Solo se admite la suma de comprobación de bloque para los LUN de cabina en discos externos.
+
+
+*Información relacionada*
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Referencias y requisitos de instalación de la virtualización FlexArray"]

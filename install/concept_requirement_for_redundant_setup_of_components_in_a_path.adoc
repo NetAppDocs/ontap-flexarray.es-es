@@ -1,0 +1,39 @@
+---
+permalink: install/concept_requirement_for_redundant_setup_of_components_in_a_path.html 
+sidebar: sidebar 
+keywords: requirements, redundant, setup, components, path, fc switch, ontap, systems, storage, array 
+summary: 'Los sistemas ONTAP deben conectarse a la cabina de almacenamiento a través de una red Fibre Channel (FC) redundante. Se requieren dos redes de FC para protegerse contra un error de conexión y de modo que puedan desconectar los puertos o los switches de la estructura para realizar actualizaciones y sustituciones sin que ello afecte a los sistemas ONTAP.' 
+---
+= Requisitos para la configuración redundante de componentes en una ruta
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los sistemas ONTAP deben conectarse a la cabina de almacenamiento a través de una red Fibre Channel (FC) redundante. Se requieren dos redes de FC para protegerse contra un error de conexión y de modo que puedan desconectar los puertos o los switches de la estructura para realizar actualizaciones y sustituciones sin que ello afecte a los sistemas ONTAP.
+
+
+
+== Requisitos de redundancia de los sistemas ONTAP
+
+* Cada conexión debe conectarse a un puerto de iniciador FC diferente en la pareja de puertos de los sistemas ONTAP.
+* Cada puerto de iniciador de FC en el mismo par de puertos de iniciador de FC debe estar en un bus diferente.
+
+
+
+
+== Los requisitos de redundancia del switch FC
+
+* Debe utilizar switches redundantes.
+
+
+
+
+== Requisitos de redundancia de la cabina de almacenamiento
+
+Asegúrese de que los puertos de la cabina de almacenamiento que selecciona para acceder a un LUN determinado pertenecen a diferentes componentes, a fin de evitar un solo punto de error, por ejemplo, desde controladoras, clústeres o compartimentos alternativos. El motivo es que no desea que se pierdan todos los accesos a un LUN de cabina si falla un componente.
+
+En la siguiente ilustración, se muestra la selección de puertos de la cabina de almacenamiento correcta e incorrecta para la redundancia. La configuración de la ruta en el ejemplo de la izquierda es correcta porque las rutas que van al LUN de cabina son redundantes: Cada conexión se realiza a un puerto de una controladora diferente de la cabina de almacenamiento.
+
+image::../media/redundant_array_port_selection.gif[Las rutas a un LUN de cabina deben ser redundantes. Es incorrecto que ambas rutas vayan a la misma controladora de la cabina de almacenamiento.]

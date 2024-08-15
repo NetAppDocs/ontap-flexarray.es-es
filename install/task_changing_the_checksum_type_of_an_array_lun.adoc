@@ -1,0 +1,48 @@
+---
+permalink: install/task_changing_the_checksum_type_of_an_array_lun.html 
+sidebar: sidebar 
+keywords: change, checksum, type, array, lun 
+summary: Debe cambiar el tipo de suma de comprobación de un LUN de cabina si desea añadirlo a un agregado que tiene un tipo de suma de comprobación diferente al tipo de suma de comprobación del LUN. 
+---
+= Cambio del tipo de suma de comprobación de un LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe cambiar el tipo de suma de comprobación de un LUN de cabina si desea añadirlo a un agregado que tiene un tipo de suma de comprobación diferente al tipo de suma de comprobación del LUN.
+
+*Lo que necesitará*
+
+Debe haber revisado las desventajas entre el rendimiento en ciertos tipos de cargas de trabajo y el uso de capacidad de almacenamiento de cada tipo de suma de comprobación.
+
+También puede ponerse en contacto con el ingeniero de ventas para obtener más información sobre el uso de sumas de comprobación.
+
+* Debe asignar un tipo de suma de comprobación *zoned* a un LUN de matriz que planea agregar a un agregado de suma de comprobación zoned avanzada (AZCS). Cuando se agrega un LUN de matriz de suma de comprobación zonificada a un agregado AZCS, se convierte en un LUN de matriz de suma de comprobación zonificada avanzada. Del mismo modo, cuando un LUN de matriz de suma de comprobación de zonas se agrega a un agregado de zonas, es un tipo de suma de comprobación de zonas.
+* No se puede modificar la suma de comprobación de los LUN de cabina mientras se asigna la propiedad. Puede modificar la suma de comprobación solo en los LUN de cabina ya asignados.
+
+
+.Pasos
+. Introduzca el siguiente comando para cambiar el tipo de suma de comprobación: `storage disk assign -disk disk name -owner owner -c new_checksum_type`
++
+_Disk name_ es el LUN de cabina cuyo tipo de suma de comprobación desea cambiar.
+
++
+_Owner_ es el nodo al que se asigna el LUN de cabina.
+
++
+_new_checksum_type_ se puede bloquear o dividir en zonas.
+
++
+`storage disk assign -disk EMC-1.1 -owner system147b -c block`
+
++
+El tipo de suma de comprobación del LUN de cabina se modifica al nuevo tipo de suma de comprobación especificado.
+
+. Introduzca el siguiente comando para acceder a nodeshell: `system node run -node node_name`
++
+_node_name_ es el nombre de este sistema.
+
+. Introduzca el siguiente comando para salir del infierno de nodos: `exit`
+

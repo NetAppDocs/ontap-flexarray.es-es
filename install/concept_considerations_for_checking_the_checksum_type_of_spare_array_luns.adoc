@@ -1,0 +1,28 @@
+---
+permalink: install/concept_considerations_for_checking_the_checksum_type_of_spare_array_luns.html 
+sidebar: sidebar 
+keywords: checksum, type, considerations, add, spare, array, luns, aggregates 
+summary: Debe tener en cuenta determinados aspectos relacionados con los tipos de suma de comprobación al añadir LUN de cabina de repuesto a agregados. Por ejemplo, si piensa añadir un LUN de cabina de repuesto a un agregado especificando su nombre, debe asegurarse de que el LUN de cabina y el agregado tengan el mismo tipo de suma de comprobación. 
+---
+= Consideraciones sobre el tipo de suma de comprobación para añadir LUN de cabina de repuesto a los agregados
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe tener en cuenta determinados aspectos relacionados con los tipos de suma de comprobación al añadir LUN de cabina de repuesto a agregados. Por ejemplo, si piensa añadir un LUN de cabina de repuesto a un agregado especificando su nombre, debe asegurarse de que el LUN de cabina y el agregado tengan el mismo tipo de suma de comprobación.
+
+A continuación se muestran algunas consideraciones del tipo de suma de comprobación para añadir LUN de cabina de repuesto a los agregados:
+
+* No se pueden mezclar LUN de cabina de diferentes tipos de suma de comprobación en un agregado de LUN de cabina.
+* Si especifica el número de LUN de cabina de repuesto que se añadirán a un agregado, ONTAP selecciona de forma predeterminada los LUN de cabina del mismo tipo de suma de comprobación que el agregado.
+* Los LUN de matriz del tipo de suma de comprobación zonificada cuando se agregan a un agregado de suma de comprobación zonificado existente siguen dividiéndose en los LUN de matriz de suma de comprobación.
+* Los LUN de matriz de repuesto de suma de comprobación de zonas agregados a un agregado de tipo de suma de comprobación de zona avanzada (AZCS) utilizan el esquema de suma de comprobación de AZCS.
+
+
+[NOTE]
+====
+Puede comprobar el tipo de suma de comprobación de los LUN de cabina de repuesto mediante `storage disk show` el comando. Para obtener más información acerca del comando, consulte las páginas de manual.
+
+====

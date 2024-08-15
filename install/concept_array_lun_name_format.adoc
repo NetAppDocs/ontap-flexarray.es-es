@@ -1,0 +1,33 @@
+---
+permalink: install/concept_array_lun_name_format.html 
+sidebar: sidebar 
+keywords: array, lun, name, format 
+summary: El nombre asignado a un LUN de cabina tiene un nuevo formato para garantizar que el nombre sea único en un clúster. 
+---
+= Formato de nombre de LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El nombre asignado a un LUN de cabina tiene un nuevo formato para garantizar que el nombre sea único en un clúster.
+
+El nombre del LUN de cabina consta de dos componentes y se muestra del siguiente modo:
+
+``<array_prefix>.<offset>``, por ejemplo `EMC-1.1`.
+
+* El `array_prefix` es un prefijo único que ONTAP asigna de forma predeterminada a cada cabina de almacenamiento.
++
+Este campo se compone de ``<array_name-array_instance> (EMC-1`` en este caso).
+
++
+`array_name` puede indicarse con las tres primeras letras del nombre del proveedor.
+
++
+Si hay más de una cabina del mismo proveedor, el valor de `array_instance` procede en orden ascendente.
+
+* El desplazamiento es el número de disco virtual ascendente que ONTAP asigna a cada LUN. Es independiente del ID de LUN del host.
+
+
+Puede modificar ``<array_prefix>`` el campo con `storage array modify -name -prefix` el comando.

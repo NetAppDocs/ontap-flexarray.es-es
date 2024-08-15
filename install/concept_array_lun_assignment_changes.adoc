@@ -1,0 +1,14 @@
+---
+permalink: install/concept_array_lun_assignment_changes.html 
+sidebar: sidebar 
+keywords: array, lun, assignment, changes 
+summary: Puede cambiar la asignación de un LUN de cabina de repuesto de un sistema ONTAP a otro. Es posible que desee cambiar la propiedad del equilibrio de carga por nodos. 
+---
+= Cambios de asignación de LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede cambiar la asignación de un LUN de cabina _spare_ de un sistema ONTAP a otro. Es posible que desee cambiar la propiedad del equilibrio de carga por nodos.

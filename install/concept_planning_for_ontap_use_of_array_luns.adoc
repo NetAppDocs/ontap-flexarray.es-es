@@ -1,0 +1,27 @@
+---
+permalink: install/concept_planning_for_ontap_use_of_array_luns.html 
+sidebar: sidebar 
+keywords: plan, ontap, use, array, luns 
+summary: Para que ONTAP utilice LUN de cabina, primero un administrador de cabina de almacenamiento debe crear LUN en la cabina de almacenamiento y ponerlos a disposición de ONTAP. A continuación, el administrador de ONTAP debe configurar ONTAP para usar los LUN de cabina que la cabina de almacenamiento puso a disposición. 
+---
+= Planificar el uso de ONTAP de LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para que ONTAP utilice LUN de cabina, primero un administrador de cabina de almacenamiento debe crear LUN en la cabina de almacenamiento y ponerlos a disposición de ONTAP. A continuación, el administrador de ONTAP debe configurar ONTAP para usar los LUN de cabina que la cabina de almacenamiento puso a disposición.
+
+Al planificar cómo aprovisionar LUN de cabina para el uso de ONTAP se incluyen las siguientes consideraciones:
+
+* Los tipos de LUN de cabina que admite ONTAP
+* Tamaños mínimos y máximos de LUN de cabina de ONTAP
+* La cantidad de LUN de cabina que necesita
+
+
+[NOTE]
+====
+ONTAP considera que un LUN de cabina es un disco virtual.
+
+====

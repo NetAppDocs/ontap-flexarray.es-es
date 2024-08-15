@@ -1,0 +1,54 @@
+---
+permalink: install/reference_reasons_for_fewer_array_lun_groups_than_expected.html 
+sidebar: sidebar 
+keywords: reasons, fewer, array, lun, groups, expected, resolve, issue 
+summary: Para validar la configuración back-end, debe comprobar el resultado para mostrar la configuración de la cabina de almacenamiento para determinar si la cantidad de grupos de LUN de cabinas en la salida es la que pretende. 
+---
+= Motivos de menos grupos de LUN de cabina de lo esperado
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Al validar la configuración back-end, debe comprobar la `storage array config show` salida para determinar si el número de grupos LUN de cabinas en la salida es lo que pretendió.
+
+
+
+== Explicación
+
+La causa más probable para menos grupos de LUN de lo esperado es que la asignación de LDEV a LUN sea la misma para los dos pares de puertos iniciadores de FC en el sistema ONTAP. Si la asignación de LDEV a LUN es la misma para los dos pares de puertos de iniciador FC, el `storage array config show` resultado muestra un grupo de LUN menos de lo esperado.
+
+La siguiente `storage array config show` salida muestra solo un grupo LUN de cabina debido a que se están asignando ambos pares de puertos de iniciador FC al mismo par de puertos de destino:
+
+[listing]
+----
+
+mysystem1::> storage array config show
+
+         LUN   LUN
+Node     Group Count Array Name  Array Target Ports      Switch Port    Initiator
+------   ----- ----- ---------- -------------------      -----------    ---------
+
+mysystem1  0     2   DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr200es25:5   0a
+                                  20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6   0c
+                                  20:1A:00:a0:b8:0f:ee:04  vnbr200es25:5   0b
+                                  20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6   0d
+----
+Al observar la columna Puertos de destino de cabina, puede ver el mismo puerto de destino más de una vez en el grupo LUN y cada incidencia tiene un iniciador diferente.
+
+* Los iniciadores 0A y 0b tienen acceso al puerto 1A de la cabina de almacenamiento.
+* Los iniciadores 0C y 0d tienen acceso al puerto 2A de la cabina de almacenamiento.
+
+
+
+
+== Resolver el problema
+
+ONTAP no lo marca como un error porque un sistema ONTAP puede funcionar cuando la asignación de LDEV a LUN es la misma para los dos pares de puertos iniciadores de FC. Sin embargo, no se admiten varios iniciadores de FC al mismo puerto de destino. Debe reparar la asignación para que el sistema ONTAP siga una configuración compatible y de modo que tenga el número de grupos de LUN deseados.
+
+Si desea solucionar este problema, haga lo siguiente:
+
+. En la cabina de almacenamiento, corrija la asignación de modo que la asignación de pareja de puertos iniciadores de FC ya no sea la misma para los dos pares de puertos de iniciador de FC en el sistema ONTAP.
+. En el sistema ONTAP, vuelva a ejecutarse `storage array config show` y confirme que se muestra el número de grupos LUN que esperaba y que los pares de puertos iniciadores de FC no acceden a los mismos puertos de destino.
+

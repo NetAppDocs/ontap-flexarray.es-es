@@ -1,0 +1,58 @@
+---
+permalink: install/concept_pre_cluster_array_lun_name_format.html 
+sidebar: sidebar 
+keywords: pre cluster, array, lun, name, format, ontap, systems 
+summary: Antes de que un nodo se una a un clúster o cuando el sistema está en modo de mantenimiento, el nombre del LUN de cabina sigue un formato utilizado antes de Data ONTAP 8,3, el formato previo al clúster. 
+---
+= Formato de nombre de LUN de cabina anterior al clúster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de que un nodo se una a un clúster o cuando el sistema está en modo de mantenimiento, el nombre de la LUN de cabina sigue un formato utilizado antes de Data ONTAP 8,3, el formato _pre-cluster_.
+
+En este formato, el nombre del LUN de cabina es un nombre basado en rutas que incluye los dispositivos en la ruta entre el sistema ONTAP y la cabina de almacenamiento, los puertos utilizados y el ID de LUN SCSI en la ruta que la cabina de almacenamiento presenta externamente para su asignación a los hosts.
+
+En un sistema ONTAP que admite las LUN de cabina, cada LUN de cabina puede tener varios nombres porque hay varias rutas a cada LUN.
+
+
+
+== Formato de nombre de LUN de cabina para sistemas ONTAP
+
+|===
+| Configuración | Formato de nombre de LUN de cabina | Descripciones de componentes 
+
+
+ a| 
+Conexión directa
+ a| 
+`node-name.adapter.idlun-id`
+ a| 
+`node-name` es el nombre del nodo almacenado en clúster. Con ONTAP, el nombre del nodo se antepone al nombre de la LUN de modo que el nombre basado en ruta sea único dentro del clúster. Adapter es el número del adaptador del sistema ONTAP.
+
+`id` es el puerto del adaptador de canal de la cabina de almacenamiento.
+
+`lun-id` Es el número de LUN de cabina que presenta la cabina de almacenamiento a los hosts.
+
+Ejemplo: `node1.0a.0L1`
+
+
+
+ a| 
+Estructural
+ a| 
+`node-name:switch-name:port.idlun-id`
+ a| 
+`node-name` es el nombre del nodo. Con ONTAP, el nombre del nodo se antepone al nombre de la LUN de modo que el nombre basado en ruta sea único dentro del clúster. `switch-name` es el nombre del conmutador.
+
+`port` es el puerto del switch conectado al puerto de destino (el punto final).
+
+`id` Es el ID del dispositivo.
+
+`lun-id` Es el número de LUN de cabina que presenta la cabina de almacenamiento a los hosts.
+
+Ejemplo: `node1:brocade3:6.126L1`
+
+|===

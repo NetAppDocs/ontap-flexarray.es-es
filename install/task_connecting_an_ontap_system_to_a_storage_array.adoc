@@ -1,0 +1,85 @@
+---
+permalink: install/task_connecting_an_ontap_system_to_a_storage_array.html 
+sidebar: sidebar 
+keywords: connect, ontap, system, storage, array 
+summary: La conexión del sistema ONTAP a una cabina de almacenamiento implica conectar el cableado del sistema ONTAP, los switches y las cabinas de almacenamiento juntos, y conectar dispositivos adicionales, como dispositivos de backup en cinta. 
+---
+= Conectar un sistema ONTAP a una cabina de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La conexión del sistema ONTAP a una cabina de almacenamiento implica conectar el cableado del sistema ONTAP, los switches y las cabinas de almacenamiento juntos, y conectar dispositivos adicionales, como dispositivos de backup en cinta.
+
+*Lo que necesitará*
+
+* Debe haber identificado los puertos incorporados y los puertos de adaptador de expansión para el sistema ONTAP para conectarse con la cabina de almacenamiento.
+* Debe haber localizado los puertos en la cabina de almacenamiento que desea usar para conectarse con el sistema ONTAP.
+
+
+En este procedimiento, se describe cómo conectar un sistema ONTAP a una cabina de almacenamiento a través de dos rutas, y cada iniciador está dedicado a un puerto de destino.
+
+.Pasos
+. Conecte el sistema ONTAP a los switches como se muestra en la siguiente tabla:
++
+|===
+| Durante... | Siga estos pasos... 
+
+
+ a| 
+Un sistema independiente
+ a| 
+.. Conecte un cable entre un puerto de iniciador FC del sistema ONTAP a un puerto en el switch 1.
+.. Conecte otro cable desde un puerto iniciador FC redundante a un puerto en el switch 2.
+
+
+
+
+ a| 
+Un par de alta disponibilidad
+ a| 
+.. En el primer nodo del par de alta disponibilidad, conecte un cable desde un puerto iniciador FC a un puerto en el switch 1.
+.. Conecte otro cable de un puerto iniciador FC redundante en el mismo nodo a un puerto en el switch 2.
+.. En el segundo nodo del par de alta disponibilidad, conecte un cable desde un puerto iniciador FC a un puerto en el switch 1.
+.. Conecte otro cable de un puerto iniciador FC redundante en el mismo nodo a un puerto en el switch 2.
+
+
+|===
+. Conecte los switches a la cabina de almacenamiento siguiendo las instrucciones de la siguiente tabla y, en el caso de un par de alta disponibilidad, la ilustración siguiente en la tabla:
++
+|===
+| Para un sistema autónomo... | Para un par de alta disponibilidad... 
+
+
+ a| 
+.. Conecte el switch 1 al controlador de la cabina de almacenamiento 1, puerto 1A.
+.. Conecte el switch 2 al controlador de la cabina de almacenamiento 2, puerto 2A.
+
+ a| 
+.. Conecte el switch 1 al controlador de la cabina de almacenamiento 1, puerto 1A.
+.. Conecte el switch 2 al controlador de la cabina de almacenamiento 2, puerto 2A.
+.. Conecte el switch 1 al controlador de la cabina de almacenamiento 1, puerto 1B.
+.. Conecte el switch 2 al controlador de la cabina de almacenamiento 2, puerto 2B.
+
+
+|===
++
+En la siguiente ilustración, se muestran las conexiones de un par de alta disponibilidad.
+
++
+image::../media/one_4_port_array_lun_gp.gif[Las conexiones de VS1 0A y VS2 0A se dirigen a la controladora de la cabina de almacenamiento 1,ports 1A and 1B. Connections from vs1 0c and vs2 0c go to storage array controller 2,ports 2A and 2B.]
+
+. *Opcional:* Conecte el sistema ONTAP a un dispositivo de copia de seguridad de cinta a través de un puerto iniciador FC separado o un adaptador de cinta SCSI.
+. Compruebe que la cabina de almacenamiento esté configurada y conectada correctamente y que esté encendida.
++
+La cabina de almacenamiento configurada y conectada debe encenderse antes de encender el sistema ONTAP. Consulte la documentación de la cabina de almacenamiento para saber cómo encender la cabina de almacenamiento.
+
+. Si la implementación incluye switches, asegúrese de que todos los ID de switch estén configurados y, a continuación, enciéndalos a intervalos de 10 minutos.
+. *Opcional:* Si es aplicable, encienda cualquier dispositivo de copia de seguridad de cinta.
+. Encienda el sistema ONTAP y realice la configuración y configuración de red iniciales.
+. Si la cabina de almacenamiento no detecta automáticamente los WWN del sistema de ONTAP después de conectar el sistema ONTAP a la cabina de almacenamiento, debe obtener los WWN manualmente.
+
+
+Debe continuar con la configuración adecuada de las funciones de gestión de ONTAP para trabajar con las cabinas de almacenamiento.

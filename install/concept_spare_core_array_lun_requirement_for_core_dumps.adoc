@@ -1,0 +1,24 @@
+---
+permalink: install/concept_spare_core_array_lun_requirement_for_core_dumps.html 
+sidebar: sidebar 
+keywords: spare, array, lun, requirement, core, dumps 
+summary: Tanto para sistemas ONTAP independientes como para nodos en pares de alta disponibilidad, debe crear un LUN de cabina de repuesto con un tamaño adecuado para contener volcados de memoria si no hay discos de reserva disponibles. 
+---
+= Requisito de LUN de cabina de repuesto para volcados de memoria
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Tanto para sistemas ONTAP independientes como para nodos en pares de alta disponibilidad, debe crear un LUN de cabina de repuesto con un tamaño adecuado para contener volcados de memoria si no hay discos de reserva disponibles.
+
+En un sistema que utilice tanto discos como LUN de cabina, no se necesita un LUN de cabina de repuesto para un volcado de memoria si hay disponible un disco de reserva. Si no hay disponible un LUN de cabina de repuesto ni un disco de reserva, no hay lugar para volcar el núcleo.
+
+Un volcado principal contiene el contenido de memoria y de NVRAM. Durante una alarma del sistema, ONTAP vuelca el núcleo a un LUN de cabina de repuesto o un disco de reserva, si existe un repuesto. Tras el reinicio, el núcleo se lee del disco de reserva y se guarda en un volcado principal en el sistema de archivos raíz. A continuación, el soporte técnico puede utilizar el volcado de memoria para solucionar el problema.
+
+_Hardware Universe_ contiene el tamaño mínimo de LUN de cabina de núcleo de reserva para cada plataforma.
+
+*Información relacionada*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

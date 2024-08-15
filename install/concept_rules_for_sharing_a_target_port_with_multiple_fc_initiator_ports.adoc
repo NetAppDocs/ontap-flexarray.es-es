@@ -1,0 +1,28 @@
+---
+permalink: install/concept_rules_for_sharing_a_target_port_with_multiple_fc_initiator_ports.html 
+sidebar: sidebar 
+keywords: rules, share, target, port, multiple, fc initiator 
+summary: Se admite la conexión de un máximo de dos puertos de iniciador FC ONTAP a un único puerto de destino de la cabina de almacenamiento. Cada puerto de destino está dividido en dos puertos de iniciador FC, uno desde cada nodo del clúster. No se admite el uso compartido de un puerto de destino conectado a sistemas ONTAP con cualquier otro host. 
+---
+= Reglas para compartir un puerto de destino con varios puertos de iniciador FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se admite la conexión de un máximo de dos puertos de iniciador FC ONTAP a un único puerto de destino de la cabina de almacenamiento. Cada puerto de destino está dividido en dos puertos de iniciador FC, uno desde cada nodo del clúster. No se admite el uso compartido de un puerto de destino conectado a sistemas ONTAP con cualquier otro host.
+
+El uso compartido de un puerto de destino con varios iniciadores ayuda a optimizar el uso de los puertos de cabina de almacenamiento para la conectividad con sistemas ONTAP.
+
+Las reglas para esta configuración son las siguientes:
+
+* Cuando los sistemas ONTAP están en un par de alta disponibilidad, cada nodo puede compartir como máximo un puerto de iniciador de FC con el mismo puerto de destino.
+* Todas las cabinas de almacenamiento deben tener el mismo proveedor y la misma familia modelo.
+* En configuraciones MetroCluster se admite la conexión de un solo puerto de destino a varios puertos iniciadores FC.
+* La práctica recomendada para la división en zonas es tener cada par de puertos iniciador-destino de FC en una zona separada (1:1).
+
+
+*Información relacionada*
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Instalación y configuración de MetroCluster estructural"]

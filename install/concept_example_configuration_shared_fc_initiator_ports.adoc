@@ -1,0 +1,215 @@
+---
+permalink: install/concept_example_configuration_shared_fc_initiator_ports.html 
+sidebar: sidebar 
+keywords: example, configuration, shared, fc initiator, ports, separate, storage, arrays, multiple, targets 
+summary: Un puerto de iniciador FC en un sistema ONTAP se puede conectar a hasta cuatro puertos de destino en cabinas de almacenamiento independientes o, para algunas cabinas de almacenamiento, a cuatro puertos de destino en las mismas cabinas de almacenamiento. 
+---
+= Configuración de ejemplo: Puertos de iniciador FC compartidos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un puerto de iniciador FC en un sistema ONTAP se puede conectar a hasta cuatro puertos de destino en cabinas de almacenamiento independientes o, para algunas cabinas de almacenamiento, a cuatro puertos de destino en las mismas cabinas de almacenamiento.
+
+La recomendación de división en zonas de prácticas recomendadas es tener cada par de puertos objetivo-iniciador de FC en una zona separada (1:1), incluso si el mismo iniciador de FC esté hablando con varios puertos de destino.
+
+
+
+== Puerto de iniciador FC compartido conectado a varios puertos de destino en cabinas de almacenamiento _separate_
+
+En la siguiente ilustración, se muestran las conexiones y la división en zonas para compartir un puerto iniciador de FC con los puertos de destino en las cabinas de almacenamiento _diferentes_.
+
+Las líneas sólidas de la siguiente ilustración muestran las conexiones de los puertos de iniciador FC en el sistema VS1, y las líneas discontinuas muestran las conexiones de los puertos de iniciadores FC en el sistema VS2.
+
+image::../media/shared_initiator_ports_different_arrays.gif[el iniciador compartido dispone de puertos diferentes cabinas]
+
+En la siguiente tabla se muestran las definiciones de zonas de 1:1 para el ejemplo de un puerto de iniciador de FC que comparte varios puertos de destino en diferentes cabinas de almacenamiento.
+
+|===
+| Zona | Sistema ONTAP y puerto iniciador FC | Cabina de almacenamiento 
+
+
+ a| 
+*Interruptor 1*
+
+
+
+ a| 
+z1
+ a| 
+vs1:0a
+ a| 
+Cabina de almacenamiento 1: Controladora 1 puerto 1A
+
+
+
+ a| 
+z2
+ a| 
+vs1:0a
+ a| 
+Cabina de almacenamiento 2: Controladora 1 puerto 1A
+
+
+
+ a| 
+z3
+ a| 
+vs2:0a
+ a| 
+Cabina de almacenamiento 1: Controladora 1 puerto 1B
+
+
+
+ a| 
+z4
+ a| 
+vs2:0a
+ a| 
+Cabina de almacenamiento 2: Controladora 1 puerto 1B
+
+
+
+ a| 
+*Interruptor 2*
+
+
+
+ a| 
+z5
+ a| 
+vs1:0c
+ a| 
+Cabina de almacenamiento 1: Controladora 2 puerto 2A
+
+
+
+ a| 
+z6
+ a| 
+vs1:0c
+ a| 
+Cabina de almacenamiento 2: Controladora 2 puerto 2A
+
+
+
+ a| 
+z7
+ a| 
+vs2:0c
+ a| 
+Cabina de almacenamiento 1: Controladora 2 puerto 2B
+
+
+
+ a| 
+z8
+ a| 
+vs2:0c
+ a| 
+Cabina de almacenamiento 2: Controladora 2 puerto 2B
+
+|===
+
+
+== Puerto de iniciador de FC compartido conectado a varios puertos de destino en la cabina de almacenamiento _same_
+
+Esta configuración se puede utilizar únicamente con cabinas de almacenamiento cuya funcionalidad de enmascaramiento de LUN, presentación o grupo de hosts permite realizar diferentes presentaciones de grupo de LUN en el mismo iniciador FC según el puerto de destino al que se esté accediendo.
+
+Algunas cabinas de almacenamiento pueden presentar diferentes conjuntos de dispositivos lógicos a un iniciador FC según el puerto de destino al que se desea acceder. Estos tipos de cabinas de almacenamiento permiten que el mismo iniciador de FC esté en varios grupos de hosts. En cabinas de almacenamiento con esta capacidad, es posible que cada iniciador FC acceda a varios puertos de destino de cabina en la misma cabina de almacenamiento, con cada puerto de destino presentando un grupo de LUN diferente al iniciador de FC. Revise la documentación de la cabina de almacenamiento para determinar si la cabina de almacenamiento permite que el mismo iniciador de FC esté en varios grupos de hosts.
+
+En la siguiente ilustración, se muestran las conexiones y la división en zonas para compartir un puerto iniciador de FC con varios puertos de destino en la cabina de almacenamiento _same_. En este ejemplo, las definiciones de zonas se configuran como 1:1, es decir, un iniciador de FC a un puerto de destino.
+
+Las líneas sólidas de la siguiente ilustración muestran las conexiones de los puertos de iniciador FC en el sistema VS1, y las líneas discontinuas muestran las conexiones de los puertos de iniciadores FC en el sistema VS2. Se requieren dos grupos de LUN para esta configuración.
+
+image::../media/shared_initiator_ports_same_array.gif[Las conexiones y la zonificación se describen en el texto circundante.]
+
+En la siguiente tabla se muestran las definiciones de zonas de 1:1 para el ejemplo de un puerto de iniciador de FC que comparte varios puertos de destino en la misma cabina de almacenamiento.
+
+|===
+| Zona | Sistema ONTAP y puerto iniciador FC | Puerto y cabina de almacenamiento 
+
+
+ a| 
+Interruptor 1
+
+
+
+ a| 
+z1
+ a| 
+vs1:0a
+ a| 
+Controlador 1 Puerto 1A
+
+
+
+ a| 
+z2
+ a| 
+vs1:0a
+ a| 
+Controlador 1 Puerto 1C
+
+
+
+ a| 
+z3
+ a| 
+vs2:0a
+ a| 
+Controlador 1 Puerto 1B
+
+
+
+ a| 
+z4
+ a| 
+vs2:0a
+ a| 
+Controlador 1 Puerto 1D
+
+
+
+ a| 
+Interruptor 2
+
+
+
+ a| 
+z5
+ a| 
+vs1:0c
+ a| 
+Controlador 2 Puerto 2A
+
+
+
+ a| 
+z6
+ a| 
+vs1:0c
+ a| 
+Controlador 2 Puerto 2C
+
+
+
+ a| 
+z7
+ a| 
+vs2:0c
+ a| 
+Controlador 2 Puerto 2B
+
+
+
+ a| 
+z8
+ a| 
+vs2:0c
+ a| 
+Controlador 2 Puerto 2D
+
+|===

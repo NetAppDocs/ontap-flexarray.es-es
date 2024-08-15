@@ -1,0 +1,29 @@
+---
+permalink: implement-e-series/reference_required_host_type_for_e_series_storage_arrays_reference.html 
+sidebar: sidebar 
+keywords: required, host, type, e-series, storage, arrays 
+summary: Debe definir la opción de tipo de host adecuada para que la cabina de almacenamiento E-Series se comunique con los sistemas ONTAP. Puede usar SANtricity Storage Manager para establecer el tipo de host. 
+---
+= Tipo de host requerido para las cabinas de almacenamiento E-Series
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe definir la opción de tipo de host adecuada para que la cabina de almacenamiento E-Series se comunique con los sistemas ONTAP. Puede usar SANtricity Storage Manager para establecer el tipo de host.
+
+Para una versión de ONTAP determinada, es posible configurar el tipo de host requerido según la versión del firmware de la cabina de almacenamiento.
+
+Si la versión de firmware es 08.10.15.00 y posterior, establezca el tipo de host en _Data ONTAP (ALUA)_.
+
+[NOTE]
+====
+La versión mínima admitida de SANtricity Storage Manager para la versión de firmware 08.10.15.00 y posterior es 11.10.0G00.0026.
+
+====
+Cuando se utiliza el firmware de la controladora E-Series 8,25, ONTAP RDAC ya no es compatible como tipo de host en el sistema E-Series. Por lo tanto, si utiliza ONTAP RDAC, antes de actualizar la cabina back-end a CFW 8,25 o una versión posterior, deberá seguir este artículo de la base de conocimientos para convertirla a ONTAP ALUA.
+
+*Información relacionada*
+
+https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Systems/E-Series_Storage_Array/How_to_non-disruptively_change_between_Active-Passive_and_ALUA_failover_modes["Cómo cambiar sin interrupciones entre los modos de conmutación por error Active-Passive y ALUA en cabinas NetApp E-Series conectadas con sistemas Clustered Data ONTAP"]

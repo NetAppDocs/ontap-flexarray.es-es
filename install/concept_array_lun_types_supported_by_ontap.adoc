@@ -1,0 +1,20 @@
+---
+permalink: install/concept_array_lun_types_supported_by_ontap.html 
+sidebar: sidebar 
+keywords: array, lun, type, supported, ontap 
+summary: Solo puede asignar LUN de cabina de almacenamiento a ONTAP. Puede asignar LUN 0 a ONTAP si es un LUN de tipo de almacenamiento. 
+---
+= Tipo de LUN de cabina compatible con ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Solo puede asignar LUN de cabina de almacenamiento a ONTAP. Puede asignar LUN 0 a ONTAP si es un LUN de tipo de almacenamiento.
+
+Algunas cabinas de almacenamiento tienen una LUN nonstorage _command_. No puede asignar un tipo de LUN de comando a un sistema ONTAP.
+
+*Información relacionada*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"]

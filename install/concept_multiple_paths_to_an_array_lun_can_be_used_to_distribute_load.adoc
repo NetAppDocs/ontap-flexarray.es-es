@@ -1,0 +1,33 @@
+---
+permalink: install/concept_multiple_paths_to_an_array_lun_can_be_used_to_distribute_load.html 
+sidebar: sidebar 
+keywords: multiple, paths, array, lun, used, distribute, load, commands 
+summary: Las solicitudes de I/O de una LUN determinada se pueden distribuir en todas las rutas optimizadas disponibles a la LUN. Esto es diferente a las versiones anteriores, donde a pesar de que hay varias rutas disponibles, las solicitudes de I/O de una LUN determinada se enviaban únicamente a través de una única ruta activa optimizada. 
+---
+= Se pueden utilizar varias rutas a un LUN de cabina para distribuir la carga
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Las solicitudes de I/O de una LUN determinada se pueden distribuir en todas las rutas optimizadas disponibles a la LUN. Esto es diferente a las versiones anteriores, donde a pesar de que hay varias rutas disponibles, las solicitudes de I/O de una LUN determinada se enviaban únicamente a través de una única ruta activa optimizada.
+
+La distribución de las solicitudes de I/O de una LUN determinada en varias rutas da como resultado los siguientes beneficios:
+
+* Mejora de la eficiencia gracias al máximo aprovechamiento de todas las rutas disponibles y optimizadas
+* Mejora del rendimiento gracias al equilibrio de carga en varias rutas
+
+
+Por ejemplo, en una cabina activa-activa, las solicitudes de I/O para un LUN determinado se pueden distribuir en todos los cuatro puertos de destino disponibles para ese LUN. En un LUN de cabina activo-activo asimétrico, las solicitudes I/O se pueden distribuir por todas las rutas optimizadas para un LUN determinado.
+
+
+
+== Comandos para ver el balanceo de carga en varias rutas de una LUN determinada
+
+Puede ejecutar los siguientes comandos para ver la distribución de carga de un LUN determinado en varias rutas:
+
+* ``storage disk show -disk <LUN name>`` Muestra la distribución de la carga de E/S en las rutas disponibles para un LUN de cabina determinado.
+* ``storage path show-by-initiator -array-name <array name>`` Muestra la distribución de la carga de I/O en todos los puertos del iniciador del sistema ONTAP conectado a una cabina de almacenamiento determinada.
+* ``storage path show -by-target -array-name <array name>`` Muestra la distribución de la carga de I/O en todos los puertos objetivo de una cabina de almacenamiento determinada.
+

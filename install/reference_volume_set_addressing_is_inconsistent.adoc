@@ -1,0 +1,57 @@
+---
+permalink: install/reference_volume_set_addressing_is_inconsistent.html 
+sidebar: sidebar 
+keywords: volume, set, address, inconsistent, show, message, troubleshoot, problem, resolution 
+summary: ONTAP puede detectar ID de LUN incoherentes a través de un conjunto de rutas para las cabinas de almacenamiento. Para las cabinas de almacenamiento donde se configuran las direcciones del conjunto de volúmenes, una discrepancia de la configuración de los puertos a los que se asigna la LUN es un problema que provoca la discrepancia de los ID de LUN. 
+---
+= El direccionamiento del conjunto de volúmenes es inconsistente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP puede detectar ID de LUN incoherentes a través de un conjunto de rutas para las cabinas de almacenamiento. Para las cabinas de almacenamiento donde se configuran las direcciones del conjunto de volúmenes, una discrepancia de la configuración de los puertos a los que se asigna la LUN es un problema que provoca la discrepancia de los ID de LUN.
+
+En las cabinas de almacenamiento EMC Symmetrix, por ejemplo, la configuración incoherente del parámetro de direccionamiento del conjunto de volúmenes en los puertos del director de canal a los que se asigna una LUN activa un error de discrepancia de LUN.
+
+
+
+== Los errores de almacenamiento muestran un mensaje
+
+[listing]
+----
+
+EMC-1.128 (4849544143484920443630303035323430303132): This Array LUN is using multiple LUN IDs.  Only one LUN ID per serial number is supported.
+----
+
+
+== Explicación
+
+Hay varios errores de configuración que pueden causar el mensaje de error. Esta explicación trata sobre la visualización de este mensaje cuando el direccionamiento del conjunto de volúmenes se establece de forma incoherente.
+
+ONTAP comprueba de forma explícita la configuración incoherente del parámetro de direccionamiento del conjunto de volúmenes en los puertos a los que se asigna una LUN. Si la configuración es diferente, ONTAP informa de esto como una discrepancia de ID de LUN en `storage errors show` los mensajes de salida y en los mensajes de EMS.
+
+[NOTE]
+====
+ONTAP no le avisa si el direccionamiento del conjunto de volúmenes no está configurado como se esperaba; solo le avisa si la configuración no es coherente en los puertos del director de canal a los que se asigna la LUN.
+
+====
+
+
+== Solución de problemas y resolución de problemas
+
+Si `storage errors show` el comando muestra el mensaje de error particular y la cabina de almacenamiento es una EMC Symmetrix, realizar una de las siguientes acciones ayuda a identificar si el problema se debe a una incoherencia en el direccionamiento de un conjunto de volúmenes:
+
+* En ONTAP, ejecute `storage disk show -disk` el LUN de cabina identificado.
++
+Este comando muestra todas las rutas al LUN de la cabina y el ID de LUN asignado a cada ruta.
+
+* En la cabina de almacenamiento, compruebe la configuración de direcciones del conjunto de volúmenes para los puertos del director de canal a los que está asignado el LUN identificado.
+
+
+Si determina que la configuración es incoherente, corrija el problema de configuración en la cabina de almacenamiento, y asegúrese de configurar el parámetro en ambos puertos director de canal en la configuración requerida por ONTAP.
+
+*Información relacionada*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"]

@@ -1,0 +1,22 @@
+---
+permalink: install/concept_planning_for_lun_security_on_storage_arrays.html 
+sidebar: sidebar 
+keywords: plan, lun, security, storage, arrays 
+summary: Si utiliza su sistema ONTAP con cabinas de almacenamiento, debe usar un método de seguridad LUN para eliminar la posibilidad de que un sistema que no sea ONTAP sobrescriba LUN de cabina que pertenecen a un sistema ONTAP, o viceversa. 
+---
+= Planificación de la seguridad de las LUN en las cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si utiliza su sistema ONTAP con cabinas de almacenamiento, debe usar un método de seguridad LUN para eliminar la posibilidad de que un sistema que no sea ONTAP sobrescriba LUN de cabina que pertenecen a un sistema ONTAP, o viceversa.
+
+La seguridad LUN es un método para aislar los hosts que pueden acceder a LUN de cabina determinadas. La seguridad de LUN es similar a la división en zonas de switches en concepto, pero se realiza en la cabina de almacenamiento. _Lun security_ y _lun masking_ son términos equivalentes para describir esta funcionalidad.
+
+[NOTE]
+====
+El esquema de propiedad de disco de ONTAP impide que un sistema ONTAP sobrescriba un LUN de cabina propiedad de otro sistema ONTAP. Sin embargo, no impide que un sistema ONTAP sobrescriba un LUN de cabina al que pueda acceder un host que no sea de ONTAP. Del mismo modo, sin un método para evitar la sobrescritura, un host no ONTAP podría sobrescribir un LUN de cabina que utiliza un sistema ONTAP.
+
+====

@@ -1,0 +1,18 @@
+---
+permalink: implement-third-party/concept_use_of_storage_array_advanced_features.html 
+sidebar: sidebar 
+keywords: support, advanced, features, storage, arrays 
+summary: ONTAP no admite funciones avanzadas de las cabinas de almacenamiento a menos que se especifique lo contrario en la matriz de interoperabilidad. 
+---
+= Soporte para funciones avanzadas de las cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP no admite funciones avanzadas de las cabinas de almacenamiento a menos que se especifique lo contrario en la matriz de interoperabilidad.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

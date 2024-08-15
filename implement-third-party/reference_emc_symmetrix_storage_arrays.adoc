@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_emc_symmetrix_storage_arrays.html 
+sidebar: sidebar 
+keywords: emc, symmetrix, storage, arrays 
+summary: Debe cumplir requisitos específicos al configurar las cabinas de almacenamiento para que funcionen con los sistemas ONTAP que utilizan LUN de cabina. Estos requisitos incluyen establecer parámetros de configuración en las cabinas de almacenamiento y poner en marcha solamente configuraciones compatibles. 
+---
+= Cabinas de almacenamiento EMC Symmetrix
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe cumplir requisitos específicos al configurar las cabinas de almacenamiento para que funcionen con los sistemas ONTAP que utilizan LUN de cabina. Estos requisitos incluyen establecer parámetros de configuración en las cabinas de almacenamiento y poner en marcha solamente configuraciones compatibles.

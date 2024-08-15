@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_requirement_for_8_gb_array_port_initialization.html 
+sidebar: sidebar 
+keywords: requirement, 8-Gb array, port, initialization 
+summary: 'En una estructura típica Fibre Channel (FC), los puertos de la cabina de almacenamiento se inicializan como puertos N (puertos de nodo) y sus puertos de switch correspondientes se inicializan como puertos F-Ports (puertos de estructura). En algunos casos, estos puertos F pueden desconectarse y reanudar el funcionamiento como puertos L (puertos de bucle), lo que produce errores de estructura.' 
+---
+= Requisito para la inicialización de puertos de cabina de 8 GB
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En una estructura típica Fibre Channel (FC), los puertos de la cabina de almacenamiento se inicializan como puertos N (puertos de nodo) y sus puertos de switch correspondientes se inicializan como puertos F-Ports (puertos de estructura). En algunos casos, estos puertos F pueden desconectarse y reanudar el funcionamiento como puertos L (puertos de bucle), lo que produce errores de estructura.
+
+Este comportamiento se debe a problemas de negociación automática de topología en el switch Brocade.
+
+Para garantizar que los puertos del switch se inicialicen siempre como puertos F, debe ejecutar `portcfggport` ``<portnumber> 1` el comando en los puertos del switch Brocade que están conectados a las cabinas de almacenamiento. Debe ejecutar este comando cuando comience la configuración del sistema para evitar este problema y deberá corregir el problema si sucede.
+
+Para promover la eficiencia en la estructura en conjunto, también puede utilizar esta solución alternativa en cualquier puerto Brocade conectado a los puertos de iniciador de ONTAP.

@@ -1,0 +1,39 @@
+---
+permalink: install/concept_number_of_storage_arrays_supported_with_a_ontap_system.html 
+sidebar: sidebar 
+keywords: considerations, connect, multiple, storage, arrays, ontap, system 
+summary: Según los modelos de cabina de almacenamiento compatibles con los sistemas ONTAP, puede conectar varias cabinas de almacenamiento o una sola cabina de almacenamiento al sistema ONTAP. 
+---
+= Consideraciones que tener en cuenta al conectar varias cabinas de almacenamiento a un sistema ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Según los modelos de cabina de almacenamiento compatibles con los sistemas ONTAP, puede conectar varias cabinas de almacenamiento o una sola cabina de almacenamiento al sistema ONTAP.
+
+[NOTE]
+====
+La matriz de interoperabilidad identifica cualquier modelo de cabina de almacenamiento para el cual solo se admite una cabina de almacenamiento con un sistema ONTAP.
+
+====
+Tenga en cuenta lo siguiente al conectar varias cabinas de almacenamiento a un sistema ONTAP:
+
+* Si se pueden conectar varias cabinas del mismo modelo de cabina de almacenamiento compatible al sistema ONTAP, no hay límite en el número de cabinas de almacenamiento que se pueden poner en marcha.
+* Las cabinas de almacenamiento pueden ser del mismo proveedor compatible o de diferentes proveedores.
++
+Si las cabinas de almacenamiento son del mismo proveedor, pueden pertenecer a la misma familia o a familias diferentes.
+
+
+
+[NOTE]
+====
+Las cabinas de almacenamiento de la misma familia comparten las mismas características de rendimiento y conmutación por error. Por ejemplo, todos los miembros de la misma familia realizan failover activo-activo, o todos realizan failover activo-pasivo. Se puede usar más de un factor para determinar las familias de las cabinas de almacenamiento. Por ejemplo, las cabinas de almacenamiento con arquitecturas diferentes estarían en familias distintas aunque otras características sean las mismas.
+
+====
+*Información relacionada*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"]
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

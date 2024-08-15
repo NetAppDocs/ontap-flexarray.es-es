@@ -1,0 +1,14 @@
+---
+permalink: install/concept_managing_array_luns_using_data_ontap.html 
+sidebar: sidebar 
+keywords: manage, array, luns, ontap 
+summary: Si el administrador de la cabina de almacenamiento desea realizar cambios de configuración en un LUN de cabina después de asignarlo a un nodo, por ejemplo, para cambiar su tamaño, es posible que deba ejecutar algunas actividades en ONTAP antes de poder volver a configurar el LUN en la cabina de almacenamiento. 
+---
+= Gestión de los LUN de cabina mediante ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si el administrador de la cabina de almacenamiento desea realizar cambios de configuración en un LUN de cabina después de asignarlo a un nodo, por ejemplo, para cambiar su tamaño, es posible que deba ejecutar algunas actividades en ONTAP antes de poder volver a configurar el LUN en la cabina de almacenamiento.

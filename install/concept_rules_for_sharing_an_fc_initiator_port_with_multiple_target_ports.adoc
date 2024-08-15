@@ -1,0 +1,56 @@
+---
+permalink: install/concept_rules_for_sharing_an_fc_initiator_port_with_multiple_target_ports.html 
+sidebar: sidebar 
+keywords: rules, share, fc initiator, port, multiple, target, connect, storage, arrays 
+summary: Puede conectar un puerto de iniciador FC en un sistema ONTAP a un máximo de cuatro puertos de destino en cabinas de almacenamiento independientes. Compartir un puerto iniciador de FC con varios destinos es útil cuando se desea minimizar el número de puertos de iniciador de FC utilizados. 
+---
+= Reglas para compartir un puerto de iniciador FC con varios puertos de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede conectar un puerto de iniciador FC en un sistema ONTAP a un máximo de cuatro puertos de destino en las cabinas de almacenamiento _separate_. Compartir un puerto iniciador de FC con varios destinos es útil cuando se desea minimizar el número de puertos de iniciador de FC utilizados.
+
+También puede conectar un puerto de iniciador de FC con un máximo de cuatro puertos de destino en la cabina de almacenamiento _SAME_ si la cabina puede presentar diferentes conjuntos de dispositivos lógicos al iniciador de FC en función del puerto de destino al que se esté accediendo.
+
+Hay límites sobre cuántos LUN de cabina pueden ser visibles a través de un puerto iniciador FC. Estos límites varían según la versión.
+
+
+
+== Reglas cuando el puerto iniciador de FC está conectado a varios puertos de destino en cabinas de almacenamiento _separate_
+
+Las reglas para esta configuración son las siguientes:
+
+* Todas las cabinas de almacenamiento deben tener la misma familia de modelos de proveedor.
++
+Las cabinas de almacenamiento de la misma familia comparten las mismas características de rendimiento y conmutación por error. Por ejemplo, todos los miembros de la misma familia realizan failover activo-activo, o todos realizan failover activo-pasivo. Se puede usar más de un factor para determinar las familias de las cabinas de almacenamiento. Por ejemplo, las cabinas de almacenamiento con arquitecturas diferentes estarían en familias distintas aunque otras características sean las mismas.
+
+* Se admite la conexión de un solo puerto de iniciador FC a varios puertos de destino en configuraciones MetroCluster.
+* Un único puerto de iniciador FC puede conectarse a un máximo de cuatro puertos de destino en múltiples cabinas de almacenamiento.
+* Debe tener cada par de puerto objetivo-iniciador FC en una zona independiente (1:1), incluso si el mismo puerto de iniciador de FC está accediendo a varios puertos de destino.
+
+
+
+
+== Reglas cuando el puerto iniciador de FC está conectado a varios puertos de destino en la cabina de almacenamiento _same_
+
+Esta configuración se puede utilizar únicamente con cabinas de almacenamiento cuya funcionalidad de enmascaramiento de LUN, presentación o grupo de hosts permite realizar diferentes presentaciones de grupo de LUN en el mismo iniciador FC según el puerto de destino al que se esté accediendo.
+
+Algunas cabinas de almacenamiento pueden presentar diferentes conjuntos de dispositivos lógicos a un iniciador FC según el puerto de destino al que se desea acceder. Estos tipos de cabinas de almacenamiento permiten que el mismo iniciador de FC esté en varios grupos de hosts. En cabinas de almacenamiento con esta capacidad, es posible que cada puerto de iniciador FC acceda a varios puertos de destino de cabina en la misma cabina de almacenamiento, con cada puerto de destino presentando un grupo de LUN diferente al iniciador de FC. Consulte la documentación de la cabina de almacenamiento para determinar si la cabina de almacenamiento permite que el mismo iniciador de FC esté en varios grupos de hosts.
+
+Las siguientes son las reglas de esta configuración:
+
+* Un solo puerto de iniciador de FC puede conectarse hasta a cuatro puertos de destino en una cabina de almacenamiento.
+* Se admite la conexión de un solo puerto de iniciador FC a varios puertos de destino en configuraciones MetroCluster.
+* Debe tener cada par de puerto objetivo-iniciador de FC en una zona independiente (1:1), incluso si el mismo iniciador de FC accede a varios puertos de destino.
+
+
+*Información relacionada*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implementación de virtualización FlexArray para almacenamiento E-Series de NetApp"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Instalación y configuración de MetroCluster estructural"]

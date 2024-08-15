@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_hp_eva_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, hp, eva, arrays, ontap, systems 
+summary: La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP. 
+---
+= Parámetros necesarios para matrices HP EVA con sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP.
+
+La configuración de los parámetros del sistema se proporciona en la siguiente tabla:
+
+|===
+| Parámetro | Ajuste 
+
+
+ a| 
+`Redundancy`
+ a| 
+Cualquier nivel de RAID excepto VRAID0
+
+
+
+ a| 
+`Preferred path/mode`
+ a| 
+Ninguna preferencia (predeterminado)
+
+
+
+ a| 
+`Host type`
+ a| 
+SUN Solaris
+
+|===

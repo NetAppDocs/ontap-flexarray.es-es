@@ -1,0 +1,20 @@
+---
+permalink: install/task_preparing_array_luns_before_removing_a_v_series_system_from_service.html 
+sidebar: sidebar 
+keywords: prepare, array, luns, before, remove, ontap, system, service 
+summary: Debe liberar las reservas persistentes en todos los LUN de cabina asignados a un sistema ONTAP antes de quitar el sistema del servicio. 
+---
+= Preparando LUN de cabina antes de quitar un sistema ONTAP del servicio
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe liberar las reservas persistentes en todos los LUN de cabina asignados a un sistema ONTAP antes de quitar el sistema del servicio.
+
+Al asignar la propiedad ONTAP de un LUN de cabina, ONTAP coloca reservas persistentes (bloqueos de propiedad) en el LUN de esa cabina para identificar el sistema ONTAP propietario del LUN. Si desea que otros tipos de hosts estén disponibles los LUN de cabina para que los usen, debe quitar las reservas persistentes que ONTAP colocó en esos LUN de cabina; algunas cabinas no le permiten destruir una LUN reservada si no quita la propiedad y las reservas persistentes que ONTAP escribió en ese LUN.
+
+Por ejemplo, la cabina de almacenamiento Hitachi USP no tiene un comando de usuario para eliminar reservas persistentes de LUN. Si no elimina reservas persistentes a través de ONTAP antes de quitar el sistema ONTAP del servicio, debe llamar al soporte técnico de Hitachi para eliminar las reservas.
+
+Consulte el artículo de la base de conocimientos https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/What_are_SCSI_Reservations_and_SCSI_Persistent_Reservations["¿Qué son las reservas SCSI y las reservas persistentes SCSI"^]

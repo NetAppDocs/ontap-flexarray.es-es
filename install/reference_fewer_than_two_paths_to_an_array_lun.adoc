@@ -1,0 +1,112 @@
+---
+permalink: install/reference_fewer_than_two_paths_to_an_array_lun.html 
+sidebar: sidebar 
+keywords: fewer, two, paths, array, lun 
+summary: Los motivos comunes de menos de dos rutas a un LUN de cabina son un error de asignación, un error de división en zonas o un cable que se cae. El resultado que muestran los errores de almacenamiento identifica los LUN de la cabina con una sola ruta. 
+---
+= Menos de dos rutas a un LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los motivos comunes de menos de dos rutas a un LUN de cabina son un error de asignación, un error de división en zonas o un cable que se cae. El `storage errors show` resultado identifica los LUN de cabina con una sola ruta.
+
+ONTAP requiere rutas redundantes a un LUN de cabina para que se mantenga el acceso al LUN en caso de fallo de un dispositivo. Deben existir dos rutas a cada LUN de cabina.
+
+
+
+== Los errores de almacenamiento muestran un mensaje
+
+[listing]
+----
+
+NAME (UID):  This Array LUN is only available on one path.  Proper configuration requires two paths.
+----
+
+
+== Explicación
+
+Algunos de los motivos por los que se observan menos de dos rutas a un LUN de cabina son los siguientes:
+
+* El LDEV se asigna en un solo puerto de la cabina de almacenamiento.
+* No se ha dividido en zonas la segunda ruta al LUN de cabina.
+* Hay un problema con la asignación del grupo de hosts.
+* Hay un problema en las conexiones del switch.
+* El cable se ha caído.
+* Los SFP han fallado en el adaptador.
+
+
+[NOTE]
+====
+Si una ruta se interrumpe en un sistema en ejecución, se genera un mensaje de EMS.
+
+====
+
+
+== Situación de problema
+
+Para este ejemplo de un error de asignación, supongamos que el administrador de almacenamiento creó una nueva LDEV Z. El administrador asignó LDEV Z como ID de LUN 3 al puerto de destino 1A. Sin embargo, el administrador no asignó el LDEV al puerto de destino 2A, como muestra la siguiente ilustración. El resultado es solo una ruta al LUN de la cabina.
+
+image::../media/ldev_mapped_on_only_one_array_port.gif[Este gráfico se describe en el texto adyacente.]
+
+Cuando se realiza este error, el `storage array config show` resultado solo muestra una ruta a la LUN, como muestra el ejemplo siguiente.
+
+[listing]
+----
+
+mysystem1::> storage array config show
+           LUN     LUN
+Node       Group   Count  Array Name    Array Target Ports      Switch Port   Initiator
+-------   -------  -----  ----------   -------------------      -----------    ---------
+mysystem1a    0      1    DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr20es25:5   0a
+
+Warning: Configuration errors were detected.  Use 'storage errors show' for detailed information.
+----
+El `storage errors show` comando proporciona los detalles que necesita para determinar qué LUN tiene menos de dos rutas.
+
+[listing]
+----
+
+mysystem1a::> storage errors show
+Disk: EMC-1.2
+UID: 600508B4:000B6314:00008000:00200000:00000000:00000000:00000000:...
+--------------------
+EMC-1.2 (600508b4000b63140000800000200000): This array LUN is only available on one path. Proper configuration requires two paths.
+----
+[NOTE]
+====
+El UID de este ejemplo es 600508B4:000B6314:00008000:00200000:00000000:00000000:00000000:00000000:00000000:00000000. Se trunca debido al espacio.
+
+====
+
+
+== Solución de problemas y resolución de problemas
+
+Si se observan `storage array config show` los errores de salida y de almacenamiento, se muestra que el resultado es útil cuando se solucionan menos de dos rutas a un LUN de cabina.
+
+. Revise el `storage errors show` resultado para obtener el número de serie del LUN de cabina que solo está disponible en una ruta.
+. Revise la `storage array config show` salida para intentar aislar la causa del problema.
++
+|===
+| Si `storage array config show` el resultado muestra... | La causa es más probable... 
+
+
+ a| 
+Otros LUN de cabina
+ a| 
+Error de asignación
+
+
+
+ a| 
+No hay otros LUN de cabina
+ a| 
+Un error de cableado, de división en zonas o de hardware
+
+|===
+. Si la causa es un error de asignación, el administrador de la cabina de almacenamiento asigne el LUN de cabina identificado a dos puertos de la cabina de almacenamiento redundantes.
+. Si la causa parece ser un problema aparte de la asignación, compruebe la división en zonas, la asignación de grupos de hosts, el cableado y la conectividad.
+. Después de solucionar el problema, ejecute `storage array config show` de nuevo para confirmar que el error se ha solucionado.
+

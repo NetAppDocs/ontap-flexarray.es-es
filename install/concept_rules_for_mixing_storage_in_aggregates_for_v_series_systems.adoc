@@ -1,0 +1,29 @@
+---
+permalink: install/concept_rules_for_mixing_storage_in_aggregates_for_v_series_systems.html 
+sidebar: sidebar 
+keywords: rules, mix, storage, array, lun, aggregates 
+summary: Al planificar agregados, debe tener en cuenta las reglas para combinar almacenamiento en agregados. No se pueden mezclar distintos tipos de almacenamiento o LUN de cabinas de diferentes proveedores o familias de proveedores en el mismo agregado. 
+---
+= Reglas para mezclar almacenamiento en agregados de LUN de cabinas
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Al planificar agregados, debe tener en cuenta las reglas para combinar almacenamiento en agregados. No se pueden mezclar distintos tipos de almacenamiento o LUN de cabinas de diferentes proveedores o familias de proveedores en el mismo agregado.
+
+No se permite la adición de lo siguiente al mismo agregado:
+
+* LUN y discos de cabina
+* LUN de cabina con diferentes tipos de suma de comprobación
+* LUN de cabina de distintos tipos de unidades (por ejemplo, FC y SATA) o velocidades diferentes
+* LUN de cabina de diferentes proveedores de cabinas de almacenamiento
+* Los LUN de cabina de diferentes familias de modelos de cabina de almacenamiento
+
+
+[NOTE]
+====
+Las cabinas de almacenamiento de la misma familia comparten las mismas características de rendimiento y conmutación por error. Por ejemplo, todos los miembros de la misma familia realizan failover activo-activo, o todos realizan failover activo-pasivo. Se puede usar más de un factor para determinar las familias de las cabinas de almacenamiento. Por ejemplo, las cabinas de almacenamiento con arquitecturas diferentes estarían en familias distintas aunque otras características sean las mismas.
+
+====

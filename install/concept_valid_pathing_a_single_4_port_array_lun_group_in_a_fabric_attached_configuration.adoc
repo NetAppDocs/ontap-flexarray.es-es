@@ -1,0 +1,36 @@
+---
+permalink: install/concept_valid_pathing_a_single_4_port_array_lun_group_in_a_fabric_attached_configuration.html 
+sidebar: sidebar 
+keywords: valid, path, single, 4, port, array, lun, group, fabric attached, configuration 
+summary: Una configuración única de grupo de LUN de cabina de 4 puertos funciona con todas las cabinas de almacenamiento para todas las versiones de ONTAP. 
+---
+= Rutas válidas: Un único grupo de LUN de cabina de 4 puertos en una configuración estructural
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una configuración única de grupo de LUN de cabina de 4 puertos funciona con todas las cabinas de almacenamiento para todas las versiones de ONTAP.
+
+En la siguiente ilustración, se muestran las rutas en una configuración con un solo grupo de LUN de cabina de 4 puertos:
+
+image::../media/one_4_port_array_lun_gp.gif[Este gráfico se describe con el texto circundante.]
+
+En esta configuración con un único grupo LUN de 4 puertos, las LUN de cabina se asignan a cuatro puertos en la cabina de almacenamiento. El grupo LUN de cabina se presenta a ambos nodos del par de alta disponibilidad en diferentes puertos de destino de cabina. Sin embargo, cada nodo puede ver un LUN de cabina, integral, por solo dos rutas. La división en zonas se configura de modo que cada puerto de iniciador FC de un nodo pueda acceder solo a un único puerto de cabina de destino.
+
+Resulta útil comparar los resultados con los resultados válidos `storage array config show` cuando comprueba que se ha configurado el número de grupos de LUN esperado. En el siguiente `storage array config show` ejemplo de salida se muestra el resultado esperado para esta configuración: Un solo grupo de LUN de cabina:
+
+[listing]
+----
+vs::> storage array config show
+             LUN   LUN
+Node         Group Count  Array Name     Array Target Port     Initiator
+------------ ----- ----- ------------- ----------------------- ---------
+vs1            1    10   DGC_RAID5_1      50050763030301241A     0a
+                                          50050763031301242A     0c
+vs2            1    10   DGC_RAID5_1      50050763030881241B     0a
+                                          50050763031881242B     0c
+
+4 entries were displayed.
+----

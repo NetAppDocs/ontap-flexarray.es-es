@@ -1,0 +1,14 @@
+---
+permalink: install/concept_troubleshooting.html 
+sidebar: sidebar 
+keywords: troubleshoot, configurations, storage, arrays 
+summary: Debe validar la configuración durante la instalación inicial para poder resolver problemas antes de poner la configuración en un entorno de producción. 
+---
+= Solución de problemas de configuraciones con cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe validar la configuración durante la instalación inicial para poder resolver problemas antes de poner la configuración en un entorno de producción.

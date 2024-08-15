@@ -1,0 +1,20 @@
+---
+permalink: install/concept_supported_methods_for_connecting_a_v_series_system_to_a_storage_array.html 
+sidebar: sidebar 
+keywords: supported, methods, connect, ontap, system, storage, array 
+summary: El sistema ONTAP se puede conectar en una configuración estructural con cabinas de almacenamiento. Las configuraciones conectadas a estructura son compatibles con sistemas independientes y parejas de alta disponibilidad. Las configuraciones de conexión directa se limitan a algunas cabinas de almacenamiento y algunas versiones de ONTAP. 
+---
+= Métodos compatibles para conectar un sistema ONTAP a una cabina de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El sistema ONTAP se puede conectar en una configuración estructural con cabinas de almacenamiento. Las configuraciones conectadas a estructura son compatibles con sistemas independientes y parejas de alta disponibilidad. Las configuraciones de conexión directa se limitan a algunas cabinas de almacenamiento y algunas versiones de ONTAP.
+
+La matriz de interoperabilidad contiene información sobre los métodos de conexión admitidos para cabinas de almacenamiento específicas y plataformas que ejecutan ONTAP.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

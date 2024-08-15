@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_where_to_find_information_for_configurations_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: find, information, configurations, storage, arrays 
+summary: Cuando planifique la configuración para usar sistemas ONTAP con cabinas de almacenamiento, debe comprobar distintos orígenes para obtener información sobre la configuración de la LUN de la cabina además de la documentación de producto. 
+---
+= Dónde se encuentra información sobre las configuraciones con cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cuando planifique la configuración para usar sistemas ONTAP con cabinas de almacenamiento, debe comprobar distintos orígenes para obtener información sobre la configuración de la LUN de la cabina además de la documentación de producto.
+
+Las herramientas disponibles en el sitio de soporte de NetApp proporcionan, en una ubicación central, información específica sobre las funciones, las configuraciones y los modelos de cabinas de almacenamiento que son compatibles en versiones concretas.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/site/global/dashboard["Soporte de NetApp"]

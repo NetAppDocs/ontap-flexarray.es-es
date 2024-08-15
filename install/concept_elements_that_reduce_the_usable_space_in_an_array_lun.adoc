@@ -1,0 +1,28 @@
+---
+permalink: install/concept_elements_that_reduce_the_usable_space_in_an_array_lun.html 
+sidebar: sidebar 
+keywords: elements, reduce, usable, space, array, lun 
+summary: Varios factores afectan al espacio útil de una LUN de cabina. Cuando se planifica el número y el tamaño requeridos de los LUN de cabina, se debe tener en cuenta el espacio utilizable en el LUN de cabina de acuerdo con el tipo de suma de comprobación que se esté utilizando y los elementos que se pueden configurar. 
+---
+= Elementos que reducen el espacio utilizable en una LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Varios factores afectan al espacio útil de una LUN de cabina. Cuando se planifica el número y el tamaño requeridos de los LUN de cabina, se debe tener en cuenta el espacio utilizable en el LUN de cabina de acuerdo con el tipo de suma de comprobación que se esté utilizando y los elementos que se pueden configurar.
+
+Al calcular el espacio utilizable en un LUN de cabina, debe tener en cuenta los siguientes factores que reducen el espacio utilizable de la LUN:
+
+* Espacio reservado para su uso por ONTAP
+* Espacio para volcado de memoria
+* Reserva de Snapshot en el nivel de volumen
+* Copia Snapshot en el nivel del agregado
+* Tipo de suma de comprobación (asigna un tipo):
++
+** Suma de comprobación de bloque (BCS)
+** Suma de comprobación de zonas avanzada (AZCS)
+
+
+

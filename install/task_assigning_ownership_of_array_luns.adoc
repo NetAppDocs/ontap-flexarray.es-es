@@ -1,0 +1,45 @@
+---
+permalink: install/task_assigning_ownership_of_array_luns.html 
+sidebar: sidebar 
+keywords: assign, ownership, array, luns 
+summary: En un sistema ONTAP donde el volumen raíz reside en bandejas de discos, es necesario asignar la propiedad de los LUN de cabina a un nodo antes de añadirlos a un agregado para utilizarlos como almacenamiento. 
+---
+= Asignación de propiedad de LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En un sistema ONTAP donde el volumen raíz reside en bandejas de discos, es necesario asignar la propiedad de los LUN de cabina a un nodo antes de añadirlos a un agregado para utilizarlos como almacenamiento.
+
+*Lo que necesitará*
+
+* Deben realizarse pruebas de configuración back-end (prueba de la conectividad y configuración de los dispositivos tras los sistemas ONTAP).
+* Las LUN de cabina que desea asignar deben presentarse a los sistemas de ONTAP.
+
+
+Es posible asignar propiedad de LUN de cabina que tienen las siguientes características:
+
+* No son de propiedad.
+* No tienen errores de configuración de la cabina de almacenamiento, como los siguientes:
++
+** El LUN de la cabina es menor o mayor que el tamaño compatible con ONTAP.
+** El LDEV está asignado en un solo puerto.
+** El LDEV tiene asignados ID de LUN incoherentes.
+** El LUN solo está disponible en una ruta.
+
+
+
+
+ONTAP emite un mensaje de error si se intenta asignar la propiedad de un LUN de cabina con errores de configuración back-end que pudieran interferir en el funcionamiento del sistema ONTAP y de la cabina de almacenamiento. Debe corregir estos errores para poder continuar con la asignación de LUN de cabina.
+
+ONTAP alerta si se intenta asignar un LUN de cabina con un error de redundancia: Por ejemplo, todas las rutas a este LUN de cabina están conectadas a la misma controladora o solo una ruta al LUN de cabina. Es posible corregir un error de redundancia antes o después de asignar la propiedad de la LUN.
+
+.Pasos
+. Introduzca el siguiente comando para ver los LUN de cabina que todavía no se han asignado a un nodo:``storage disk show -container-type unassigned``
+. Introduzca el siguiente comando para asignar un LUN de cabina a este nodo:``storage disk assign -disk arrayLUNname -owner nodename``
++
+Si desea corregir un error de redundancia después de la asignación de disco en lugar de antes, debe utilizar `-force` el parámetro con `storage disk assign` el comando.
+
+

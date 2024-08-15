@@ -1,0 +1,63 @@
+---
+permalink: install/concept_planning_summary_for_a_v_series_system_using_native_disks.html 
+sidebar: sidebar 
+keywords: plan, summary, v-series, system, native, disks, additional, considerations, setup, array, luns 
+summary: Puede instalar bandejas de discos nativas en sistemas V-Series nuevos o existentes. Sin embargo, debe tener en cuenta algunos factores adicionales si planea instalar bandejas de discos nativas en sistemas V-Series, en comparación con la instalación de las bandejas de discos en sistemas FAS. 
+---
+= Resumen de planificación de un sistema V-Series mediante discos nativos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede instalar bandejas de discos nativas en sistemas V-Series nuevos o existentes. Sin embargo, debe tener en cuenta algunos factores adicionales si planea instalar bandejas de discos nativas en sistemas V-Series, en comparación con la instalación de las bandejas de discos en sistemas FAS.
+
+
+
+== Consideraciones adicionales sobre planificación para la configuración básica en sistemas V-Series con discos
+
+Debe tener en cuenta lo siguiente al determinar los requisitos básicos de configuración e instalación para el sistema V-Series que usa discos nativos:
+
+* Si el sistema V-Series se ordena con bandejas de discos, la fábrica configura el volumen raíz e instala licencias y el software ONTAP (al igual que lo hace con los sistemas FAS).
+* Si el sistema V-Series no se solicita con bandejas de discos, debe planificar la instalación del software ONTAP y las licencias correspondientes.
+* ONTAP asigna automáticamente la propiedad a discos nativos conectados al sistema V-Series.
+
+
+
+
+== Consideraciones de planificación adicionales si el sistema V-Series utiliza tanto discos como LUN de cabina
+
+En la siguiente tabla se resumen las consideraciones de planificación adicionales y la ubicación de la información para ayudarle con cada tarea.
+
+|===
+| Consideración de planificación | Dónde encontrar pautas 
+
+
+ a| 
+Ubicación del volumen raíz
+ a| 
+xref:concept_location_of_the_root_volume.adoc[Ubicación del volumen raíz]
+
+
+
+ a| 
+Cuántos discos y LUN de cabina combinados se pueden asignar sin superar el límite máximo admitido para el sistema V-Series
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Uso del puerto iniciador FC
+ a| 
+xref:concept_requirements_for_v_series_fc_initiator_port_usage.adoc[Requisitos para el uso del puerto del iniciador FC]
+
+
+
+ a| 
+El tipo de datos que debe residir en los discos y el tipo de datos que debe residir en los LUN de cabina
+ a| 
+Debe evaluar el tipo de datos que debe gestionarse y, a continuación, decidir si los datos pueden residir en los discos nativos o los LUN de cabina.
+
+|===

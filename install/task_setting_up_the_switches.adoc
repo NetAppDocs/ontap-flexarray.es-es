@@ -1,0 +1,78 @@
+---
+permalink: install/task_setting_up_the_switches.html 
+sidebar: sidebar 
+keywords: set, up, switches 
+summary: Por lo general, la configuración de switch es realizada por el administrador de almacenamiento o SAN. Es necesario dividir en zonas los switches para que los sistemas ONTAP y las cabinas de almacenamiento puedan verse entre sí. Debe utilizar la división en zonas de iniciador único como estrategia de división en zonas. 
+---
+= Configuración de los interruptores
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Por lo general, la configuración de switch es realizada por el administrador de almacenamiento o SAN. Es necesario dividir en zonas los switches para que los sistemas ONTAP y las cabinas de almacenamiento puedan verse entre sí. Debe utilizar la división en zonas de iniciador único como estrategia de división en zonas.
+
+.Pasos
+. Inicie sesión en la cabina de almacenamiento y obtenga los WWPN de los adaptadores de FC de la cabina de almacenamiento.
+. Utilice los comandos del switch Fibre Channel para dividir cada switch de modo que la cabina de almacenamiento y el sistema ONTAP vean los WWPN del otro.
++
+Considere el siguiente ejemplo de sistemas ONTAP en un par de alta disponibilidad:
+
++
+image::../media/one_4_port_array_lun_gp.gif[Este gráfico se describe con el texto circundante.]
+
++
+En la configuración de ejemplo, las zonas son las siguientes:
+
++
+|===
+| Zona | Puerto y sistema ONTAP | Controladora y puerto de la cabina de almacenamiento 
+
+
+ a| 
+Interruptor 1
+
+
+
+ a| 
+z1
+ a| 
+vs1, 0a
+ a| 
+Controlador 1, 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2, 0a
+ a| 
+Controlador 1, 1B
+
+
+
+ a| 
+Interruptor 2
+
+
+
+ a| 
+z3
+ a| 
+vs1, 0c
+ a| 
+Controlador 2, 2A
+
+
+
+ a| 
+z4
+ a| 
+vs2, 0c
+ a| 
+Controlador 2, 2B
+
+|===
+

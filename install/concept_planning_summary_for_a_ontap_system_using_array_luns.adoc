@@ -1,0 +1,71 @@
+---
+permalink: install/concept_planning_summary_for_a_ontap_system_using_array_luns.html 
+sidebar: sidebar 
+keywords: plan, summary, ontap, systems, array, luns 
+summary: Cuando planea usar LUN de cabina con sistemas ONTAP, debe comunicarse con la cabina de almacenamiento y con los administradores de switch de modo que los dispositivos back-end se configuren para funcionar con los sistemas ONTAP. 
+---
+= Resumen de planificación para sistemas ONTAP mediante LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cuando planea usar LUN de cabina con sistemas ONTAP, debe comunicarse con la cabina de almacenamiento y con los administradores de switch de modo que los dispositivos back-end se configuren para funcionar con los sistemas ONTAP.
+
+En la siguiente tabla se resumen las tareas principales de planificación y la ubicación de la información para ayudarle con cada tarea.
+
+|===
+| Tarea de planificación | Dónde encontrar información 
+
+
+ a| 
+Determinar requisitos para configurar la cabina de almacenamiento para que funcione con ONTAP
+ a| 
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"]
+* https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implementación de virtualización FlexArray para almacenamiento E-Series de NetApp"]
+* https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]
+
+
+
+
+ a| 
+Directrices para el LUN de cabina con ONTAP
+ a| 
+xref:concept_planning_for_ontap_use_of_array_luns.adoc[Planificar el uso de ONTAP de LUN de cabina]
+
+
+
+ a| 
+Determinar los límites de ONTAP con respecto a las LUN de cabina
+ a| 
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+ a| 
+Determinar un esquema de seguridad LUN, configurar controles de acceso en la cabina de almacenamiento y, si se implementan switches, configurar la división en zonas en los switches
+ a| 
+* xref:concept_planning_for_lun_security_on_storage_arrays.adoc[Planificación de la seguridad LUN en las cabinas de almacenamiento]
+* xref:concept_zoning_for_a_configuration_with_storage_arrays.adoc[Requisitos de división en zonas]
+
+
+
+
+ a| 
+Determinar un esquema de conectividad de puerto a puerto entre los sistemas ONTAP y la cabina de almacenamiento
+ a| 
+* xref:concept_planning_a_port_to_port_connectivity_scheme.adoc[Planificación de un esquema de conectividad puerto a puerto]
+* https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]
+
+
+
+
+ a| 
+Determinar qué sistema ONTAP será ««propio» qué LUN de cabina (propiedad de disco)
+ a| 
+* xref:concept_how_array_luns_become_available_for_ontap_storage_use.adoc[Cómo se ponen disponibles los LUN de cabina para el uso del almacenamiento de ONTAP]
+* xref:task_assigning_ownership_of_array_luns.adoc[Asignación de propiedad de LUN de cabina]
+
+
+|===

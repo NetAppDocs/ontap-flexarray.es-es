@@ -1,0 +1,14 @@
+---
+permalink: install/concept_invalid_path_setup_examples.html 
+sidebar: sidebar 
+keywords: invalid, path, setup, examples 
+summary: La configuración de ruta puede ser no válida porque las rutas a un LUN de cabina no son redundantes o el número de rutas a un LUN de cabina no cumple los requisitos de ONTAP. 
+---
+= Ejemplos de configuración de ruta no válidos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configuración de ruta puede ser no válida porque las rutas a un LUN de cabina no son redundantes o el número de rutas a un LUN de cabina no cumple los requisitos de ONTAP.

@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_for_paths_to_array_luns.html 
+sidebar: sidebar 
+keywords: plan, paths, array, luns 
+summary: 'Las rutas son las conexiones físicas entre el sistema ONTAP y la cabina de almacenamiento. Se requieren rutas redundantes para eliminar cualquier punto único de error (SPOF) entre el sistema ONTAP y la cabina de almacenamiento.' 
+---
+= Planificación de las rutas a las LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Las rutas son las conexiones físicas entre el sistema ONTAP y la cabina de almacenamiento. Se requieren rutas redundantes para eliminar cualquier punto único de error (SPOF) entre el sistema ONTAP y la cabina de almacenamiento.

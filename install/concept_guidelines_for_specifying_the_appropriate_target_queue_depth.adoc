@@ -1,0 +1,30 @@
+---
+permalink: install/concept_guidelines_for_specifying_the_appropriate_target_queue_depth.html 
+sidebar: sidebar 
+keywords: guidelines, specify, appropriate, target, queue, depth 
+summary: Debe considerar el impacto de todos los iniciadores que acceden al puerto de la cabina de almacenamiento cuando planifica la configuración para un sistema ONTAP específico o un host específico que no ejecuta ONTAP. 
+---
+= Directrices para especificar la profundidad de cola de destino adecuada
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe considerar el impacto de todos los iniciadores que acceden al puerto de la cabina de almacenamiento cuando planifica la configuración para un sistema ONTAP específico o un host específico que no ejecuta ONTAP.
+
+Si la implementación incluye más de un iniciador en un puerto de destino, debe tener en cuenta el número total de comandos enviados a un puerto de destino por todos los iniciadores al establecer la profundidad de cola de destino.
+
+Las directrices para especificar la profundidad de cola de destino adecuada son las siguientes:
+
+* No configure un valor de 0 (cero).
++
+Un valor de 0 significa que no hay límite en los comandos pendientes.
+
+* Tenga en cuenta el volumen de comandos que es probable que envíen iniciadores específicos al puerto de destino.
++
+Luego puede configurar valores más altos para que los iniciadores puedan enviar un mayor número de solicitudes y un valor menor para que los iniciadores puedan enviar un número menor de solicitudes.
+
+* Configure hosts que no ejecuten ONTAP según las directrices proporcionadas para dichos hosts.
+* Considere la posibilidad de establecer la profundidad de cola de destino por puerto de destino cuando las cargas de trabajo difieren entre puertos.
+

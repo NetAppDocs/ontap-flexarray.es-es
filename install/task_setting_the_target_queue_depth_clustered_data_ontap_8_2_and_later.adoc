@@ -1,0 +1,41 @@
+---
+permalink: install/task_setting_the_target_queue_depth_clustered_data_ontap_8_2_and_later.html 
+sidebar: sidebar 
+keywords: set, target, queue, depth 
+summary: La profundidad de cola de destino predeterminada es aceptable para la mayoría de las implementaciones, pero se puede cambiar si se producen problemas de rendimiento. 
+---
+= Definición de la profundidad de cola de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La profundidad de cola de destino predeterminada es aceptable para la mayoría de las implementaciones, pero se puede cambiar si se producen problemas de rendimiento.
+
+Es posible establecer la profundidad de cola objetivo por cabina de almacenamiento o por puerto objetivo.
+
+.Paso
+. Use uno de los siguientes comandos para configurar la profundidad de la cola de puerto de destino en todos los puertos de destino o en un puerto de destino específico de una cabina de almacenamiento.
++
+|===
+| Si desea... | Utilice esta secuencia de comandos... 
+
+
+ a| 
+Configure la profundidad de cola de puertos de destino en todos los puertos de destino para una cabina de almacenamiento
+ a| 
+`set advanced` `storage array port modify -name array_name -max-queue-depth value`
+
+
+
+ a| 
+Configure la profundidad de la cola del puerto de destino en un puerto de destino específico en una cabina de almacenamiento
+ a| 
+`set advanced` `storage array port modify -name array_name -wwnn value -wwpn value -max-queue-depth value`
+
+|===
++
+Para obtener más información sobre estos comandos, consulte las páginas man.
+
+

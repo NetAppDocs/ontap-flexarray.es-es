@@ -1,0 +1,36 @@
+---
+permalink: install/concept_how_array_luns_are_made_available_for_host_use.html 
+sidebar: sidebar 
+keywords: how, array, luns, available, host, use 
+summary: Un administrador de cabina de almacenamiento debe crear LUN de cabina y ponerlos a disposición de los puertos iniciadores FC especificados de sistemas ONTAP. 
+---
+= Cómo se ponen a disposición los LUN de cabina para el uso del host
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un administrador de cabina de almacenamiento debe crear LUN de cabina y ponerlos a disposición de los puertos iniciadores FC especificados de sistemas ONTAP.
+
+El proceso para que las LUN estén disponibles para los hosts y la terminología para describirlas varía según los proveedores de cabinas de almacenamiento. El proceso básico que sigue el administrador de la cabina de almacenamiento para que los LUN estén disponibles para el uso del host es el siguiente:
+
+. Crea dispositivos lógicos (LDEV).
++
+[NOTE]
+====
+_LDEV_ es un término utilizado por algunos proveedores y este contenido para describir una parte del almacenamiento RAID lógico configurado a partir de discos.
+
+====
+. Crea un grupo de hosts (o equivalente de proveedor).
++
+El grupo de hosts incluye los WWPN de los puertos de iniciador de los hosts que pueden ver el LDEV.
+
++
+[NOTE]
+====
+Para simplificar la gestión, la mayoría de las cabinas de almacenamiento permiten definir uno o varios grupos de hosts. Puede definir WWPN (puertos) y WWN (hosts) específicos para que sean miembros del mismo grupo. Luego, se deben asociar LUN de cabina específicos con un grupo de hosts. Los hosts del grupo de hosts pueden acceder a las LUN asociadas con el grupo de hosts; los hosts que no están en ese grupo de hosts no pueden acceder a esas LUN. Los diferentes proveedores usan diferentes términos para describir este concepto. El proceso de creación de un grupo de hosts difiere entre los proveedores.
+
+====
+. Asigna los LDEVs a grupos de hosts como LUN.
+

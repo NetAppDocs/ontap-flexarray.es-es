@@ -1,0 +1,16 @@
+---
+permalink: install/concept_zoning_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: zone, configuration, storage, arrays 
+summary: La división en zonas permite que un administrador de almacenamiento restrinja los LUN de cabina a los que puede acceder un determinado sistema ONTAP. ONTAP requiere que un LUN de cabina esté visible en un solo puerto de destino para cada puerto de iniciador. 
+---
+= La división en zonas en una configuración con cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La división en zonas permite que un administrador de almacenamiento restrinja los LUN de cabina a los que puede acceder un determinado sistema ONTAP. ONTAP requiere que un LUN de cabina esté visible en un solo puerto de destino para cada puerto de iniciador.
+
+La configuración de la división en zonas en un switch Fibre Channel (FC) permite definir rutas entre los nodos conectados, restringiendo la visibilidad y la conectividad entre los dispositivos conectados a una SAN FC común.

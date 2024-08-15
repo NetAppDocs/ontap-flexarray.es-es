@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/concept_restriction_on_using_a_gatekeeper_lun.html 
+sidebar: sidebar 
+keywords: restriction, using, gatekeeper, luns 
+summary: 'Si se presenta un dispositivo lógico (LUN) de gatekeeper, no debe asignarlo al sistema ONTAP. Los sistemas ONTAP no pueden utilizar LUN de gatekeeper. Un LUN de control de acceso es un dispositivo lógico de Symmetrix a través del cual SYMAPI o el agente de ControlCenter se comunican con la cabina de almacenamiento.' 
+---
+= Restricción al uso de LUN de gatekeeper
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si se presenta un dispositivo lógico (LUN) de gatekeeper, no debe asignarlo al sistema ONTAP. Los sistemas ONTAP no pueden utilizar LUN de gatekeeper. Un LUN de control de acceso es un dispositivo lógico de Symmetrix a través del cual SYMAPI o el agente de ControlCenter se comunican con la cabina de almacenamiento.

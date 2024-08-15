@@ -1,0 +1,28 @@
+---
+permalink: install/concept_target_queue_depth_customization.html 
+sidebar: sidebar 
+keywords: target, queue, depth, customization 
+summary: 'La profundidad de cola objetivo define la cantidad de comandos ONTAP que se pueden poner en cola (pendientes) en un puerto de destino de la cabina de almacenamiento. ONTAP proporciona un valor predeterminado. En la mayoría de las implementaciones, la profundidad de cola de destino predeterminada es adecuada; sin embargo, puede cambiarla para corregir problemas de rendimiento.' 
+---
+= Personalización de la profundidad de la cola de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La profundidad de cola objetivo define la cantidad de comandos ONTAP que se pueden poner en cola (pendientes) en un puerto de destino de la cabina de almacenamiento. ONTAP proporciona un valor predeterminado. En la mayoría de las implementaciones, la profundidad de cola de destino predeterminada es adecuada; sin embargo, puede cambiarla para corregir problemas de rendimiento.
+
+La profundidad de la cola de destino predeterminada es diferente con las diferentes versiones de ONTAP:
+
+* Para ONTAP, el valor predeterminado es 512.
+* Para todas las versiones anteriores a Data ONTAP 8,2, el valor predeterminado es 256.
+
+
+Cuando se configura una cabina de almacenamiento con varios iniciadores que comparten puertos de destino, no se desean reunir los comandos pendientes del búfer de cola de todos los iniciadores para superar lo que puede manejar la cabina de almacenamiento. De lo contrario, el rendimiento de todos los hosts puede verse afectado. Las cabinas de almacenamiento difieren en el número de comandos que pueden manejar en el búfer de cola.
+
+[NOTE]
+====
+La profundidad de la cola de destino también se puede denominar «longitud de la cola de destino», «profundidad de Q» o «aceleración máxima».
+
+====

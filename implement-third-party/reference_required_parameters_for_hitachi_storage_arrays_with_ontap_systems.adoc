@@ -1,0 +1,111 @@
+---
+permalink: implement-third-party/reference_required_parameters_for_hitachi_storage_arrays_with_ontap_systems.html 
+sidebar: sidebar 
+keywords: required, parameters, hitachi, storage, arrays, ontap, systems, ams, hus, vsp, hus vm, workaround 
+summary: La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP. 
+---
+= Parámetros requeridos para las cabinas de almacenamiento Hitachi con sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP.
+
+
+
+== Parámetros del sistema requeridos para las matrices de almacenamiento AMS y HUS
+
+Los parámetros que se deben definir se enumeran en la siguiente tabla:
+
+|===
+| Parámetro | Ajuste 
+
+
+ a| 
+`Mapping mode`
+ a| 
+Activado
+
+
+
+ a| 
+`Host group security`
+ a| 
+Activado
+
+
+
+ a| 
+`Mode Setting > Common Setting`
+ a| 
+Modo estándar
+
+
+
+ a| 
+`Platform`
+ a| 
+No especificado
+
+
+
+ a| 
+`Middleware`
+ a| 
+No especificado
+
+|===
+
+
+== Parámetros de sistema necesarios para las matrices de almacenamiento de VM VSP y HUS
+
+Los parámetros que se deben definir se enumeran en la siguiente tabla:
+
+|===
+| Parámetro | Ajuste 
+
+
+ a| 
+`Host mode`
+ a| 
+Estándar o 00
+
+
+
+ a| 
+`Port security`
+ a| 
+Activado
+
+
+
+ a| 
+[NOTE]
+====
+Se debe crear un grupo de hosts separado de los grupos de hosts predeterminados para cada par de puertos de iniciador-destino.
+
+====
+|===
+Se deben definir los parámetros de la cabina de almacenamiento y se deben asignar LUN a los grupos de hosts antes de dividir la zona del switch para conectar el sistema ONTAP a la cabina de almacenamiento Hitachi.
+
+Si los puertos de iniciador de ONTAP FC se dividen con puertos de destino de cabinas Hitachi antes de que se establezcan los parámetros de la cabina de almacenamiento y se asignen los grupos de hosts, es posible que no pueda ver ninguna LUN presentada en la interfaz de ONTAP.
+
+En esta situación, ONTAP genera uno de los siguientes mensajes de EMS:
+
+[listing]
+----
+[fci.device.login.reject:info] The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x9 'Invalid R_CTL Field', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+[listing]
+----
+[fci.device.login.reject:info]: The PLOGI transmitted by port XX was rejected by port_id 0xYYYY with reason code 0x3 'Nx_Port Not Available, Temporary', explanation code 0x29 'Insufficient Resources to Support Login'
+----
+
+
+== Solución alternativa
+
+Si se configuró la división en zonas antes de configurar los parámetros y asignar los LUN a los grupos de hosts, puede resolver el problema que no se ven los LUN realizando una reinicialización de ruta para forzar la detección de los LUN de cabina que se asignan desde la cabina de almacenamiento de Hitachi. Consulte la solución provisional cuando los LUN no están visibles con la sección de cabinas de almacenamiento Hitachi para obtener la solución alternativa a este problema.
+
+xref:reference_workaround_when_luns_are_not_visible_with_hitachi_storage_arrays.adoc[Solución alternativa cuando los LUN no están visibles con las cabinas de almacenamiento Hitachi]

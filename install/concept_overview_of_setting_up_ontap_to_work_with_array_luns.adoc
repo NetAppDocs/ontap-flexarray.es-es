@@ -1,0 +1,18 @@
+---
+permalink: install/concept_overview_of_setting_up_ontap_to_work_with_array_luns.html 
+sidebar: sidebar 
+keywords: set, up, ontap, work, array, luns 
+summary: El proceso de configuración de un sistema ONTAP para trabajar con LUN de cabina es diferente según si los sistemas ONTAP se solicitan con o sin discos. 
+---
+= Configuración de ONTAP para que funcione con LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El proceso de configuración de un sistema ONTAP para trabajar con LUN de cabina es diferente según si los sistemas ONTAP se solicitan con o sin discos.
+
+Si se solicita un sistema ONTAP con bandejas de discos, el software ONTAP se instala de fábrica. En esta configuración, no es necesario crear el volumen raíz e instalar licencias y el software ONTAP.
+
+Puede instalar el software ONTAP en sistemas pedidos sin bandejas de discos. En estos sistemas, primero debe instalar ONTAP y, a continuación, configurar un clúster.

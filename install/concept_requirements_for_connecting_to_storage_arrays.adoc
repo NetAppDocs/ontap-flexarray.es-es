@@ -1,0 +1,27 @@
+---
+permalink: install/concept_requirements_for_connecting_to_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, connect, storage, arrays 
+summary: Al planificar la forma de conectar el sistema ONTAP a una cabina de almacenamiento, el plan de conectividad de puerto a puerto debe abordar la redundancia, las rutas y otras directrices. 
+---
+= Requisitos para la conexión a cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Al planificar la forma de conectar el sistema ONTAP a una cabina de almacenamiento, el plan de conectividad de puerto a puerto debe abordar la redundancia, las rutas y otras directrices.
+
+Los requisitos para configurar conexiones son los siguientes:
+
+* Cada conexión de una pareja de puertos redundante de la cabina de almacenamiento debe conectarse a un puerto iniciador FC diferente en el sistema ONTAP.
+* Los puertos utilizados en los switches FC deben ser redundantes.
+* Se debe configurar la conectividad para evitar un SPOF.
++
+Asegúrese de que los puertos de la cabina de almacenamiento que selecciona para acceder a un LUN determinado pertenecen a diferentes componentes, a fin de evitar un solo punto de error, por ejemplo, desde controladoras, clústeres o compartimentos alternativos. El motivo es que no desea que se pierdan todos los accesos a un LUN de cabina si falla un componente.
+
+* La cantidad de rutas no puede superar la cantidad de rutas compatibles con la versión de ONTAP.
+* Si desea configurar una configuración donde un puerto de iniciador de FC se comparte con varios puertos de destino o un puerto de destino se comparte con varios puertos de iniciador FC, debe seguir las reglas adecuadas.
+* Si la cabina de almacenamiento admite menos LUN por grupo de hosts por puerto que el número de LUN que usa el sistema ONTAP, debe añadir cables adicionales entre el sistema ONTAP y la cabina de almacenamiento.
+

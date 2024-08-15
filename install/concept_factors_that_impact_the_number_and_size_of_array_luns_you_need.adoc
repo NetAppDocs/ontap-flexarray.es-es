@@ -1,0 +1,14 @@
+---
+permalink: install/concept_factors_that_impact_the_number_and_size_of_array_luns_you_need.html 
+sidebar: sidebar 
+keywords: factors, impact, number, size, array, luns, need 
+summary: Debe tener en cuenta una serie de factores, incluidos el espacio utilizable en una LUN, al determinar cuántas LUN de cabina se necesitan y su tamaño. 
+---
+= Factores que afectan a la cantidad y el tamaño de LUN de cabina que necesita
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe tener en cuenta una serie de factores, incluidos el espacio utilizable en una LUN, al determinar cuántas LUN de cabina se necesitan y su tamaño.

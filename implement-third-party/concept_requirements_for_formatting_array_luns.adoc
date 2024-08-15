@@ -1,0 +1,36 @@
+---
+permalink: implement-third-party/concept_requirements_for_formatting_array_luns.html 
+sidebar: sidebar 
+keywords: requirements, formatting, array, luns 
+summary: Es posible realizar diferentes tipos de formato de LUN de cabina. Cada tipo tiene un impacto en la disponibilidad de las LUN o de toda la cabina de almacenamiento. 
+---
+= Requisitos para formatear los LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es posible realizar diferentes tipos de formato de LUN de cabina. Cada tipo tiene un impacto en la disponibilidad de las LUN o de toda la cabina de almacenamiento.
+
+Si debe presentar un nuevo LUN al sistema ONTAP inmediatamente, debe utilizar formato rápido. Si planea presentar las LUN al sistema ONTAP más adelante, se recomienda formatear rápido pero se acepta el formato en línea.
+
+Se recomienda el formato rápido porque tanto el formato en línea como sin conexión retrasa la detección de discos hasta después de haber completado el formato de las LUN, como se describe en la siguiente lista:
+
+* El formato en línea deja que el LUN de cabina que se está formateando esté completamente fuera de línea y el LUN de cabina no responde a ningún comando SCSI.
++
+Se formatea en un LUN de cabina por vez hasta que se formateen todos los LUN de cabina.
+
+* El formateo sin conexión desconecta toda la cabina de almacenamiento y la cabina no responde a ningún comando de SCSI.
++
+Los LUN de cabina se formatean seis a la vez por controladora hasta que se completa el formato.
+
++
+La cabina de almacenamiento no responde hasta que se completa todo el formato.
+
+* Si crea LUN de cabina (para cualquier host) después de la configuración inicial del sistema ONTAP y utiliza el formato Sin conexión, el sistema produce una alarma.
++
+Los LUN de cabina asignados al sistema ONTAP, incluidos los LUN de cabina en el volumen raíz, no se encuentran disponibles hasta que se complete el formato.
+
+* El formato en línea y rápido de las LUN para otros hosts no afecta al sistema ONTAP.
+

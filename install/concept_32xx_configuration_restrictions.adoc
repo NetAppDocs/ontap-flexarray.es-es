@@ -1,0 +1,16 @@
+---
+permalink: install/concept_32xx_configuration_restrictions.html 
+sidebar: sidebar 
+keywords: 32xx, system, configuration, restrictions 
+summary: Existen algunas restricciones para los sistemas 32xx que no se aplican a otros modelos. Debe tener en cuenta estos errores al configurar los sistemas. 
+---
+= 32xx restricciones de configuración del sistema
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Existen algunas restricciones para los sistemas 32xx que no se aplican a otros modelos. Debe tener en cuenta estos errores al configurar los sistemas.
+
+Los dos puertos FC internos que etiquetan como 0C y 0d no se encuentran en autobuses independientes. Por lo tanto, no ofrecen redundancia de almacenamiento. Algunos fallos en el puerto pueden provocar que el sistema entre en pánico. Para configurar pares de puertos redundantes, debe utilizar un HBA FC en una ranura de expansión disponible.

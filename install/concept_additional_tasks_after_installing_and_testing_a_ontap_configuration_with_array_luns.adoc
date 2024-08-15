@@ -1,0 +1,23 @@
+---
+permalink: install/concept_additional_tasks_after_installing_and_testing_a_ontap_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: additional, tasks, after, install, test, ontap, configuration, array, luns, netapp 
+summary: Después de completar la instalación y prueba de una configuración de ONTAP con LUN de cabina, se pueden asignar LUN de cabina adicionales a los sistemas ONTAP y configurar diversas funciones de ONTAP en los sistemas. 
+---
+= Tareas adicionales después de instalar y probar una configuración ONTAP con LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Después de completar la instalación y prueba de una configuración de ONTAP con LUN de cabina, se pueden asignar LUN de cabina adicionales a los sistemas ONTAP y configurar diversas funciones de ONTAP en los sistemas.
+
+A continuación se muestran algunas de las tareas que puede realizar después de completar la instalación y prueba del sistema ONTAP con LUN de cabina:
+
+* Asigne LUN de cabina adicionales a sistemas ONTAP según sea necesario.
+* Cree agregados y volúmenes de ONTAP según sea necesario.
+* Configure funciones adicionales de ONTAP en su sistema según sea necesario, por ejemplo, funciones para backup y recuperación de datos.
+
+
+Para obtener información sobre cómo configurar las distintas funciones de ONTAP, consulte la guía de ONTAP correspondiente.

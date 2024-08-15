@@ -1,0 +1,28 @@
+---
+permalink: install/concept_how_the_checksum_type_is_determined_for_aggregates_with_array_luns.html 
+sidebar: sidebar 
+keywords: how, checksum, type, determined, array, lun, aggregates 
+summary: Cada agregado de ONTAP tiene un tipo de suma de comprobación asociado. El tipo de suma de comprobación del agregado está determinado por el tipo de suma de comprobación de los LUN de cabina que se le añaden. 
+---
+= Cómo se determina el tipo de suma de comprobación para los agregados de LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cada agregado de ONTAP tiene un tipo de suma de comprobación asociado. El tipo de suma de comprobación del agregado está determinado por el tipo de suma de comprobación de los LUN de cabina que se le añaden.
+
+El tipo de suma de comprobación de un agregado se determina según el tipo de suma de comprobación del primer LUN de cabina que se añade al agregado. El tipo de suma de comprobación se aplica a un agregado completo (es decir, a todos los volúmenes del agregado). No se admite la mezcla de LUN de cabina de diferentes tipos de suma de comprobación en un agregado.
+
+* Se debe utilizar un LUN de cabina del tipo _block_ con agregados de tipo suma de comprobación de bloque.
+* Se debe utilizar un LUN de matriz de tipo _zoned_ con agregados de tipo Advanced zoned checksum (AZCS o advanced_zoned).
+
+
+Antes de añadir LUN de cabina a un agregado, debe conocer el tipo de suma de comprobación de los LUN que desea añadir, por los siguientes motivos:
+
+* No se pueden añadir LUN de cabina de diferentes tipos de suma de comprobación al mismo agregado.
+* No es posible convertir un agregado de un tipo de suma de comprobación a otro.
+
+
+Cuando crea un agregado puede especificar el número de LUN de cabina que se van a añadir o puede especificar los nombres de las LUN que se van a añadir. Si desea especificar un número de LUN de cabina que se van a añadir al agregado, debe haber disponible el mismo número o más LUN de cabina de ese tipo de suma de comprobación.

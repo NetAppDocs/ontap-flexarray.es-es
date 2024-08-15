@@ -1,0 +1,28 @@
+---
+permalink: install/concept_how_array_luns_become_available_for_ontap_storage_use.html 
+sidebar: sidebar 
+keywords: how, array, luns, available, ontap, storage, use 
+summary: Un sistema ONTAP no puede utilizar un LUN de cabina presentado hasta que se haya configurado ONTAP para utilizar el LUN de cabina. 
+---
+= Cómo se ponen disponibles los LUN de cabina para el uso del almacenamiento de ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un sistema ONTAP no puede utilizar un LUN de cabina presentado hasta que se haya configurado ONTAP para utilizar el LUN de cabina.
+
+Aunque el administrador de la cabina de almacenamiento hace que ONTAP pueda acceder a un LUN de cabina, ONTAP no puede usar el LUN de cabina para almacenamiento hasta que se completen las dos siguientes tareas:
+
+. Se debe asignar un sistema ONTAP (con licencia para utilizar las LUN de cabina) para ser el _propietario_ del LUN de cabina.
+. El LUN de cabina se debe añadir a un agregado.
+
+
+Cuando se asigna un LUN de cabina a un sistema ONTAP, ONTAP escribe los datos en el LUN de cabina para identificar el sistema asignado como propietario del LUN de cabina. Esta relación lógica se conoce como _propiedad de disco_.
+
+Cuando se asigna un LUN de cabina a un sistema ONTAP, se convierte en un LUN de repuesto que es propiedad de ese sistema y ya no está disponible para ningún otro sistema ONTAP.
+
+No se puede usar un LUN de cabina de reserva para el almacenamiento hasta que no se lo añada a un agregado. Después, ONTAP garantiza que solo el propietario del LUN de cabina pueda escribir y leer datos de la LUN.
+
+En un par de alta disponibilidad, ambos nodos deben poder ver el mismo almacenamiento, pero solo un nodo del par es el propietario del LUN de cabina. El nodo compañero toma el acceso de lectura/escritura a un LUN de la cabina en caso de un fallo del nodo propietario. El nodo propietario original reanuda la propiedad después de que se resuelve el problema que provocó la falta de disponibilidad del nodo.

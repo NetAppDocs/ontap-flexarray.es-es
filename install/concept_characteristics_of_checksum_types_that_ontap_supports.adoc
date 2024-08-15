@@ -1,0 +1,40 @@
+---
+permalink: install/concept_characteristics_of_checksum_types_that_ontap_supports.html 
+sidebar: sidebar 
+keywords: characteristics, checksum, types, ontap, supports, block, advanced, zoned 
+summary: 'ONTAP admite el tipo de suma de comprobación de bloque (BCS) y el tipo de suma de comprobación avanzada por zonas (AZCS) para LUN, discos y agregados de cabinas.' 
+---
+= Características de los tipos de suma de comprobación que es compatible con ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP admite el tipo de suma de comprobación de bloque (BCS) y el tipo de suma de comprobación avanzada por zonas (AZCS) para LUN, discos y agregados de cabinas.
+
+El tipo de suma de comprobación asignada a un LUN de cabina en ONTAP puede afectar al rendimiento o al espacio utilizable de un LUN de cabina. Por lo tanto, el número y tamaño de LUN de cabina que necesita pueden verse afectados, según el tipo de suma de comprobación que asigne a los LUN de cabina.
+
+
+
+== Suma de comprobación de bloque (BCS)
+
+BCS es el tipo de suma de comprobación predeterminado y recomendado para los LUN de cabina. BCS proporciona un mejor rendimiento para los LUN de cabina que AZCS.
+
+BCS tiene un mayor impacto en el espacio utilizable en una LUN de matriz que AZCS. BCS utiliza el 12,5% del espacio utilizable en una LUN de cabina.
+
+
+
+== Suma de comprobación de zonas avanzada (AZCS)
+
+AZCS es una alternativa a BCS. El impacto de AZCS en el espacio utilizable en un LUN de matriz es menor que con BCS; AZCS usa el 1,56 por ciento de la capacidad del dispositivo. Sin embargo, debe sopesar la necesidad de más espacio utilizable frente al rendimiento. En ocasiones, los AZCS pueden causar problemas de rendimiento de los LUN de cabina.
+
+No se recomienda utilizar AZCS para los LUN de cabina para cargas de trabajo aleatorias de alto rendimiento. Sin embargo, puede usar AZCS con LUN de cabina para recuperación ante desastres, archivado o cargas de trabajo similares.
+
+Los discos nativos no afectan al rendimiento de AZCS.
+
+Las directrices para los tipos de suma de comprobación difieren según el tamaño y el tipo de disco. Consulte _TR3838 Storage Subsystem Configuration Guide_ para obtener más información.
+
+*Información relacionada*
+
+https://www.netapp.com/pdf.html?item=/media/19675-tr-3838.pdf["Informe técnico de NetApp 3838: Guía de configuración del subsistema de almacenamiento"^]

@@ -1,0 +1,22 @@
+---
+permalink: implement-third-party/concept_alua_behavior_of_vnx2_storage_arrays.html 
+sidebar: sidebar 
+keywords: alua, behavior, vnx2, storage, arrays 
+summary: 'Aunque todas las cabinas EMC CLARiiON y VNX usan el modo de conmutación por error ALUA (activo-activo asimétrico), las cabinas de almacenamiento VNX2 pueden diferir en su comportamiento con ALUA.' 
+---
+= Comportamiento ALUA de las cabinas de almacenamiento VNX2
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Aunque todas las cabinas EMC CLARiiON y VNX usan el modo de conmutación por error ALUA (activo-activo asimétrico), las cabinas de almacenamiento VNX2 pueden diferir en su comportamiento con ALUA.
+
+Al igual que todos los demás LUN de cabina de EMC, los LUN de cabina VNX2 presentados al sistema ONTAP de pools de discos dinámicos utilizan el modo de conmutación por error ALUA. Sin embargo, los LUN de cabina VNX2 que se presentan al sistema ONTAP de grupos RAID tradicionales utilizan modo de conmutación por error activo-activo, con todas las rutas notificadas como *`AO`* (activo optimizado). Este comportamiento de las LUN de cabina cambia durante ciertas operaciones, como la creación de Snapshot en la cabina back-end.
+
+Por lo tanto, para mantener un comportamiento constante de las LUN de cabina VNX2, ONTAP trata estas LUN como ALUA, independientemente de si estas LUN de cabina se presentan desde grupos RAID tradicionales o desde pools de discos dinámicos.
+
+En este caso, las solicitudes de I/O de una LUN de VNX2 GB determinada sólo se distribuyen a través de las rutas notificadas para que estén en *`INU`estado * (en uso) y no en todas las rutas notificadas como *`AO`* (optimizadas para activo).
+
+Por ejemplo, si tiene cuatro rutas a un LUN de cabina VNX2 presentado al sistema ONTAP desde un grupo RAID tradicional, todas las rutas se notifican como *`AO`*; sin embargo, sólo dos de las rutas están en *`INU`el estado *, mientras que las otras dos rutas no se utilizan, pero están en *`RDY`el estado * (listo).

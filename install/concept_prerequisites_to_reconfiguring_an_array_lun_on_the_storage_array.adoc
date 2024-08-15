@@ -1,0 +1,32 @@
+---
+permalink: install/concept_prerequisites_to_reconfiguring_an_array_lun_on_the_storage_array.html 
+sidebar: sidebar 
+keywords: prerequisites, reconfigure, array. lun, storage, array 
+summary: 'Si ya se asignó un LUN de cabina (a través de ONTAP) a un determinado sistema ONTAP, se debe quitar la información que ONTAP escribió en el LUN de cabina antes de que el administrador de almacenamiento intente volver a configurar el LUN de cabina en la cabina de almacenamiento.' 
+---
+= Requisitos previos para volver a configurar un LUN de cabina en la cabina de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si ya se asignó un LUN de cabina (a través de ONTAP) a un determinado sistema ONTAP, se debe quitar la información que ONTAP escribió en el LUN de cabina antes de que el administrador de almacenamiento intente volver a configurar el LUN de cabina en la cabina de almacenamiento.
+
+Cuando la cabina de almacenamiento presenta un LUN de cabina a ONTAP, ONTAP recopila información acerca del LUN de cabina (por ejemplo, su tamaño) y escribe esa información en el LUN de cabina. ONTAP no puede actualizar de forma dinámica la información que escribió en un LUN de cabina. Por lo tanto, antes de que el administrador de la cabina de almacenamiento vuelva a configurar un LUN de cabina, se debe usar ONTAP para cambiar el estado del LUN de cabina a _UNUSED_. El LUN de cabina no se utiliza desde la perspectiva de ONTAP.
+
+Al cambiar el estado del LUN de cabina a Sin utilizar, ONTAP hace lo siguiente:
+
+* Finaliza las operaciones de I/O en el LUN de cabina
+* Elimina la etiqueta de la información de configuración de RAID y las reservas persistentes del LUN de cabina, lo que hace que el LUN de cabina no pertenezca a ningún sistema ONTAP
+
+
+Cuando se completa este proceso, no queda ninguna información de ONTAP en el LUN de cabina.
+
+Puede hacer lo siguiente después de que el estado del LUN de la cabina cambie a Sin usar:
+
+* Quite la asignación del LUN de cabina a ONTAP y ponga el LUN de cabina a disposición de otros hosts.
+* Cambie el tamaño del LUN de la cabina o cambie su composición.
+
+
+Si desea que ONTAP se reanude usando el LUN de cabina después de cambiar su tamaño o composición, debe volver a presentar el LUN de cabina a ONTAP y volver a asignar el LUN de cabina a un sistema ONTAP. ONTAP admite la nueva composición o el tamaño de LUN de la cabina.

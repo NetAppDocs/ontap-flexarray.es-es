@@ -1,0 +1,30 @@
+---
+permalink: install/concept_limits_information_for_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: limit, types, configurations, storage, arrays 
+summary: Debe tener en cuenta ciertos límites de la cabina de almacenamiento al planificar la configuración de ONTAP. 
+---
+= Tipos de límite para las configuraciones con cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe tener en cuenta ciertos límites de la cabina de almacenamiento al planificar la configuración de ONTAP.
+
+_Hardware Universe_ contiene valores de límite específicos para las cabinas de almacenamiento y los discos nativos.
+
+Los siguientes tipos de límites solo se aplican a las cabinas de almacenamiento y no a los discos nativos:
+
+* Tamaño mínimo y máximo de LUN de cabina que admite ONTAP
+* Tamaño mínimo para el LUN de cabina para el volumen raíz
+* Tamaño mínimo de LUN de cabina de núcleo de repuesto
+* Límites para los grupos RAID con LUN de cabina
+* Tamaño mínimo de agregado para un agregado de LUN de cabina
+* Número máximo de LUN y discos de cabina combinados por plataforma
+
+
+*Información relacionada*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

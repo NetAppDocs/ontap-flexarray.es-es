@@ -1,0 +1,32 @@
+---
+permalink: install/task_configuring_lun_security.html 
+sidebar: sidebar 
+keywords: configure, lun, security 
+summary: El administrador de la cabina de almacenamiento debe configurar la cabina de almacenamiento y crear grupos de hosts para que otros hosts no puedan acceder a los LUN de cabina que ONTAP pretende utilizar. 
+---
+= Configurando la seguridad LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El administrador de la cabina de almacenamiento debe configurar la cabina de almacenamiento y crear grupos de hosts para que otros hosts no puedan acceder a los LUN de cabina que ONTAP pretende utilizar.
+
+El concepto de seguridad de LUN es similar a la división en zonas, excepto que la seguridad LUN está configurada en la cabina de almacenamiento. La seguridad de LUN evita que los diferentes servidores utilicen entre sí el almacenamiento de otros en la SAN. La seguridad de LUN también puede denominarse _lun masking_.
+
+.Pasos
+. Configure la seguridad LUN en la cabina de almacenamiento.
++
+Consulte la documentación de la cabina de almacenamiento para obtener información sobre cómo configurar la seguridad de LUN.
+
++
+También debe consultar https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"] para obtener cualquier detalle adicional sobre la seguridad de LUN de las cabinas de almacenamiento de su proveedor. Algunas cabinas de almacenamiento deben estar dedicadas para que las utilicen los sistemas ONTAP.
+
+. Cree grupos de hosts (o el equivalente) para el sistema ONTAP.
++
+El término _grupo de hosts_ se usa en algunas cabinas de almacenamiento para describir un parámetro de configuración que permite especificar el acceso de host a puertos específicos de la cabina de almacenamiento. Diferentes cabinas de almacenamiento usan términos diferentes para describir este parámetro de configuración. Cada proveedor de cabinas de almacenamiento tiene su propio proceso para crear un grupo de hosts o un equivalente.
+
+
+
+*Información relacionada*

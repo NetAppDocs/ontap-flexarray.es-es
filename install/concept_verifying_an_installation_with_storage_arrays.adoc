@@ -1,0 +1,30 @@
+---
+permalink: install/concept_verifying_an_installation_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: verify, installation, storage, arrays 
+summary: Es importante detectar y resolver errores de configuración de back-end antes de implementar el sistema en un entorno de producción. 
+---
+= Verificación de la instalación con cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Es importante detectar y resolver errores de configuración de back-end antes de implementar el sistema en un entorno de producción.
+
+Las dos etapas para verificar la configuración del back-end son las siguientes:
+
+. La comprobación de errores de configuración back-end para impedir que ONTAP funcione con la cabina de almacenamiento.
++
+Estos son los errores que están marcados por `storage errors show`. Debe solucionar estos errores.
+
+. Comprobando que la configuración es la deseada.
++
+Hay una serie de situaciones que no son errores desde la perspectiva del sistema, pero que pueden no ser lo que usted pretendía. Por ejemplo, el `storage array config show` resultado muestra dos grupos LUN pero solo pretende utilizar un grupo LUN. Este documento se refiere a situaciones tales como situaciones que no cumplen con sus “intenciones”.
+
+
+
+La siguiente ilustración muestra el flujo de trabajo en el que primero verifica que no haya errores de configuración desde la perspectiva del sistema y luego verifica que la instalación es la deseada.
+
+image::../media/installation_verification_flowchart.gif[Ejecute primero un show de configuración de la cabina de almacenamiento. Si se le indica,run storage errors show,review the messages and review the documentation. Contact technical support if the problem is not resolved.]

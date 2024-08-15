@@ -1,0 +1,30 @@
+---
+permalink: install/concept_location_of_the_root_volume.html 
+sidebar: sidebar 
+keywords: location, root, volume 
+summary: La ubicación del volumen raíz depende de si el sistema ONTAP está preordenado con discos nativos o de si va a añadir discos a un sistema ONTAP configurado para los LUN de cabina. 
+---
+= Ubicación del volumen raíz
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La ubicación del volumen raíz depende de si el sistema ONTAP está preordenado con discos nativos o de si va a añadir discos a un sistema ONTAP configurado para los LUN de cabina.
+
+Siga estas directrices para determinar la ubicación del volumen raíz en el sistema ONTAP:
+
+* El volumen raíz puede estar en una cabina de almacenamiento o en una bandeja de discos nativa.
++
+Sin embargo, debe instalar el volumen raíz en un disco nativo si el sistema ONTAP tiene discos nativos y LUN de cabina.
+
++
+Si solicita discos en el sistema de almacenamiento, la fábrica instala el volumen raíz en un disco nativo.
+
+* En una pareja de alta disponibilidad, la práctica recomendada es que el volumen raíz se ubique en el mismo tipo de almacenamiento para los dos nodos, ya sea en una bandeja de discos nativa o en una cabina de almacenamiento para los dos nodos.
+* Para las configuraciones de MetroCluster con discos y LUN de cabina, debe crear el volumen raíz en un disco si va a configurar una nueva configuración.
++
+Si va a añadir discos a una configuración MetroCluster existente con LUN de cabina, puede dejar el volumen raíz en un LUN de cabina.
+
+

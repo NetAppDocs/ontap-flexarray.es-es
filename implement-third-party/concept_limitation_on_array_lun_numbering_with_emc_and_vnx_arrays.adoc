@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/concept_limitation_on_array_lun_numbering_with_emc_and_vnx_arrays.html 
+sidebar: sidebar 
+keywords: limitation, array, lun, numbering, emc, vnx, array 
+summary: Los arrays de almacenamiento VNX de EMC solo admiten la numeración de LUN de cabinas de 0 a 255. Las LUN de cabina numeradas más allá de este rango no son visibles para ONTAP. 
+---
+= Limitación de la numeración de LUN de cabina con arreglo EMC VNX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los arrays de almacenamiento VNX de EMC solo admiten la numeración de LUN de cabinas de 0 a 255. Las LUN de cabina numeradas más allá de este rango no son visibles para ONTAP.

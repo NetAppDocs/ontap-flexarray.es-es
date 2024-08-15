@@ -1,0 +1,47 @@
+---
+permalink: install/concept_stages_of_implementation_for_a_system_using_array_luns.html 
+sidebar: sidebar 
+keywords: stages, implementation, system, use, array, luns, back end, front end 
+summary: 'La implementación de una configuración en la que su sistema utiliza LUN de una cabina de almacenamiento consta de dos etapas: Una implementación back-end y una implementación front-end. Resulta útil cuando se planifica la configuración para comprender las tareas de alto nivel en cada etapa.' 
+---
+= Etapas de implementación de un sistema utilizando LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La implementación de una configuración en la que su sistema utiliza LUN de una cabina de almacenamiento consta de dos etapas: Una implementación back-end y una implementación front-end. Resulta útil cuando se planifica la configuración para comprender las tareas de alto nivel en cada etapa.
+
+
+
+== Fase 1: Implementación del back-end
+
+La configuración de la implementación de back-end incluye todas las tareas necesarias para configurar el sistema ONTAP con una cabina de almacenamiento, hasta el punto en que pueda instalar el software ONTAP.
+
+Entre las tareas para configurar la implementación de back-end se incluyen las siguientes:
+
+. Creación y formato de las LUN de cabina
+. Asignación de puertos
+. Cableado
+. Switches de división en zonas (si corresponde)
+. En ONTAP, asignar LUN de cabina específicos a un sistema ONTAP
+. En ONTAP, proporcionar información para configurar un sistema ONTAP en la red
+. Instalación del software ONTAP
+
+
+Si se solicita un sistema ONTAP con bandejas de discos, se instala el software ONTAP de fábrica. En esta configuración, no es necesario crear el volumen raíz e instalar licencias y el software ONTAP.
+
+Si un sistema ONTAP se ordena sin bandejas de discos, debe configurar ONTAP antes de configurar el clúster.
+
+
+
+== Etapa 2: Implementación front-end
+
+Las tareas para configurar la implementación front-end son las mismas que en un sistema que utiliza discos, incluidas las siguientes:
+
+* Configuración del sistema ONTAP para todos los protocolos (NAS, FC o ambos)
+* Configurar funciones de ONTAP como SnapVault, SnapMirror, SnapValidator y copias Snapshot
+* Creación de volúmenes y agregados
+* Configuración de la protección de datos, incluidos volcados NDMP en cintas
+

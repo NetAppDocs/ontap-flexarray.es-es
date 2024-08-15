@@ -1,0 +1,42 @@
+---
+permalink: implement-third-party/concept_3par_storage_array_families.html 
+sidebar: sidebar 
+keywords: 3par, storage, array, families 
+summary: ONTAP no admite la mezcla de algunos tipos de almacenamiento en los agregados. Para ayudarle a determinar los LUN de cabina que se pueden combinar en un agregado, las cabinas de almacenamiento de cada proveedor se agrupan en familias. Cuando se crean agregados, no se pueden mezclar LUN de cabina de diferentes proveedores y de diferentes familias de cabinas de almacenamiento en el mismo agregado. 
+---
+= Familias de cabinas de almacenamiento 3PAR
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP no admite la mezcla de algunos tipos de almacenamiento en los agregados. Para ayudarle a determinar los LUN de cabina que se pueden combinar en un agregado, las cabinas de almacenamiento de cada proveedor se agrupan en familias. Cuando se crean agregados, no se pueden mezclar LUN de cabina de diferentes proveedores y de diferentes familias de cabinas de almacenamiento en el mismo agregado.
+
+Las cabinas de almacenamiento de la misma familia comparten las mismas características de rendimiento y conmutación por error. Por ejemplo, todos los miembros de la misma familia realizan failover activo-activo, o todos realizan failover activo-pasivo. Se puede usar más de un factor para determinar las familias de las cabinas de almacenamiento. Por ejemplo, las cabinas de almacenamiento con arquitecturas diferentes estarían en familias distintas aunque otras características sean las mismas.
+
+La siguiente lista muestra las cabinas de almacenamiento 3PAR admitidas organizadas por familias distintas:
+
+* Familia 1: Almacenamiento InServ 3PAR
++
+** Tx00
+
+
+* Familia 2: Almacenamiento InServ 3PAR
++
+** Fx00
+
+
+* Familia 3: 3PAR Almacenamiento StoreServ
++
+** 20000
+** 208xx
+
+
+
+
+La matriz de interoperabilidad es la autoridad final para obtener información sobre las cabinas de almacenamiento compatibles con cada proveedor.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

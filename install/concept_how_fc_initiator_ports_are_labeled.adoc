@@ -1,0 +1,27 @@
+---
+permalink: install/concept_how_fc_initiator_ports_are_labeled.html 
+sidebar: sidebar 
+keywords: how, fc initiator, ports, labeled 
+summary: Todos los puertos de iniciador FC de los sistemas ONTAP se identifican con un número y una letra. El etiquetado varía en función de si los puertos están en la placa base o en las tarjetas de las ranuras de expansión. 
+---
+= Cómo se etiquetan los puertos del iniciador de FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Todos los puertos de iniciador FC de los sistemas ONTAP se identifican con un número y una letra. El etiquetado varía en función de si los puertos están en la placa base o en las tarjetas de las ranuras de expansión.
+
+* Numeración de puertos en la placa base
++
+Los puertos están numerados 0A, 0b, 0C, 0d...
+
+* Numeración de puertos en tarjetas de expansión
++
+Los puertos se numeran según la ranura en la que está instalada la tarjeta de expansión. Una tarjeta de la ranura 3 proporciona los puertos 3A y 3B.
+
++
+Los puertos del iniciador de FC están etiquetados como 1 y 2. Sin embargo, el software se refiere a ellos como A y B. Estas etiquetas se ven en la interfaz de usuario y los mensajes del sistema que se muestran en la consola.
+
+

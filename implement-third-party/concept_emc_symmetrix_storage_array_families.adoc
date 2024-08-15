@@ -1,0 +1,26 @@
+---
+permalink: implement-third-party/concept_emc_symmetrix_storage_array_families.html 
+sidebar: sidebar 
+keywords: emc, symmetrix, storage, array, families 
+summary: ONTAP no admite la mezcla de algunos tipos de almacenamiento en los agregados. Para ayudarle a determinar los LUN de cabina que se pueden combinar en un agregado, las cabinas de almacenamiento de cada proveedor se agrupan en familias. Cuando se crean agregados, no se pueden mezclar LUN de cabina de diferentes proveedores y de diferentes familias de cabinas de almacenamiento en el mismo agregado. 
+---
+= Familias de cabinas de almacenamiento EMC Symmetrix
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP no admite la mezcla de algunos tipos de almacenamiento en los agregados. Para ayudarle a determinar los LUN de cabina que se pueden combinar en un agregado, las cabinas de almacenamiento de cada proveedor se agrupan en familias. Cuando se crean agregados, no se pueden mezclar LUN de cabina de diferentes proveedores y de diferentes familias de cabinas de almacenamiento en el mismo agregado.
+
+Los sistemas ONTAP admiten las siguientes familias de cabinas de almacenamiento de EMC Symmetrix:
+
+* Familia 1: VMAX
+* Familia 2: VMAX3
+
+
+La matriz de interoperabilidad es la autoridad final para obtener información sobre las cabinas de almacenamiento compatibles con cada proveedor.
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

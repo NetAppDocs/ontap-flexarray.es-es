@@ -1,0 +1,86 @@
+---
+permalink: install/concept_example_of_a_configuration_with_multiple_lun_groups.html 
+sidebar: sidebar 
+keywords: example, configuration, multiple, lun, groups 
+summary: Puede utilizar una configuración de varios grupos de LUN para mejorar el rendimiento del sistema distribuyendo la carga de trabajo entre varios puertos de destino. 
+---
+= Ejemplo de una configuración con varios grupos de LUN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede utilizar una configuración de varios grupos de LUN para mejorar el rendimiento del sistema distribuyendo la carga de trabajo entre varios puertos de destino.
+
+La configuración de varios grupos de LUN es compatible con la mayoría de las cabinas de almacenamiento. Consulte _Matriz de interoperabilidad_ para confirmar que esta configuración es compatible con la cabina de almacenamiento.
+
+En la siguiente ilustración, se muestra cómo un par de puertos de iniciador FC (0C y 0f) en un sistema ONTAP tiene acceso a un grupo de LUN a través de un par de puertos de cabina de almacenamiento, y un segundo par de puertos de iniciador FC (0A y 0h) accede a un segundo grupo de LUN de la misma cabina de almacenamiento a través de un par de puertos de cabina de almacenamiento diferente.
+
+Esta configuración se conoce como _independiente con dos grupos de LUN de cabina de 2 puertos_. Una configuración de varios grupos de LUN puede tener un par de alta disponibilidad en lugar de un sistema independiente.
+
+image::../media/multiple_lun_groups_with_stand_alone_6xxx_array_controller.gif[Este gráfico se describe con el texto circundante.]
+
+Esta configuración de varios grupos de LUN le permite distribuir las I/O entre los grupos RAID (grupos de paridad) de la cabina de almacenamiento. La configuración se configura para que las diferentes parejas de puertos de iniciador FC accedan a diferentes grupos de LUN en la cabina de almacenamiento. El sistema ONTAP ve cualquier LUN de cabina determinado solo por dos rutas, porque un LDEV (dispositivo lógico) determinado está asignado solo a dos puertos redundantes de la cabina de almacenamiento. Se accede a cada grupo de LUN mediante un par de puertos de destino diferente.
+
+Cada LDEV se identifica externamente con un ID de LUN. El LDEV debe asignarse al mismo ID de LUN en todos los puertos de cabina de almacenamiento mediante los que podrá ser visible para los sistemas ONTAP.
+
+[NOTE]
+====
+El mismo ID de LUN no puede hacer referencia a dos LDEVs diferentes, aunque las LUN que utilizan el mismo ID estén en grupos de hosts diferentes en un puerto de destino. Aunque la reutilización de ID de LUN no es compatible con el mismo puerto de destino, se admite la reutilización de ID de LUN en una cabina de almacenamiento si los LUN se asignan a puertos de cabina de almacenamiento diferentes.
+
+====
+La siguiente tabla resume la división en zonas en este ejemplo. La estrategia de división en zonas recomendada es la división en zonas de iniciador único.
+
+|===
+| Zona | Puerto iniciador FC en el sistema ONTAP | Cabina de almacenamiento 
+
+
+ a| 
+Interruptor 1
+
+
+
+ a| 
+z1
+ a| 
+Puerto 0A
+ a| 
+Controlador 1 Puerto B
+
+
+
+ a| 
+z2
+ a| 
+Puerto 0C
+ a| 
+Controlador 1 Puerto A
+
+
+
+ a| 
+Interruptor 2
+
+
+
+ a| 
+z3
+ a| 
+Puerto 0f
+ a| 
+Controlador 2 Puerto A
+
+
+
+ a| 
+z4
+ a| 
+Puerto 0h
+ a| 
+Controlador 2 Puerto B
+
+|===
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

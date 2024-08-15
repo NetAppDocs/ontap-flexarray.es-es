@@ -1,0 +1,14 @@
+---
+permalink: install/reference_relationship_between_zoning_and_host_group_configuration.html 
+sidebar: sidebar 
+keywords: relationship, between, zone, host, group, configuration 
+summary: Al corregir errores de configuración de la división en zonas, a veces también tiene que cambiar la configuración del grupo de hosts y lo contrario. 
+---
+= Relación entre la división en zonas y la configuración del grupo de hosts
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Al corregir errores de configuración de la división en zonas, a veces también tiene que cambiar la configuración del grupo de hosts y lo contrario.

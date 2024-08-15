@@ -1,0 +1,37 @@
+---
+permalink: implement-third-party/concept_attaching_fc_initiator_port_to_multiple_targets_ports.html 
+sidebar: sidebar 
+keywords: attach, fc initiator, port, multiple targets, ports 
+summary: Puede conectar un puerto de iniciador FC de un sistema ONTAP a varios puertos objetivo de cabinas de almacenamiento independientes dentro de la misma familia. Esta configuración es compatible con las configuraciones de MetroCluster en ONTAP. 
+---
+= Conectando el puerto de iniciador de FC a varios puertos de destinos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Puede conectar un puerto de iniciador FC de un sistema ONTAP a varios puertos objetivo de cabinas de almacenamiento independientes dentro de la misma familia. Esta configuración es compatible con las configuraciones de MetroCluster en ONTAP.
+
+ONTAP admite el uso compartido de un puerto de iniciador FC con varios puertos de destino tanto en parejas de alta disponibilidad como en sistemas independientes. Esta configuración se admite para su uso con todas las cabinas de almacenamiento enumeradas en la matriz de interoperabilidad compatibles con la versión de ONTAP que se ejecuta en el sistema.
+
+[NOTE]
+====
+Para obtener detalles sobre cómo compartir un puerto iniciador de FC con varios puertos de destino y la división en zonas, consulte la información en _Referencia y requisitos de instalación de la virtualización FlexArray_
+
+====
+
+
+== El puerto de iniciador único FC de ONTAP se conecta a los puertos de destino en cabinas de almacenamiento independientes
+
+El siguiente ejemplo muestra un par de alta disponibilidad en el que un único puerto iniciador FC de ONTAP se conecta a varios puertos de destino en diferentes cabinas de almacenamiento:
+
+image::../media/shared_initiator_ports_different_arrays.gif[Las conexiones y la zonificación se describen en el texto circundante.]
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/install/index.html["Referencias y requisitos de instalación de la virtualización FlexArray"]
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Instalación y configuración de MetroCluster estructural"]

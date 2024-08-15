@@ -1,0 +1,40 @@
+---
+permalink: install/task_preparing_a_storage_array_for_use_with_ontap_systems.html 
+sidebar: sidebar 
+keywords: prepare, storage, array, use, ontap, systems 
+summary: Antes de poder comenzar a configurar sistemas ONTAP en una configuración con LUN de cabina, el administrador de la cabina de almacenamiento debe preparar el almacenamiento para su uso con ONTAP. 
+---
+= Preparar una cabina de almacenamiento para usar con sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de poder comenzar a configurar sistemas ONTAP en una configuración con LUN de cabina, el administrador de la cabina de almacenamiento debe preparar el almacenamiento para su uso con ONTAP.
+
+*Lo que necesitará*
+
+Las cabinas de almacenamiento, el firmware y los switches que planea utilizar en la configuración deben ser compatibles con la versión de ONTAP específica.
+
+* https://mysupport.netapp.com/NOW/products/interoperability["Interoperabilidad de NetApp"]
++
+En IMT, puede utilizar el campo solución de almacenamiento para seleccionar su solución de MetroCluster. Utilice el *Explorador de componentes* para seleccionar los componentes y la versión ONTAP para refinar la búsqueda. Puede hacer clic en *Mostrar resultados* para mostrar la lista de configuraciones compatibles que coinciden con los criterios.
+
+* https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+Debe coordinarse con el administrador de la cabina de almacenamiento para realizar esta tarea en la cabina de almacenamiento.
+
+.Pasos
+. Cree al menos cuatro LUN en la cabina de almacenamiento para que los utilicen los sistemas ONTAP.
++
+Cada nodo de la pareja de alta disponibilidad requiere un LUN de cabina para el volumen raíz y un LUN de cabina para volcados principales.
+
+. Configure los parámetros en la cabina de almacenamiento que se necesitan para trabajar con ONTAP.
++
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"]
+** https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implementación de virtualización FlexArray para almacenamiento E-Series de NetApp"]
+
+
+

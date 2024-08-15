@@ -1,0 +1,75 @@
+---
+permalink: install/concept_target_port_utilization_policy_settings.html 
+sidebar: sidebar 
+keywords: target, port, utilization, policy, settings, output, examples, array 
+summary: ONTAP puede detectar eventos de contención de recursos, como que la cola de I/O se está llenando, los comandos se agotan el tiempo de espera o el recurso de HBA se agota, en un puerto de destino. 
+---
+= Configuración de la política de utilización del puerto de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP puede detectar eventos de contención de recursos, como que la cola de I/O se está llenando, los comandos se agotan el tiempo de espera o el recurso de HBA se agota, en un puerto de destino.
+
+Puede establecer las políticas de utilización de puertos de destino mediante `storage array port modify` el comando si detecta dichos eventos en un puerto de destino de cabina determinado.
+
+En la siguiente tabla se describen las dos políticas de utilización asociadas a un puerto de destino:
+
+|===
+| Política | Descripción 
+
+
+ a| 
+* normal*
+ a| 
+Cuando ONTAP detecta la contención de recursos de puerto de destino en un puerto de destino de cabina determinado, reduce la profundidad de cola del puerto de destino y regula la I/O al puerto de destino. En este modo, la reducción de la profundidad de la cola de puerto de destino es menor que la política *defer* para cada evento de contención de recursos de puerto de destino. El aumento subsiguiente en la profundidad de la cola del puerto de destino es más rápido que la política *defer*. *normal* es la política predeterminada.
+
+
+
+ a| 
+*diferir*
+ a| 
+Cuando ONTAP detecta la contención de recursos de puerto de destino en un puerto de destino de cabina determinado, reduce la profundidad de cola del puerto de destino y regula la I/O al puerto de destino. En este modo, la reducción de la profundidad de la cola del puerto de destino es mayor que la política *normal* para cada evento de contención de recursos del puerto de destino. El aumento subsiguiente en la profundidad de la cola del puerto de destino es más lento que la política de utilización * normal *.
+
+|===
+
+
+== Ejemplos de salida para ver y modificar las políticas de utilización de puertos de destino de la matriz
+
+El siguiente comando muestra la política de utilización de puerto de destino asociada a un puerto de destino de la cabina:
+
+[listing]
+----
+vgv3170_jon::> storage array port show -wwnn 2703750270235
+        Array Name: HITACHI_DF600F_1
+              WWNN: 2703750270235
+              WWPN: 2703750270235
+   Connection Type: fabric
+       Switch Port: vgbr300s89:9
+        Link Speed: 4 GB/s
+   Max Queue Depth: 1024
+Utilization Policy: defer
+                              LUN                                        Link
+Node              Initiator  Count   IOPS    KB/s    %busy    %waiting   Errs
+----------------  ---------  -----  ------  ------  -------  ----------  ----
+     vgv3170f54a         0a      2       50   1956       85           0     0
+     vgv3170f54b         0a      2      350  15366      100          40     0
+----
+De forma predeterminada, la política de E/S para un puerto de destino de matriz determinado es *normal*. Puede modificar la política de E/S asociada al puerto ejecutando el siguiente comando:
+
+[listing]
+----
+vgv3070f50ab::> storage array port modify -wwpn 50014380025d1509 -utilization-policy ?
+
+
+
+normal      This policy aggressively competes for target port resources, in effect competing with other hosts.
+             (normal)
+
+defer      	This policy does not aggressively compete for target port resources, in effect deferring to other hosts.
+
+vgv3070f50ab::> storage array port modify -wwpn 50014380025d1509 -utilization-policy defer
+1 record updated.
+----

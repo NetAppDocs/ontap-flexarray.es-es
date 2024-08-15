@@ -1,0 +1,14 @@
+---
+permalink: implement-third-party/reference_emc_vnx_storage_arrays.html 
+sidebar: sidebar 
+keywords: emc, vnx, storage, arrays 
+summary: Debe cumplir requisitos específicos al configurar las cabinas de almacenamiento EMC VNX para que funcionen con sistemas ONTAP que utilizan los LUN de cabina. Estos requisitos incluyen establecer parámetros de configuración en las cabinas de almacenamiento y poner en marcha solamente configuraciones compatibles. 
+---
+= Cabinas de almacenamiento EMC VNX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe cumplir requisitos específicos al configurar las cabinas de almacenamiento EMC VNX para que funcionen con sistemas ONTAP que utilizan los LUN de cabina. Estos requisitos incluyen establecer parámetros de configuración en las cabinas de almacenamiento y poner en marcha solamente configuraciones compatibles.

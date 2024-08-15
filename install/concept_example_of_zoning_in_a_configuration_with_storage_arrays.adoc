@@ -1,0 +1,88 @@
+---
+permalink: install/concept_example_of_zoning_in_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: example, zone, configuration, storage, arrays, single, 4-port, lun, group 
+summary: El uso de la seguridad de LUN al configurar los switches para la división en zonas garantiza que los diferentes hosts no vean las LUN asignadas a otro host. 
+---
+= Ejemplo de la división en zonas en una configuración con cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+El uso de la seguridad de LUN al configurar los switches para la división en zonas garantiza que los diferentes hosts no vean las LUN asignadas a otro host.
+
+
+
+== La división en zonas en una configuración de grupo de LUN de un único puerto con 4 puertos
+
+image::../media/one_4_port_array_lun_gp.gif[Este gráfico se describe con el texto circundante.]
+
+La siguiente tabla muestra la división en zonas para este ejemplo de configuración de los sistemas ONTAP en un par de alta disponibilidad. La estrategia de división en zonas recomendada es la división en zonas de iniciador único.
+
+|===
+| Zona | Sistema ONTAP de NetApp |  | Cabina de almacenamiento |  
+
+
+ a| 
+Interruptor 1
+
+
+
+ a| 
+z1
+ a| 
+vs1
+ a| 
+Puerto 0A
+ a| 
+Controlador 1
+ a| 
+Puerto 1A
+
+
+
+ a| 
+z2
+ a| 
+vs2
+ a| 
+Puerto 0A
+ a| 
+Controlador 1
+ a| 
+Puerto 1B
+
+
+
+ a| 
+Interruptor 2
+
+
+
+ a| 
+z3
+ a| 
+vs1
+ a| 
+Puerto 0C
+ a| 
+Controlador 2
+ a| 
+Puerto 2A
+
+
+
+ a| 
+z4
+ a| 
+vs2
+ a| 
+Puerto 0C
+ a| 
+Controlador 2
+ a| 
+Puerto 2B
+
+|===

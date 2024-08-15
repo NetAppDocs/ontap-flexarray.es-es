@@ -1,0 +1,45 @@
+---
+permalink: implement-third-party/reference_requirements_for_configuring_ibm_xiv_storage_arrays_with_data_ontap_systems.html 
+sidebar: sidebar 
+keywords: requirements, configuring, ibm xiv, arrays, ontap, systems, parameter, settings 
+summary: La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP. 
+---
+= Requisitos para configurar matrices IBM XIV con sistemas ONTAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La cabina de almacenamiento requiere ciertos parámetros de configuración para que la cabina de almacenamiento funcione correctamente con los sistemas ONTAP.
+
+
+
+== Ajustes de parámetros del sistema
+
+En la siguiente tabla, se enumeran los ajustes de los parámetros del sistema para las matrices IBM XIV Gen3:
+
+|===
+| Parámetro | Ajuste 
+
+
+ a| 
+`Type`
+ a| 
+Predeterminado
+
+
+
+ a| 
+`Host`
+ a| 
+Nombre de host proporcionado por el usuario
+
+
+
+ a| 
+`Cluster`
+ a| 
+Nombre de clúster proporcionado por el usuario
+
+|===

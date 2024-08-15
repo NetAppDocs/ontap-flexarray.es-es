@@ -1,0 +1,41 @@
+---
+permalink: implement-third-party/task_preparing_hp_eva_storage_arrays_for_ndu.html 
+sidebar: sidebar 
+keywords: prepare, hp, eva, storage, arrays, ndu 
+summary: Las matrices de almacenamiento HP EVA tienden a desconectar los puertos de destino durante una actualización de firmware. ONTAP ofrece comandos que aumentan la resiliencia de ONTAP para que el sistema ONTAP no se interrumpa si los puertos de destino se desconectan durante la actualización de firmware. Estos comandos solo se pueden utilizar con sistemas de almacenamiento que ejecuten ONTAP. 
+---
+= Preparación de matrices de almacenamiento HP EVA para NDU
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Las matrices de almacenamiento HP EVA tienden a desconectar los puertos de destino durante una actualización de firmware. ONTAP ofrece comandos que aumentan la resiliencia de ONTAP para que el sistema ONTAP no se interrumpa si los puertos de destino se desconectan durante la actualización de firmware. Estos comandos solo se pueden utilizar con sistemas de almacenamiento que ejecuten ONTAP.
+
+Debe seguir las directrices proporcionadas por HP para realizar la actualización de firmware, incluidas las directrices sobre la recomendación de carga (HP EVA). Sólo puede actualizar a firmware compatible con HP. Este procedimiento hace referencia al tipo de actualización de firmware de HP EVA _ONLINE UPGRADE_.
+
+[NOTE]
+====
+Durante la actualización del firmware, se reinician ambos controladores HP EVA.
+
+====
+Este procedimiento le indica que utilice comandos ONTAP para aumentar la resiliencia de ONTAP durante la actualización de firmware. Cuando finaliza la actualización del firmware, es necesario volver a utilizar los comandos de la ONTAP para devolver los puertos a su modo operativo normal.
+
+.Pasos
+. En el sistema ONTAP, defina el nivel de privilegio de la sesión de comandos en AVANZADO: *`set -privilege advanced`*
+. Establezca `is-upgrade-pending` el parámetro en *true* para la matriz de almacenamiento HP EVA que se está actualizando el firmware *`storage array modify -name array_name -is-upgrade-pending true`: *
+. En la cabina de almacenamiento, inicie la actualización de firmware.
+. Una vez completada la actualización del firmware, establezca el nivel de privilegio en ADVANCED de nuevo, si es necesario, y luego, en el sistema ONTAP, establezca `is-upgrade-pending` el parámetro en *false* para que los puertos de la cabina de almacenamiento vuelvan a su funcionamiento normal *`storage array modify -name array_name -is-upgrade-pending false`: *
++
+Si no salió del modo avanzado en el paso 2, no es necesario volver a acceder a él.
+
++
+ `is-upgrade-pending`El parámetro contiene las siguientes funciones para garantizar un uso adecuado del comando:
+
++
+** Si se intenta establecer `is-upgrade-pending` en *false* mientras la actualización está en curso en la cabina de almacenamiento, el comando falla y se devuelve un mensaje de EMS.
+** Si `is-upgrade-pending` el estado no se devuelve a *false* dentro de los 60 minutos desde el momento en que se establece en *true*, los mensajes EMS se registran cada hora hasta que `is-upgrade-pending` se devuelven a *false*.
+
+
+

@@ -1,0 +1,30 @@
+---
+permalink: install/concept_considerations_when_planning_for_disk_ownership.html 
+sidebar: sidebar 
+keywords: considerations, plan, disk, ownership 
+summary: Si va a poner en marcha varios sistemas ONTAP para usarlos con LUN de cabina, debe determinar de qué sistema es el propietario de qué LUN de cabina. La propiedad de disco garantiza que solo el sistema ONTAP propietario de un LUN de cabina determinado pueda leer datos y escribir datos en el LUN de la cabina. 
+---
+= Consideraciones que se deben tener en cuenta al planificar la propiedad del disco
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si va a implementar varios sistemas ONTAP para usarlos con LUN de cabina, debe determinar qué system _own_ qué LUN de cabina. La propiedad de disco garantiza que solo el sistema ONTAP propietario de un LUN de cabina determinado pueda leer datos y escribir datos en el LUN de la cabina.
+
+Debe tener en cuenta lo siguiente al planificar qué sistema será propietario de qué LUN de cabina:
+
+* Límite máximo de dispositivos asignados que admite la plataforma
++
+_Hardware Universe_ muestra el límite máximo de dispositivos asignados que es compatible con diferentes plataformas. Este es un límite codificado. Si el sistema utiliza tanto LUN como discos de cabina, este límite máximo es el máximo de discos y LUN de cabina combinados. Debe tener en cuenta los dos tipos de almacenamiento cuando se determina cuántos LUN y discos de cabina se pueden asignar a un sistema.
+
+* La cantidad de carga que espera generar las distintas aplicaciones utilizadas en su entorno
++
+Es probable que algunos tipos de aplicaciones generen muchas solicitudes, mientras que otras (por ejemplo, aplicaciones de archivado) generan menos solicitudes. Es posible que desee considerar la ponderación de asignaciones de propiedad en función de la carga esperada de aplicaciones específicas.
+
+
+
+*Información relacionada*
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

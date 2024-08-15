@@ -1,0 +1,44 @@
+---
+permalink: install/concept_available_lun_security_methods.html 
+sidebar: sidebar 
+keywords: available, lun, security, methods, port-level, storage, array, dedicate, ontap 
+summary: Diversos métodos de seguridad de LUN le ayudan a designar qué hosts pueden acceder a LUN de cabina determinados. Puede utilizar productos de seguridad a nivel de puertos o de LUN, o dedicar un almacenamiento para que lo usen los sistemas ONTAP. 
+---
+= Métodos de seguridad LUN disponibles
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Diversos métodos de seguridad de LUN le ayudan a designar qué hosts pueden acceder a LUN de cabina determinados. Puede utilizar productos de seguridad a nivel de puertos o de LUN, o dedicar un almacenamiento para que lo usen los sistemas ONTAP.
+
+
+
+== Seguridad a nivel de puertos
+
+Es posible usar la seguridad a nivel de puertos para presentar solo los LUN de cabina de un host en particular. Ese puerto pasa a estar dedicado a ese host.
+
+No todas las cabinas de almacenamiento admiten la seguridad a nivel de puerto. Algunas cabinas de almacenamiento presentan todas las LUN en todos los puertos de forma predeterminada y no proporcionan una forma de restringir la visibilidad de las LUN a hosts particulares. Para estas cabinas, debe usar un producto de seguridad de LUN o dedicar la cabina de almacenamiento al sistema ONTAP. Debe comprobar la documentación de la cabina de almacenamiento para determinar si la cabina de almacenamiento es compatible con la seguridad en el nivel de puertos.
+
+
+
+== Productos de seguridad de LUN
+
+Puede usar un producto de seguridad LUN para controlar los hosts que se dividen en zonas en el mismo puerto de modo que solo puedan acceder a LUN de cabina específicos a través de ese puerto. Esto evita que otros hosts accedan a esos mismos LUN de cabina enmascarándolos desde los otros hosts.
+
+
+
+== Dedique la cabina de almacenamiento para el uso de ONTAP
+
+Es posible dedicar la cabina de almacenamiento para que la utilicen los sistemas ONTAP. En este caso, ningún host distinto de los sistemas ONTAP está conectado a la cabina de almacenamiento.
+
+Debe utilizar la seguridad de la división en zonas y de LUN para lograr más protección y redundancia para los sistemas ONTAP.
+
+Además de seguir los métodos de seguridad de LUN, también debe comprobar cualquier detalle adicional sobre la seguridad de LUN para las cabinas de almacenamiento de su proveedor. Algunas cabinas de almacenamiento deben estar dedicadas para que las utilicen los sistemas ONTAP.
+
+*Información relacionada*
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-third-party/index.html["Implementación de virtualización FlexArray para almacenamiento de terceros"]
+
+https://docs.netapp.com/us-en/ontap-flexarray/implement-e-series/index.html["Implementación de virtualización FlexArray para almacenamiento E-Series de NetApp"]

@@ -1,0 +1,14 @@
+---
+permalink: install/concept_planning_a_port_to_port_connectivity_scheme.html 
+sidebar: sidebar 
+keywords: plan, port to port, connectivity, scheme 
+summary: La planificación de la conectividad entre los puertos de iniciador FC en sistemas ONTAP y los puertos de la cabina de almacenamiento consiste en determinar cómo lograr la redundancia y cumplir los requisitos sobre el número de rutas a un LUN de cabina. 
+---
+= Planificación de un esquema de conectividad puerto a puerto
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La planificación de la conectividad entre los puertos de iniciador FC en sistemas ONTAP y los puertos de la cabina de almacenamiento consiste en determinar cómo lograr la redundancia y cumplir los requisitos sobre el número de rutas a un LUN de cabina.

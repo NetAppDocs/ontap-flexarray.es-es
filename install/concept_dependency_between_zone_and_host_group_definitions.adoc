@@ -1,0 +1,90 @@
+---
+permalink: install/concept_dependency_between_zone_and_host_group_definitions.html 
+sidebar: sidebar 
+keywords: dependency, between, zone, host, group, definitions, common, errors, cascading, effect 
+summary: Los errores realizados en las definiciones de zona pueden requerir la reconfiguración de las definiciones de grupo de hosts y la inversa. 
+---
+= Dependencia entre definiciones de zona y de grupo de hosts
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los errores realizados en las definiciones de zona pueden requerir la reconfiguración de las definiciones de grupo de hosts y la inversa.
+
+Cuando se crea una definición de zona, se especifican dos puertos: El WWPN del puerto iniciador de FC en el sistema ONTAP y el WWPN o WWNN del puerto de la cabina de almacenamiento para esa zona. Del mismo modo, cuando el grupo de hosts del sistema ONTAP se configura en la cabina de almacenamiento, se especifican los WWPN de los puertos del iniciador FC que se desean formar parte del grupo de hosts.
+
+El orden típico de la configuración es el siguiente:
+
+. Construir una definición de zona.
+. Construya el grupo de hosts en la cabina de almacenamiento (seleccionando el puerto WWPN del iniciador de FC en el sistema ONTAP en la lista de opciones).
+. Presente los LUN de cabina a los puertos.
+
+
+Sin embargo, los grupos de hosts a veces se configuran antes de definiciones de zona, lo que requiere introducir manualmente WWPN en la configuración del grupo de hosts en la cabina de almacenamiento.
+
+
+
+== Errores comunes
+
+En la salida ONTAP, los puertos del iniciador de FC del sistema ONTAP se identifican por número del adaptador, por ejemplo, 0A, 0b, 0C, 0d, y así sucesivamente para los modelos con puertos integrados. Los WWPN se muestran en la interfaz gráfica de usuario del switch y en la interfaz gráfica de usuario de la cabina de almacenamiento. Dado que los WWPN son largos y en formato hexadecimal, los siguientes errores son comunes:
+
+[cols="2*"]
+|===
+| Cómo se especifican los WWPN | Error común 
+
+
+ a| 
+Los tipos de administrador en WWPN
+ a| 
+Se ha cometido un error de escritura.
+
+
+
+ a| 
+Los WWPN se detectan automáticamente por el switch
+ a| 
+Se ha seleccionado el WWPN de puerto iniciador de FC incorrecto en la lista de opciones.
+
+|===
+[NOTE]
+====
+Cuando se cablean juntos los sistemas ONTAP, los switches y la cabina de almacenamiento, el switch detecta automáticamente los WWPN de los sistemas ONTAP y los puertos de la cabina de almacenamiento. Los WWPN están entonces disponibles en listas de opciones en la GUI del switch, lo que permite la selección del WWPN de cada miembro de la zona en lugar de escribirlo. Para eliminar la posibilidad de escribir errores, se recomienda que el switch detecte WWPN.
+
+====
+
+
+== Efecto de los errores en cascada
+
+Un primer paso obvio a la hora de solucionar problemas con una configuración estructural es comprobar si la división en zonas está configurada correctamente. También es importante tener en cuenta la relación entre el grupo de hosts y las definiciones de zona. Para solucionar un problema, es posible que sea necesario reconfigurar la definición de zona y la definición del grupo de hosts, en función de dónde se haya producido el error durante el proceso de configuración.
+
+Si el switch detecta automáticamente WWPN y las definiciones de zona se configuran primero, los WWPN de los puertos del iniciador de FC que se utilizarán para acceder a los LUN en la cabina de almacenamiento se propagan automáticamente a las listas de opciones de configuración de grupos de hosts en la GUI de la cabina de almacenamiento. Por lo tanto, todos los errores de división en zonas también se propagan a las listas de opciones de grupos de hosts de la cabina de almacenamiento. Las listas de opciones muestran los WWPN largos y hexadecimales en lugar de las etiquetas de puertos del iniciador de FC cortas que se pueden ver en el sistema ONTAP (por ejemplo, 0A, 0b, etc.). Por lo tanto, no es fácil ver que el WWPN que esperaba que estuviera listado no está allí.
+
+La siguiente tabla muestra los efectos de ciertos errores:
+
+[cols="3*"]
+|===
+| Definición de zona en el conmutador | Configuración del grupo de hosts en la cabina de almacenamiento | Síntoma en salida ONTAP 
+
+
+ a| 
+El puerto del iniciador FC en la definición de zona es incorrecto. Esto provocaba la propagación del WWPN de puerto iniciador FC incorrecto a la configuración del grupo de hosts.
+ a| 
+Se ha seleccionado el WWPN del puerto del iniciador de FC que se muestra en la lista de opciones, no el WWPN que pretendía.
+ a| 
+Las LUN de cabina no son visibles por el puerto del iniciador FC donde serían visibles las LUN esperadas.
+
+
+
+ a| 
+La definición de la zona incluye el puerto de iniciador FC correcto.
+ a| 
+El WWPN en la definición del grupo de hosts es incorrecto debido a una de las siguientes razones:
+
+* Se ha seleccionado el WWPN incorrecto.
+* Los grupos de hosts se configuraron manualmente antes de que se configurara la definición de zona y se produjo un error de escritura al escribir el WWPN del puerto del iniciador de FC.
+
+ a| 
+
+|===

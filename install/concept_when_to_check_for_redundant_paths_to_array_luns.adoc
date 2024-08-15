@@ -1,0 +1,32 @@
+---
+permalink: install/concept_when_to_check_for_redundant_paths_to_array_luns.html 
+sidebar: sidebar 
+keywords: when, check, redundant, paths, array, luns 
+summary: Debe comprobar si hay rutas redundantes a un LUN de cabina después de la instalación y durante las actividades de mantenimiento de la estructura. 
+---
+= Cuándo comprobar si hay rutas redundantes a los LUN de cabina
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe comprobar si hay rutas redundantes a un LUN de cabina después de la instalación y durante las actividades de mantenimiento de la estructura.
+
+Cuando realice las siguientes actividades, debe volver a comprobar la redundancia de ruta:
+
+* Instalación inicial
+* Mantenimiento de la estructura, por ejemplo:
++
+** Antes, durante y después de una actualización de la infraestructura
+** Antes y después de retirar un interruptor de servicio para mantenimiento
++
+Asegúrese de que las rutas se hayan configurado como rutas redundantes antes de quitar un switch entre los sistemas ONTAP y la cabina de almacenamiento para que no se interrumpa el acceso a los LUN de cabina.
+
+** Antes y después de mantener el hardware en una cabina de almacenamiento
++
+Por ejemplo, debe volver a comprobar la redundancia de ruta al mantener el componente de hardware en el que se encuentran los adaptadores y puertos del host. (El nombre de este componente varía en modelos de cabina de almacenamiento diferentes).
+
+
+
+

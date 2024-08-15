@@ -1,0 +1,24 @@
+---
+permalink: implement-third-party/concept_stand_alone_system_with_two_2_port_array_lun_groups.html 
+sidebar: sidebar 
+keywords: stand-alone, system, two, 2-port, array, lun, groups 
+summary: En un sistema ONTAP independiente en una configuración simple estructural, cada par de puertos de iniciador de FC presente en el sistema ONTAP accede a un grupo de LUN de cabina aparte. 
+---
+= Sistema independiente con dos grupos de LUN de cabinas con 2 puertos
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En un sistema ONTAP independiente en una configuración simple estructural, cada par de puertos de iniciador de FC presente en el sistema ONTAP accede a un grupo de LUN de cabina aparte.
+
+Esta configuración se admite para su uso con todas las cabinas de almacenamiento enumeradas en la matriz de interoperabilidad compatibles con la versión de ONTAP que se ejecuta en el sistema.
+
+En la siguiente ilustración se muestra la configuración sencilla conectada a la estructura:
+
+image::../media/multiple_lun_groups_with_stand_alone_6xxx_array_controller.gif[Este gráfico se describe con el texto circundante.]
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

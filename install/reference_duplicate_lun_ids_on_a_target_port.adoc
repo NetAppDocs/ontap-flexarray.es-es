@@ -1,0 +1,213 @@
+---
+permalink: install/reference_duplicate_lun_ids_on_a_target_port.html 
+sidebar: sidebar 
+keywords: duplicate, lun, ids, target, port, storage, errors, problem, resolution, show, message 
+summary: Cada LUN de cabina en el mismo puerto de destino de cabina de almacenamiento debe tener un ID de LUN único. El resultado que muestran errores de almacenamiento identifica las LUN que se presentan con el mismo ID de LUN en el mismo puerto de destino. 
+---
+= Duplicar ID de LUN en un puerto de destino
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cada LUN de cabina en el mismo puerto de destino de cabina de almacenamiento debe tener un ID de LUN único.  `storage errors show`El resultado identifica las LUN que se presentan con el mismo ID de LUN en el mismo puerto de destino.
+
+
+
+== Los errores de almacenamiento muestran un mensaje
+
+[listing]
+----
+
+NAME (UID), port WWPNx: LUN x occurs more than once.  LUNs cannot be reused on the same array target port.
+----
+
+
+== Explicación
+
+La causa habitual de los ID de LUN duplicados en un puerto de destino es un error de división en zonas. Un administrador coloca los iniciadores FC de los sistemas ONTAP en diferentes grupos de hosts para crear varios grupos de LUN en una cabina de almacenamiento, pero, luego, se produce un error de división en zonas que permite a los iniciadores de los distintos grupos de hosts acceder al mismo puerto de destino.
+
+Cuando se produce este tipo de error de división en zonas, `storage array config show` la salida muestra dos grupos de LUN con los mismos puertos de destino.
+
+
+
+== Situación de problema
+
+El administrador desea asignar cuatro LDEVs (a, b, c y d) para uso de ONTAP, dos LDEVs en cada uno de dos grupos de LUN. Para esta situación, supongamos que la cabina de almacenamiento presenta LDVE a los puertos de iniciador sin tener en cuenta el puerto de destino mediante el cual el iniciador accede a las cabinas de almacenamiento; es decir, los grupos de hosts son _NO_ específicos de un puerto de destino. La división en zonas debe utilizarse para crear grupos LUN controlando a qué puertos de destino accede cada iniciador.
+
+[NOTE]
+====
+Para algunas matrices de almacenamiento, como HP EVA, los grupos de hosts son los mismos para todos los puertos de destino. Para otras cabinas de almacenamiento, como Hitachi, los grupos de hosts son específicos a un puerto de destino.
+
+====
+El administrador configura correctamente dos grupos de hosts, como sigue, para que haya dos grupos de LUN:
+
+|===
+| Grupo de hosts | Iniciadores FC del grupo de hosts | LDEVs y los ID de LUN asociados 
+
+
+ a| 
+1
+ a| 
+0a0c
+ a| 
+LDEV a/LUN 1LDEV b/LUN 2
+
+
+
+ a| 
+2
+ a| 
+0b 0d
+ a| 
+LDEV c/LUN 1LDEV d/LUN 2
+
+|===
+La división en zonas se debe configurar de la siguiente manera:
+
+* Los iniciadores del grupo de hosts 1, 0A y 0C, deben dividirse en el par de puertos de destino 1A y 2A.
+* Los iniciadores del grupo de hosts 2, 0b y 0d, deben dividirse en el par de puertos de destino 1B y 2B.
+
+
+Observe en la tabla anterior que LDEV a y LDEV c tienen el mismo ID de LUN (L1). Del mismo modo, LDEV b y LDEV d tienen el mismo ID de LUN (L2). Si la división en zonas se configura correctamente, esta duplicación de los ID de LUN no es un problema porque es posible reutilizar los ID de LUN en diferentes puertos de destino.
+
+En esta situación, el problema es que algunos iniciadores se colocan en la zona incorrecta cuando se configura la división en zonas, como se muestra en la siguiente tabla:
+
+|===
+| Zona | Sistema ONTAP de NetApp |  | Cabina de almacenamiento |  
+
+
+ a| 
+Interruptor vnbr200es25
+
+
+
+ a| 
+z1
+ a| 
+vs1
+ a| 
+Puerto 0A
+ a| 
+Controlador 1
+ a| 
+Puerto 1A
+
+
+
+ a| 
+z2
+ a| 
+vs1
+ a| 
+Puerto 0b
+ a| 
+Controlador 1
+ a| 
+Puerto 1A (en lugar de 1B)
+
+
+
+ a| 
+Conmutador vnci9124s53
+
+
+
+ a| 
+z3
+ a| 
+vs1
+ a| 
+Puerto 0C
+ a| 
+Controlador 2
+ a| 
+Puerto 2A
+
+
+
+ a| 
+z4
+ a| 
+vs1
+ a| 
+Puerto 0d
+ a| 
+Controlador 2
+ a| 
+Puerto 2A (en lugar de 2B)
+
+|===
+La siguiente ilustración muestra el resultado del error de zonificación:
+
+image::../media/duplicate_lun_ids_on_a_target_port.gif[Este gráfico se describe en el texto adyacente.]
+
+Como puede ver en la ilustración, se crean dos grupos LUN. Sin embargo, debido al error de división en zonas, el grupo de LUN 0 y el grupo de LUN 1 están en el mismo par de puertos de destino (1A y 2A), en lugar de que un grupo de LUN se encuentre en cada par de puertos de destino.
+
+El siguiente `storage array config show` resultado de este ejemplo muestra dos grupos de LUN. El problema es que los dos grupos de LUN tienen los mismos puertos de destino.
+
+[listing]
+----
+
+vs1::> storage array config show
+
+       LUN    LUN
+Node  Group  Count  Array Name   Array Target Ports     Switch Port   Initiator
+----- ----- ------- -----------  -------------------    ----------    ---------
+
+ vs1    0       2   DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr200es25:5  0a
+                                 20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6  0c
+        1       2   DGC_RAID5_1  20:1A:00:a0:b8:0f:ee:04  vnbr200es25:5  0b
+                                 20:2A:00:a0:b8:0f:ee:04  vnci9124s53:6  0d
+
+Warning: Configuration were errors detected.  Use 'storage errors show' for detailed information.
+----
+El siguiente `storage errors show` resultado de este ejemplo identifica las LUN con el problema:
+
+[listing]
+----
+
+vs1::> storage errors show
+
+Disk: EMC-1.1
+UID: UID-a
+----------
+EMC-1.1 (UID-a), port WWPN1: LUN 1 occurs more than once.  LUNs cannot be reused on the same array target port.
+
+
+Disk: EMC-1.2
+UID: UID-b
+----------
+EMC-1.2 (UID-b), port WWPN1: LUN 2 occurs more than once.  LUNs cannot be reused on the same array target port.
+
+
+Disk: EMC-1.3
+UID: UID-c
+----------
+EMC-1.3 (UID-c), port WWPN2: LUN 1 occurs more than once.  LUNs cannot be reused on the same array target port.
+
+
+Disk: EMC-1.4
+UID: UID-d
+----------
+EMC-1.4 (UID-d), port WWPN2: LUN 2 occurs more than once.  LUNs cannot be reused on the same array target port.
+----
+En `storage errors show` este ejemplo, podrá ver que se muestran los UID de los cuatro LDVE, pero solo hay dos ID de LUN únicos, LUN 1 y LUN 2. en lugar de cuatro.
+
+
+
+== Solución de problemas y resolución de problemas
+
+El administrador de la cabina de almacenamiento debe corregir la división en zonas para que los iniciadores de diferentes grupos de hosts no tengan acceso al mismo puerto de destino.
+
+. En `storage array config` la salida, busque los iniciadores que están hablando al mismo puerto de destino.
+. Escriba el siguiente comando para ver los detalles del error: `storage errors show`
+. Determine el LDEV para el que se duplican los ID de LUN.
+. Para cada puerto de destino de la controladora 1 que tenga varios iniciadores del mismo sistema ONTAP asignados, cambie la división en zonas de modo que los dos iniciadores de FC estén _not_ hablando al mismo puerto de destino.
++
+Está realizando este paso porque los iniciadores de diferentes grupos de hosts no deben estar en la misma zona. Es necesario realizar este paso en un iniciador a la vez para que siempre haya una ruta al LUN de la cabina.
+
+. Repita el procedimiento en el controlador 2.
+. Introduzca `storage errors show` en ONTAP y confirme que se ha solucionado el error. ''
+

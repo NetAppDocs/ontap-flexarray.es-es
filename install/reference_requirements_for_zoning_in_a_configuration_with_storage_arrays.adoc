@@ -1,0 +1,27 @@
+---
+permalink: install/reference_requirements_for_zoning_in_a_configuration_with_storage_arrays.html 
+sidebar: sidebar 
+keywords: requirements, zone, configuration, storage, arrays 
+summary: Debe seguir los requisitos de división en zonas de la configuración de ONTAP con cabinas de almacenamiento para garantizar que el sistema ONTAP pueda acceder al conjunto correcto de LUN. 
+---
+= Requisitos para la división en zonas en una configuración con cabinas de almacenamiento
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Debe seguir los requisitos de división en zonas de la configuración de ONTAP con cabinas de almacenamiento para garantizar que el sistema ONTAP pueda acceder al conjunto correcto de LUN.
+
+* La _Matriz de interoperabilidad_ debe identificar un switch y el firmware del switch como compatibles con la configuración de ONTAP.
+* La división en zonas debe configurarse para restringir cada puerto de iniciador a un único puerto de destino en cada cabina de almacenamiento.
+* En el switch, los puertos del sistema ONTAP y los puertos de la cabina de almacenamiento deben asignarse a la misma zona.
++
+Esto permite que los sistemas ONTAP accedan a las LUN en las cabinas de almacenamiento.
+
+* Cuando los puertos de cabina de almacenamiento se comparten en sistemas heterogéneos, no se pueden exponer los LUN de cabina del sistema ONTAP a otros sistemas.
++
+Se debe utilizar seguridad de LUN o enmascaramiento de LUN de cabina para garantizar que las LUN de cabina del almacenamiento de ONTAP solo sean visibles para los sistemas ONTAP.
+
+* No se debe incluir un puerto de configuración de host en la misma zona que un puerto de destino.
+

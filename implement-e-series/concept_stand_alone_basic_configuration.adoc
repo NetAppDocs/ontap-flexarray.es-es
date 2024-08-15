@@ -1,0 +1,24 @@
+---
+permalink: implement-e-series/concept_stand_alone_basic_configuration.html 
+sidebar: sidebar 
+keywords: stand-alone, basic, configuration 
+summary: La configuración básica independiente de un sistema ONTAP que utiliza LUN de cabina es una configuración sencilla conectada a la estructura con un único par de puertos FC que accede a un único grupo de LUN. 
+---
+= Configuración básica autónoma
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configuración básica independiente de un sistema ONTAP que utiliza LUN de cabina es una configuración sencilla conectada a la estructura con un único par de puertos FC que accede a un único grupo de LUN.
+
+Esta configuración se admite para su uso con todas las cabinas de almacenamiento enumeradas en la matriz de interoperabilidad compatibles con la versión de ONTAP que se ejecuta en el sistema.
+
+En la siguiente ilustración, se muestra esta configuración:
+
+image::../media/one_standalone_2_port_array_lun_group_array_port_labels.gif[En una configuración de grupo de LUN de cabina de 2 puertos con un sistema independiente]
+
+*Información relacionada*
+
+https://mysupport.netapp.com/matrix["Herramienta de matriz de interoperabilidad de NetApp"]

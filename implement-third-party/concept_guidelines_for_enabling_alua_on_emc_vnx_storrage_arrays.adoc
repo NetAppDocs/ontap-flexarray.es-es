@@ -1,0 +1,20 @@
+---
+permalink: implement-third-party/concept_guidelines_for_enabling_alua_on_emc_vnx_storrage_arrays.html 
+sidebar: sidebar 
+keywords: guidelines, enabling, alua, emc, vnx, storage arrays 
+summary: 'Se ha añadido compatibilidad con acceso asimétrico de unidad lógica (ALUA) con cabinas CLARiiON y VNX.' 
+---
+= Directrices para habilitar ALUA en cabinas de almacenamiento VNX de EMC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se ha añadido compatibilidad con acceso asimétrico de unidad lógica (ALUA) con cabinas CLARiiON y VNX.
+
+De manera predeterminada, el soporte para ALUA está habilitado en ONTAP. Pero para utilizarlo, es necesario habilitar ALUA en la cabina de almacenamiento.
+
+Debe habilitar ALUA solo en nuevas configuraciones. No se debe habilitar ALUA en una configuración existente.
+
+Si va a configurar ALUA en la cabina de almacenamiento, debe asegurarse de que todos los hosts de un grupo de almacenamiento estén en el mismo modo de conmutación al nodo de respaldo, es decir, el modo de conmutación al nodo de respaldo 4 (ALUA).

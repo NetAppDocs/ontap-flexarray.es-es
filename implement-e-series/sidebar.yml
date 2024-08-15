@@ -1,0 +1,38 @@
+---
+section: implement-e-series
+title: Implementación de soluciones de almacenamiento de E-Series
+url: "/implement-e-series/index.html"
+entries:
+- title: Dónde se encuentra información sobre las configuraciones con cabinas de almacenamiento
+  url: "/implement-e-series/concept_where_to_find_information_for_configurations_with_storage_arrays.html"
+  entries:
+  - title: Dónde se encuentra información sobre el soporte de ONTAP para las cabinas
+      de almacenamiento
+    url: "/implement-e-series/concept_where_to_find_information_about_support_for_storage_arrays.html"
+- title: Sistemas ONTAP que pueden utilizar LUN de cabina en cabinas de almacenamiento
+  url: "/implement-e-series/concept_systems_that_can_use_array_luns_on_storage_arrays.html"
+- title: Requisitos para configurar cabinas de almacenamiento E-Series
+  url: "/implement-e-series/reference_requirements_for_configuring_e_series_storage_arrays.html"
+  entries:
+  - title: Tipo de host requerido para las cabinas de almacenamiento E-Series
+    url: "/implement-e-series/reference_required_host_type_for_e_series_storage_arrays_reference.html"
+- title: Configuraciones FAS para cabinas de almacenamiento E-Series
+  url: "/implement-e-series/reference_supported_fabric_attached_configurations_for_storage_arrays.html"
+  entries:
+  - title: Configuración básica autónoma
+    url: "/implement-e-series/concept_stand_alone_basic_configuration.html"
+  - title: Sistema independiente con dos grupos de LUN de cabinas con 2 puertos
+    url: "/implement-e-series/concept_stand_alone_system_with_two_2_port_array_lun_groups.html"
+  - title: Configuración de grupo de LUN de cabina con 4 puertos únicos
+    url: "/implement-e-series/concept_single_4_port_array_lun_group_configuration.html"
+  - title: Configuración de dos grupos de LUN para cabinas de 4 puertos
+    url: "/implement-e-series/concept_two_4_port_array_lun_group_configuration.html"
+  - title: Configuración de grupo LUN de cabina de ocho puertos
+    url: "/implement-e-series/concept_eight_port_array_lun_group_configuration.html"
+  - title: Conectando el puerto de iniciador de FC a varios puertos de destinos
+    url: "/implement-e-series/concept_attaching_fc_initiator_port_to_multiple_targets_ports.html"
+  - title: Compartir un puerto de destino con dos puertos de iniciador FC
+    url: "/implement-e-series/concept_sharing_a_target_port_with_two_fc_initiator_ports.html"
+- title: Configuraciones de conexión directa compatibles con cabinas de almacenamiento
+    E-Series
+  url: "/implement-e-series/reference_supported_direct_attached_configurations_for_e_series_storage_arrays.html"
